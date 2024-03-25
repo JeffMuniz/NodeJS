@@ -1,0 +1,131 @@
+{
+    "ETag": "E4ZI6NEP9USO2",
+    "Distribution": {
+        "Id": "EWGQ2203Y4DUH",
+        "ARN": "arn:aws:cloudfront::123721783999:distribution/EWGQ2203Y4DUH",
+        "Status": "Deployed",
+        "LastModifiedTime": "2021-09-09T22:13:07.084000+00:00",
+        "InProgressInvalidationBatches": 0,
+        "DomainName": "d2pyh86ommd2ar.cloudfront.net",
+        "ActiveTrustedSigners": {
+            "Enabled": false,
+            "Quantity": 0
+        },
+        "ActiveTrustedKeyGroups": {
+            "Enabled": false,
+            "Quantity": 0
+        },
+        "DistributionConfig": {
+            "CallerReference": "a00c3060-d0a8-4307-bf9b-bd35381fb1d6",
+            "Aliases": {
+                "Quantity": 2,
+                "Items": [
+                    "est-frt-autoec-qa.macpreprod.com",
+                    "est-frt-autoec-stg.macpreprod.com"
+                ]
+            },
+            "DefaultRootObject": "index.html",
+            "Origins": {
+                "Quantity": 1,
+                "Items": [
+                    {
+                        "Id": "cloudfront-ec.s3.sa",
+                        "DomainName": "cloudfront-ec.s3.sa-east-1.amazonaws.com",
+                        "OriginPath": "",
+                        "CustomHeaders": {
+                            "Quantity": 0
+                        },
+                        "S3OriginConfig": {
+                            "OriginAccessIdentity": "origin-access-identity/cloudfront/E92QSHC221X42"
+                        },
+                        "ConnectionAttempts": 3,
+                        "ConnectionTimeout": 10,
+                        "OriginShield": {
+                            "Enabled": false
+                        }
+                    }
+                ]
+            },
+            "OriginGroups": {
+                "Quantity": 0
+            },
+            "DefaultCacheBehavior": {
+                "TargetOriginId": "cloudfront-ec.s3.sa",
+                "TrustedSigners": {
+                    "Enabled": false,
+                    "Quantity": 0
+                },
+                "TrustedKeyGroups": {
+                    "Enabled": false,
+                    "Quantity": 0
+                },
+                "ViewerProtocolPolicy": "allow-all",
+                "AllowedMethods": {
+                    "Quantity": 2,
+                    "Items": [
+                        "HEAD",
+                        "GET"
+                    ],
+                    "CachedMethods": {
+                        "Quantity": 2,
+                        "Items": [
+                            "HEAD",
+                            "GET"
+                        ]
+                    }
+                },
+                "SmoothStreaming": false,
+                "Compress": true,
+                "LambdaFunctionAssociations": {
+                    "Quantity": 0
+                },
+                "FunctionAssociations": {
+                    "Quantity": 0
+                },
+                "FieldLevelEncryptionId": "",
+                "CachePolicyId": "658327ea-f89d-4fab-a63d-7e88639e58f6"
+            },
+            "CacheBehaviors": {
+                "Quantity": 0
+            },
+            "CustomErrorResponses": {
+                "Quantity": 0
+            },
+            "Comment": "",
+            "Logging": {
+                "Enabled": false,
+                "IncludeCookies": false,
+                "Bucket": "",
+                "Prefix": ""
+            },
+            "PriceClass": "PriceClass_All",
+            "Enabled": true,
+            "ViewerCertificate": {
+                "ACMCertificateArn": "arn:aws:acm:us-east-1:123721783999:certificate/b7f1bcd1-2eb1-4cd7-8daf-fd414c1bcb8b",
+                "SSLSupportMethod": "sni-only",
+                "MinimumProtocolVersion": "TLSv1.2_2021",
+                "Certificate": "arn:aws:acm:us-east-1:123721783999:certificate/b7f1bcd1-2eb1-4cd7-8daf-fd414c1bcb8b",
+                "CertificateSource": "acm"
+            },
+            "Restrictions": {
+                "GeoRestriction": {
+                    "RestrictionType": "none",
+                    "Quantity": 0
+                }
+            },
+            "WebACLId": "",
+            "HttpVersion": "http2",
+            "IsIPV6Enabled": true
+        },
+        "AliasICPRecordals": [
+            {
+                "CNAME": "est-frt-autoec-qa.macpreprod.com",
+                "ICPRecordalStatus": "APPROVED"
+            },
+            {
+                "CNAME": "est-frt-autoec-stg.macpreprod.com",
+                "ICPRecordalStatus": "APPROVED"
+            }
+        ]
+    }
+}

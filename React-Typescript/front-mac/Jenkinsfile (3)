@@ -1,0 +1,202 @@
+/*@NonCPS
+def slackNotifier(String buildResult) {
+  if ( buildResult == "SUCCESS" ) {
+    slackSend ( color: "good",
+    teamDomain: 'macmaceficios',
+    tokenCredentialId: 'mac-slack',
+    channel: '#team_ec-build',
+    message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Sucesso \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+  else if( buildResult == "FAILURE" ) {
+    slackSend( color: "danger",
+    teamDomain: 'macmaceficios',
+    tokenCredentialId: 'mac-slack',
+    channel: '#team_ec-build',
+    message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Falha \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+  else if( buildResult == "UNSTABLE" ) {
+    slackSend( color: "warning",
+      teamDomain: 'macmaceficios',
+      tokenCredentialId: 'mac-slack',
+      channel: '#team_ec-build',
+      message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Unstable \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+  else if( buildResult == "ABORTED" ) {
+    slackSend( teamDomain: 'macmaceficios',
+      tokenCredentialId: 'mac-slack',
+      channel: '#team_ec-build',
+      message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Abortado \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+  else if( buildResult == "null" ) {
+    slackSend( color: "warning",
+      teamDomain: 'macmaceficios',
+      tokenCredentialId: 'mac-slack',
+      channel: '#team_ec-build',
+      message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Desconhecido \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+}
+*/
+
+@NonCPS
+def configFromBranch(branch) {
+    def env_dev = [
+        deploymentFile: 'deployment.yml',
+        s3bucket: 'dev'
+    ]    
+    def env_qa = [
+        deploymentFile: 'deployment.yml',
+        s3bucket: 'qa'
+    ]
+    def env_staging = [
+        deploymentFile: 'deployment.yml',
+        s3bucket: 'stg'
+    ]
+    def env_prd = [
+        deploymentFile: 'deployment.yml',
+        s3bucket: 'prd'
+    ]
+    if (branch ==~ /(develop)/) { 
+        return [
+            shouldTest: true,
+            shouldAnalyze: true,
+            shouldDeploy: true,
+            env: 'develop',
+            tag: 'dev',
+            s3bucket: [env_dev]
+        ]
+    }    
+    if (branch ==~ /(qa)/) { 
+        return [
+            shouldTest: true,
+            shouldAnalyze: true,
+            shouldDeploy: true,
+            env: 'qa',
+            tag: 'qa',
+            s3bucket: [env_qa]
+        ]
+    }
+    else if (branch ==~ /(staging)/) {
+        return [
+            shouldTest: true,
+            shouldAnalyze: true,
+            shouldDeploy: true,
+            env: 'staging',
+            tag: 'stg',
+            s3bucket: [env_staging]
+        ]
+    }
+    if (branch ==~ /(master)/) {
+        return [
+            shouldTest: true,
+            shouldAnalyze: true,
+            shouldDeploy: true,
+            env: 'production',
+            tag: 'prd',
+            s3bucket: [env_prd]
+        ]
+    }
+    else {
+        return [
+            shouldTest: false,
+            shouldAnalyze: false,
+            shouldDeploy: false,
+            tag: '-',
+            s3bucket: []
+        ]
+    }
+}
+
+pipeline {
+    agent none
+    
+    environment {
+        CONFIG = configFromBranch(BRANCH_NAME)
+        SHOULD_TEST = "${CONFIG.shouldTest}"
+        SHOULD_ANALYZE = "${CONFIG.shouldAnalyze}"
+        SHOULD_DEPLOY = "${CONFIG.shouldDeploy}"
+        ENV = "${CONFIG.env}"
+        TAG = "${CONFIG.tag}"
+
+        PROJECT_NAME="est-api-autoec"
+        GIT_URL="git@bitbucket.org:maquiinaedu/{$PROJECT_NAME}.git"
+    }
+
+    stages {
+        stage ('CI') {
+            agent {
+                label 'TestContainer'
+            }
+            stages {
+                stage('SCM - Checkout') {
+                    steps{
+                        cleanWs()
+                        git branch: BRANCH_NAME, 
+                        credentialsId: "bitb-mac", 
+                        url: GIT_URL
+                        echo 'SCM Checkout'
+                    }
+                }
+                stage ('Test & Publish QA Reports'){
+                    when {
+                      expression { SHOULD_TEST == 'true' }
+                    }
+                    steps{
+                        echo 'Test & Publish QA Reports'
+                    }
+                }
+            }
+        }
+    
+        stage ('CD') {
+            stages {
+                stage ('Deploy') {
+                    agent {
+                        label 'Build'
+                    }
+                    stages{
+                        stage ('YARN Build'){
+                            steps{
+                                sh "eval \$(ssh-agent); ssh-add ~/.ssh/id_rsa"
+                                sh "yarn install"
+                                sh "yarn build:development"
+                            }
+                        }
+                        stage ('AWS s3 & CloudFront Deploy') {
+                            when {
+                              expression { SHOULD_DEPLOY == 'true' }
+                            }                  
+                            steps {
+                                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'mac-ecr', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                                    sh "export AWS_DEFAULT_REGION=sa-east-1"
+                                    //sh "\$(/usr/local/bin/aws ecr get-login --no-include-email --region sa-east-1)"
+                                    //sh "\$(/usr/local/bin/aws s3api create-bucket --bucket s3://${PROJECT_NAME}-${ENV})"
+                                    sh "\$(/usr/local/bin/aws s3 cp build s3://${PROJECT_NAME}-${ENV}/ --recursive)"
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            script{
+                slackNotifier('SUCCESS')
+            }
+        }
+        failure{
+            script{
+                slackNotifier('FAILURE')
+            }
+        }
+        unstable{
+            script{
+                slackNotifier('UNSTABLE')
+            }
+        }
+        aborted{
+            script{
+                slackNotifier('ABORTED')
+            }
+        }
+    }
+}
