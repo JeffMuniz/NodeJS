@@ -1,0 +1,159 @@
+image: bluecr.azurecr.io/blue/base-front-gitlab:1.1.0
+
+services:
+  - docker:dind
+
+stages:
+  - test
+  - deploy-develop
+  - deploy-qa
+  - deploy-staging
+  - promote
+  - deploy-prod
+
+test-rc:
+  stage: test
+  script:
+    - yarn && yarn lint && yarn test -u
+  only:
+    - /^release-[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}$/
+    - /^hotfix-[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}$/
+    - /^feature.*$/
+
+deploy-develop:
+  stage: deploy-develop
+  script:
+    - env="teste"
+    - envConfig="develop"
+    - sed -i s/ENV/$env/g docker/Dockerfile && sed -i s/ENV/$envConfig/g docker/nginx.conf && sed -i s/FQDN/mac-rh-front-$env.devcdt.com.br/g docker/nginx.conf
+    - git clone http://$GIT_USER:$GIT_TOKEN@gitlab.conductor.tecnologia/blue/devops.git
+    - cd devops/tools/certs/dev && ls -lh && pwd && cp -ru . ../../../../docker && cd ../../../../
+
+    # onde estou?
+    - pwd
+    - ls -la
+
+    # packaging
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build --pull -t ${CI_REGISTRY}/blue/rh_front/rh_front-develop . -f docker/Dockerfile
+    - docker push ${CI_REGISTRY}/blue/rh_front/rh_front-develop
+
+    # deploy
+    - az login --service-principal -u $AZ_USER -p $AZ_PASSWORD --tenant $TENANT_ID
+    - az webapp config container set --name mac-rh-front-develop --resource-group RG_Blue_WebApp_SouthCentralUS --docker-custom-image-name ${CI_REGISTRY}/blue/rh_front/rh_front-develop
+    - az webapp stop -g RG_Blue_WebApp_SouthCentralUS -n mac-rh-front-develop
+    - az webapp start -g RG_Blue_WebApp_SouthCentralUS -n mac-rh-front-develop
+  only:
+    - develop
+  dependencies: []
+
+deploy-qa:
+  stage: deploy-qa
+  script:
+    - version=$(echo ${CI_COMMIT_REF_NAME} | cut -d"-" -f2)"rc" && env="qa"
+    - sed -i s/VERSION/$version/g package.json
+    - sed -i s/ENV/$env/g docker/Dockerfile && sed -i s/ENV/$env/g docker/nginx.conf && sed -i s/FQDN/mac-rh-front-$env.devcdt.com.br/g docker/nginx.conf
+    - git clone http://$GIT_USER:$GIT_TOKEN@gitlab.conductor.tecnologia/blue/devops.git
+    - cd devops/tools/certs/dev && ls -lh && pwd && cp -ru . ../../../../docker && cd ../../../../
+
+
+    # onde estou?
+    - pwd
+    - ls -la
+
+    # gerar e publicar imagem
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build --pull -t ${CI_REGISTRY}/blue/rh_front/rh_front-qa:$version . -f docker/Dockerfile
+    - docker push ${CI_REGISTRY}/blue/rh_front/rh_front-qa:$version
+
+    # deploy
+    - version=$(echo ${CI_COMMIT_REF_NAME} | cut -d"-" -f2)"rc"
+    - az login --service-principal -u $AZ_USER -p $AZ_PASSWORD --tenant $TENANT_ID
+    - az webapp config container set --name mac-rh-front-qa --resource-group RG_Blue_WebApp_SouthCentralUS --docker-custom-image-name ${CI_REGISTRY}/blue/rh_front/rh_front-qa:$version
+    - az webapp stop -g RG_Blue_WebApp_SouthCentralUS -n mac-rh-front-qa
+    - az webapp start -g RG_Blue_WebApp_SouthCentralUS -n mac-rh-front-qa
+  only:
+    - /^release-[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}$/
+    - /^hotfix-[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}$/
+  dependencies:
+    - test-rc
+
+deploy-staging:
+  stage: deploy-staging
+  when: manual
+  script:
+    - version=$(echo ${CI_COMMIT_REF_NAME} | cut -d"-" -f2)"rc" && env="staging"
+    - sed -i s/VERSION/$version/g package.json
+    - sed -i s/ENV/$env/g docker/Dockerfile && sed -i s/ENV/$env/g docker/nginx.conf && sed -i s/FQDN/blue-rh-front-$env.devcdt.com.br/g docker/nginx.conf
+    - git clone http://$GIT_USER:$GIT_TOKEN@gitlab.conductor.tecnologia/blue/devops.git
+    - cd devops/tools/certs/dev && ls -lh && pwd && cp -ru . ../../../../docker && cd ../../../../
+
+    # onde estou?
+    - pwd
+    - ls -la
+
+    # gerar e publicar imagem
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build --pull -t ${CI_REGISTRY}/blue/rh_front/rh_front-staging:$version . -f docker/Dockerfile
+    - docker push ${CI_REGISTRY}/blue/rh_front/rh_front-staging:$version
+
+    # deploy
+    - version=$(echo ${CI_COMMIT_REF_NAME} | cut -d"-" -f2)"rc"
+    - az login --service-principal -u $AZ_USER -p $AZ_PASSWORD --tenant $TENANT_ID
+    - az webapp config container set --name blue-rh-front-staging --resource-group RG_Blue_WebApp --docker-custom-image-name ${CI_REGISTRY}/blue/rh_front/rh_front-staging:$version
+    - az webapp stop -g RG_Blue_WebApp -n blue-rh-front-staging
+    - az webapp start -g RG_Blue_WebApp -n blue-rh-front-staging
+  only:
+    - /^release-[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}$/
+    - /^hotfix-[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}$/
+  dependencies:
+    - test-rc
+
+
+###################################################
+######        PRODUÇÂO               ##############
+###################################################
+
+Promote-rc:
+  stage: promote
+  when: manual
+  script:
+    # obtém o número da versão
+    - version=$(echo ${CI_COMMIT_REF_NAME} | cut -d"-" -f2) && env="production" && envConfig="prd"
+    # configura variáveis de ambiente
+    - sed -i s/VERSION/$version/g package.json
+    - sed -i s/ENV/$env/g docker/Dockerfile && sed -i s/FQDN/mac-rh-front-$envConfig.conductor.com.br/g docker/nginx.conf
+    - git clone http://$GIT_USER:$GIT_TOKEN@gitlab.conductor.tecnologia/blue/devops.git
+    - cd devops/tools/certs/prd && ls -lh && pwd && cp -ru . ../../../../docker && cd ../../../../
+
+    # gerar e publicar imagem
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+    - docker build --pull -t ${CI_REGISTRY}/blue/rh_front/rh_front-prod:$version . -f docker/Dockerfile
+    - docker push ${CI_REGISTRY}/blue/rh_front/rh_front-prod:$version
+
+    # realiza o PROMOTE, ou seja, gera a branch 'stable'
+    - git remote set-url origin $(echo $CI_REPOSITORY_URL | perl -pe 's#.*@(.+?(\:\d+)?)/#git@\1:#')
+    - git config --global user.email "ci@conductor.com.br"
+    - git config --global user.name "CI"
+    - git checkout "$CI_BUILD_REF_NAME"
+    - git tag $version-stable
+    - git push --tags
+  only:
+    - /^release-[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}$/
+    - /^hotfix-[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{1,2}$/
+  dependencies: []
+
+deploy-prod:
+  stage: deploy-prod
+  tags:
+    - prod-stable
+  when: manual
+  script:
+    - version=$(echo ${CI_COMMIT_REF_NAME} | cut -d"-" -f2)
+    - az login --service-principal -u $AZ_USER_PRD -p $AZ_PASSWORD_PRD --tenant $TENANT_ID_PRD
+    - az webapp config container set --name blue-rh-front-prd --slot slot --resource-group WebAppsBLUE --docker-custom-image-name ${CI_REGISTRY}/blue/rh_front/rh_front-prod:$version
+    - az webapp stop -g WebAppsBLUE -n blue-rh-front-prd
+    - az webapp start -g WebAppsBLUE -n blue-rh-front-prd
+  only:
+    - /.*-stable/
+  dependencies: []

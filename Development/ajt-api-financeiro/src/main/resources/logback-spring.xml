@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <springProperty scope="context" name="app_name" source="info.app.name"/>    
+    <springProperty scope="context" name="app_version" source="info.app.version"/>
+    <springProperty scope="context" name="app_profile" source="info.app.profile"/>
+
+    <springProperty scope="context" name="app_splunk_logs_enabled" source="app.splunk.logs.enabled"/>
+    <springProperty scope="context" name="app_splunk_logs_host" source="app.splunk.logs.host"/>
+    <springProperty scope="context" name="app_splunk_logs_port" source="app.splunk.logs.port"/>
+
+	<if condition='"true".equals(p("app_splunk_logs_enabled"))'>
+		<then>
+			<appender name="APPENDER_SPLUNK_LOGS" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+				<remoteHost>${app_splunk_logs_host}</remoteHost>
+				<port>${app_splunk_logs_port}</port>
+				<encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+			</appender>
+		</then>
+	</if>
+
+    <appender name="APPENDER_SENTRY_LOGS" class="io.sentry.logback.SentryAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+    </appender>
+
+	<appender name="APPENDER_TRACE_LOGS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>%msg%n</Pattern>
+		</encoder>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>trace/archived/trace.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+
+	</appender>
+    
+    <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR"/>
+    <logger name="org.apache.catalina.util.LifecycleBase" level="ERROR"/>
+    <logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN"/>
+    <logger name="org.apache.sshd.common.util.SecurityUtils" level="WARN"/>
+    <logger name="org.apache.tomcat.util.net.NioSelectorPool" level="WARN"/>
+    <logger name="org.hibernate.validator.internal.util.Version" level="WARN"/>
+    <logger name="org.springframework.boot.actuate.autoconfigure.CrshAutoConfiguration" level="WARN"/>
+    
+    <logger name="br.com.conductor" level="INFO">
+        <appender-ref ref="APPENDER_TRACE_LOGS"/>
+    </logger>
+    
+    <if condition='"true".equals(p("app_splunk_metrics_enabled"))'>
+        <then>
+            <logger name="logger_metrics" additivity="false">
+                <appender-ref ref="APPENDER_SPLUNK_METRICS"/>
+            </logger>
+        </then>
+    </if>
+    
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/> 
+        <appender-ref ref="APPENDER_SENTRY_LOGS"/>
+        <if condition='"true".equals(p("app_splunk_logs_enabled"))'>
+            <then>
+                <appender-ref ref="APPENDER_SPLUNK_LOGS"/> 
+            </then>
+        </if>  
+    </root> 
+
+</configuration>

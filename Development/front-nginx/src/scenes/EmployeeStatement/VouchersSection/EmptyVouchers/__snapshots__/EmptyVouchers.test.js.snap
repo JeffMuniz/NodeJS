@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Order Should render Order 1`] = `
+<styled.div>
+  <SvgIcon
+    name="wallet"
+  />
+  <styled.p>
+    Os cartões ativos aparecerão aqui
+  </styled.p>
+</styled.div>
+`;

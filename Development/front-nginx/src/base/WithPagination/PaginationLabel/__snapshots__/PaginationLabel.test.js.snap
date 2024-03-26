@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PaginationLabel Should render PaginationLabel without filtered data 1`] = `
+<styled.div
+  id="pagination"
+>
+  <styled.div
+    id="pagination_label"
+  >
+    1
+    -
+    10
+     de
+     
+    100
+  </styled.div>
+  <styled.span
+    id="pagination_back"
+    isDisabled={false}
+    onClick={null}
+  >
+    <DirectionIcon
+      color="#000000"
+      direction="left"
+    />
+  </styled.span>
+  <styled.span
+    id="pagination_go"
+    isDisabled={false}
+    onClick={null}
+  >
+    <DirectionIcon
+      color="#000000"
+      direction="right"
+    />
+  </styled.span>
+</styled.div>
+`;

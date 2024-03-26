@@ -1,0 +1,130 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reports - Table - TableContent should render TableContent 1`] = `
+<styled.div
+  id="table_reports"
+>
+  <If
+    test={10}
+  >
+    <TableControls />
+    <HeaderColumns />
+    <BodyColumns
+      data={
+        Array [
+          Object {
+            "id": 146,
+            "rangeDate": Array [
+              "01/10/2019",
+              "18/10/2019",
+            ],
+            "requestDate": "21/10/2019 15:51",
+            "status": "Processando...",
+            "statusColor": "#009CFF",
+            "type": "Detalhes Pedidos",
+          },
+          Object {
+            "id": 145,
+            "rangeDate": Array [
+              "01/10/2019",
+              "17/10/2019",
+            ],
+            "requestDate": "21/10/2019 13:45",
+            "status": "Processando...",
+            "statusColor": "#009CFF",
+            "type": "Detalhes Pedidos",
+          },
+          Object {
+            "id": 144,
+            "rangeDate": Array [
+              "01/10/2019",
+              "17/10/2019",
+            ],
+            "requestDate": "21/10/2019 13:43",
+            "status": "Processando...",
+            "statusColor": "#009CFF",
+            "type": "Detalhes Pedidos",
+          },
+          Object {
+            "id": 135,
+            "rangeDate": Array [
+              "01/10/2019",
+              "21/10/2019",
+            ],
+            "requestDate": "21/10/2019 11:16",
+            "status": "Processando...",
+            "statusColor": "#009CFF",
+            "type": "Detalhes Pedidos",
+          },
+          Object {
+            "id": 133,
+            "rangeDate": Array [
+              "01/09/2019",
+              "21/10/2019",
+            ],
+            "requestDate": "21/10/2019 10:20",
+            "status": "Processando...",
+            "statusColor": "#009CFF",
+            "type": "Detalhes Pedidos",
+          },
+          Object {
+            "id": 130,
+            "rangeDate": Array [
+              "01/10/2019",
+              "21/10/2019",
+            ],
+            "requestDate": "21/10/2019 10:07",
+            "status": "Processando...",
+            "statusColor": "#009CFF",
+            "type": "Detalhes Pedidos",
+          },
+          Object {
+            "id": 129,
+            "rangeDate": Array [
+              "01/10/2019",
+              "07/10/2019",
+            ],
+            "requestDate": "18/10/2019 17:45",
+            "status": "Processando...",
+            "statusColor": "#009CFF",
+            "type": "Detalhes Pedidos",
+          },
+          Object {
+            "id": 128,
+            "rangeDate": Array [
+              "01/10/2019",
+              "08/10/2019",
+            ],
+            "requestDate": "18/10/2019 17:45",
+            "status": "Processando...",
+            "statusColor": "#009CFF",
+            "type": "Detalhes Pedidos",
+          },
+          Object {
+            "id": 127,
+            "rangeDate": Array [
+              "01/10/2019",
+              "18/10/2019",
+            ],
+            "requestDate": "18/10/2019 17:18",
+            "status": "Processando...",
+            "statusColor": "#009CFF",
+            "type": "Detalhes Pedidos",
+          },
+          Object {
+            "id": 126,
+            "rangeDate": Array [
+              "01/10/2019",
+              "18/10/2019",
+            ],
+            "requestDate": "18/10/2019 17:17",
+            "status": "Processando...",
+            "statusColor": "#009CFF",
+            "type": "Detalhes Pedidos",
+          },
+        ]
+      }
+    />
+  </If>
+</styled.div>
+`;

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DefaultEmptyState Should render DefaultEmptyState 1`] = `
+<styled.div
+  id="default-grid-empty-state"
+>
+  <SvgIcon
+    fill="#DADADA"
+    name="warning"
+    size={100}
+  />
+  <styled.h2>
+    Nenhum resultado encontrado
+  </styled.h2>
+  <styled.div />
+</styled.div>
+`;

@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Warning should render Warning with default props 1`] = `
+<Styled(Grid)
+  backgroundColor="#FABD59"
+  color="#FFFFFF"
+  id="id"
+>
+  <If
+    test={undefined}
+  >
+    <styled.div
+      id="banner_close-btn"
+      onClick={undefined}
+    >
+      <SvgIcon
+        fill="#009CFF"
+        name="close"
+        size={15}
+      />
+    </styled.div>
+  </If>
+  <styled.div>
+    <styled.img
+      src="icon"
+    />
+  </styled.div>
+  <styled.div>
+    <If
+      test={undefined}
+    >
+      <styled.h1 />
+    </If>
+    <span>
+      test
+    </span>
+  </styled.div>
+  <If
+    test={false}
+  >
+    <styled.Button
+      buttonType="light"
+      id="warning_btn"
+      onPress={undefined}
+      type="button"
+      value={undefined}
+    />
+  </If>
+</Styled(Grid)>
+`;

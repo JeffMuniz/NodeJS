@@ -1,0 +1,42 @@
+#%RAML 1.0 Library
+
+usage: All commons traits
+  
+traits: 
+  orderable:
+   queryParameters:
+     campoOrdenacao:
+       description: campo de ordenação
+       type: string
+       required: false
+     tipoOrdenacao:
+       description: Order
+       enum: [DESC, ASC]
+       default: DESC
+       required: false
+       
+  pageable:
+   queryParameters:
+     pagina:
+       description: página
+       type: integer
+       required: false
+       example: 0
+       default: 0
+     limite:
+       description: Limite
+       type: integer
+       required: false
+       example: 10
+       default: 10
+       
+  searchable:
+    queryParameters:
+      q:
+  
+  partialResponse:
+   queryParameters:
+     fields:
+       description: field1,field2,field3
+       required: false  
+       example: field1,field2,field3

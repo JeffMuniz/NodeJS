@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageNotFound Should render PageNotFound 1`] = `
+<ContainerWrapper
+  headerClickHandler={[MockFunction]}
+  showBackIcon={true}
+  title="Voltar"
+>
+  <styled.div>
+    <SvgIcon
+      icon={null}
+      name="search"
+      size={100}
+    />
+    <styled.h2>
+      404
+    </styled.h2>
+    <styled.h2
+      subTitle={true}
+    >
+      Página não encontrada
+    </styled.h2>
+  </styled.div>
+</ContainerWrapper>
+`;

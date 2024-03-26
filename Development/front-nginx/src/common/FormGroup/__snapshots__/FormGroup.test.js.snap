@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormGroup should render it with default props 1`] = `
+<styled.div
+  className=""
+>
+  <div
+    id="test"
+  >
+    Test
+  </div>
+  <styled.span
+    hasError={false}
+    id="test_error"
+  />
+</styled.div>
+`;

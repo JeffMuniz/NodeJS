@@ -1,0 +1,32 @@
+def lombokVersion                   = '1.18.20'
+def infrastructure                  = '1.0.3'
+def testcontainersVersion           = '1.15.2'
+def mockkVersion                    = '1.9.1'
+def mapStructVersion                = '1.3.1.Final'
+def springDocOpenApi                = '1.4.1'
+def MachinaRestAdapter                  = '0.0.2'
+def machinaCustomException              = '1.0.1'
+def awaitility                      = '3.1.6'
+
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+    implementation "org.springframework.boot:spring-boot-starter-data-mongodb:${springBootVersion}"
+    implementation("br.com.machina:machina-infrastructure:${infrastructure}")
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    implementation "br.com.machina:custom-exception:${machinaCustomException}"
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    implementation "org.springdoc:springdoc-openapi-ui:${springDocOpenApi}"
+    implementation "org.mapstruct:mapstruct:${mapStructVersion}"
+    annotationProcessor "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+    implementation "br.com.machina.adapter:rest-adapter:${MachinaRestAdapter}"
+
+    implementation("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}") {
+        exclude group: "commons-collections", module: "commons-collections"
+    }
+    developmentOnly "org.springframework.boot:spring-boot-devtools:${springBootVersion}"
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+    testImplementation("org.testcontainers:testcontainers:${testcontainersVersion}")
+    testImplementation("io.mockk:mockk:${mockkVersion}")
+    testImplementation(group: "org.awaitility", name: "awaitility", version: "${awaitility}")
+}

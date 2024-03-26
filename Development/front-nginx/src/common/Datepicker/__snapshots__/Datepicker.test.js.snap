@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Datepicker Should render Datepicker 1`] = `
+<styled.div>
+  <styled.input
+    id=""
+    max={null}
+    min={null}
+    type="date"
+    value=""
+  />
+</styled.div>
+`;
+
+exports[`Datepicker Should render Datepicker with value 1`] = `
+<styled.div>
+  <styled.input
+    id=""
+    max={null}
+    min={null}
+    type="date"
+    value="2018-08-21"
+  />
+</styled.div>
+`;

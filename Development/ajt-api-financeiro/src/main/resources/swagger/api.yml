@@ -1,0 +1,535 @@
+openapi: 3.0.1
+info:
+  title: Ajuste Financeiro API
+  version: 1.0.0
+servers:
+  - url: /v1
+paths:
+  '/ajustes/financeiros':
+    get:
+      operationId: buscaAjusteFinanceiro
+      summary: Busca ajuste financeiro
+      description: Recurso para realizar a busca de uma ajuste financeiro.
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            format: token
+          required: true
+        - in: query
+          name: id
+          schema:
+            type: integer
+            format: int32
+          description: Filtro por id
+        - in: query
+          name: idSolicitacao
+          schema:
+            type: integer
+            format: int32
+          description: Filtro por id
+        - in: query
+          name: tipo
+          schema:
+            type: string
+            enum:
+              - EC
+              - PORTADOR
+              - RH
+        - in: query
+          name: operacao
+          schema:
+            type: string
+            enum:
+              - CREDITO
+              - DEBITO
+        - in: query
+          name: status
+          schema:
+            type: string
+            enum:
+              - PENDENTE
+              - EM_PROCESSAMENTO
+              - APROVADO
+              - RECUSADO
+              - EM_EXECUCAO
+              - ERRO
+        - in: query
+          name: clienteNome
+          schema:
+            type: string
+          description: Nome do cliente
+        - in: query
+          name: clienteCpf
+          schema:
+            type: string
+          description: CPF do cliente
+        - in: query
+          name: clienteCnpj
+          schema:
+            type: string
+          description: CNPJ do cliente
+        - in: query
+          name: dataCriacaoInicial
+          schema:
+            type: string
+            format:  zoneddatetime
+          description: Data de criação (abertura) inicial do ajuste
+        - in: query
+          name: dataCriacaoFinal
+          schema:
+            type: string
+            format:  zoneddatetime
+          description: Data de criação (abertura) final do ajuste
+        - in: query
+          name: dataFinalizacaoInicial
+          schema:
+            type: string
+            format:  zoneddatetime
+          description: Data de finalização inicial do ajuste
+        - in: query
+          name: dataFinalizacaoFinal
+          schema:
+            type: string
+            format:  zoneddatetime
+          description: Data de finalização final do ajuste
+        - in: query
+          name: valor
+          schema:
+            type: string
+            format: double
+          description: Valor do ajuste
+        - in: query
+          name: valorMaiorque
+          schema:
+            type: string
+            format: double
+          description: Valor maior que do ajuste
+        - in: query
+          name: valorMenorque
+          schema:
+            type: string
+            format: double
+          description: Valor menor que do ajuste
+        - in: query
+          name: limite
+          schema:
+            type: integer
+          description: Limite de registros
+        - in: query
+          name: pagina
+          schema:
+            type: integer
+          description: Offset de registros
+        - in: query
+          name: tipoOrdenacao
+          schema:
+            type: string
+          description: Tipo de ordenação dos registros
+        - in: query
+          name: campoOrdenacao
+          schema:
+            type: string
+          description: Campo no qual será aplicado a ordenação dos registros
+      responses:
+        '200':
+          $ref: '#/components/responses/Ok'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    post:
+      operationId: criarAjuste
+      summary: Cria ajuste financeiro a débito ou crédito
+      description: Recurso para realizar a criação de um ajuste financeiro para EC/RH/PORTADOR
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            format: token
+          required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CriaAjuste'
+      responses:
+        '201':
+          $ref: '#/components/responses/AjusteCriado'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/ajustes/financeiros/{id}':
+    get:
+      operationId: buscaAjusteFinanceiroPorID
+      summary: Informações do ajuste financeiro dado um ID
+      description: Recurso para realizar a busca de um ajuste financeiro pelo ID.
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            format: token
+          required: true
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int32
+          required: true
+          description: Id do ajuste financeiro
+      responses:
+        '200':
+          $ref: '#/components/responses/BuscaAjusteFinanceiro'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+    patch:
+      operationId: atualizarAjusteFinanceiro
+      summary: Atualização do ajuste financeiro dado um ID
+      description: Recurso para realizar a atualização de um ajuste financeiro pelo ID.
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            format: token
+          required: true
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int32
+          required: true
+          description: Id do ajuste financeiro
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AtualizacaoAjusteFinanceiro'
+      responses:
+        '200':
+          $ref: '#/components/responses/BuscaAjusteFinanceiro'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+          
+  '/motivos': 
+    get:
+      operationId: buscaMotivosPorOperacaoETipo
+      summary: Informações do motivos de de ajustes por operação e tipo
+      description: Recurso para realizar a busca de motivos por operação e tipo
+      parameters:
+        - in: query 
+          name: operacao
+          schema:
+            type: integer
+            format: int32
+          required: true
+          description: Id da operação
+        - in: query
+          name: tipo
+          schema:
+            type: integer
+            format: int32
+          required: true
+          description: Id do tipo
+      responses:
+        '200':
+          $ref: '#/components/responses/MotivoResponse' 
+        '500':
+          $ref: '#/components/responses/InternalServerError' 
+components:
+  responses:
+    Ok:
+      description: Busca realizada com sucesso
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AjusteFinanceiro'
+    BuscaAjusteFinanceiro:
+      description: Busca realizada com sucesso
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AjusteFinanceiroBody'
+    InternalServerError:
+      description: Erro interno do sistema.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErro'
+    AjusteCriado:
+      description: Erro interno do sistema.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AjusteFinanceiroBody'
+    MotivoResponse: 
+       description: Busca de motivos
+       content: 
+        application/json:
+          schema:
+            type: array
+            items:
+               $ref: '#/components/schemas/MotivoAjusteBody'
+
+  schemas:
+    Meta:
+      type: object
+      description: Meta dados do recurso
+      properties:
+        total:
+          type: integer
+          description: Total de registros do recurso
+        limit:
+          type: integer
+          description: Limite de registros para busca no recurso
+        offset:
+          type: integer
+          description: A partir de qual registro a busca ocorre no recurso
+    MotivoAjusteBody:
+      type: object
+      description: Motivos de ajuste
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id do ajuste financeiro        
+        tipo:
+          type: string
+          description: EC, Portador e RH
+        operacao:
+          type: string
+          description: Débito / Crédito
+        motivoDescricao:
+          type: string
+          description: Descricao do pedido      
+    AtualizacaoAjusteFinanceiro:
+      type: object
+      description: Meta dados do recurso
+      properties:
+        ajuste:
+          type: AtualizacaoAjusteFinanceiroBody
+          description: Ajuste financeiro
+    AtualizacaoAjusteFinanceiroBody:
+      type: object
+      description: Meta dados do recurso
+      properties:
+        status:
+          type: string
+          enum:
+            - PENDENTE
+            - EM_PROCESSAMENTO
+            - APROVADO
+            - RECUSADO
+            - EM_EXECUCAO
+            - ERRO
+        dataFinalizacao:
+          type: string
+          format: date-time
+          description: Data de atualização do ajuste
+    AjusteFinanceiroBody:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id do ajuste financeiro
+        tipo:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int32
+              description: Id do tipo
+            nome:
+              type: string
+              description: Nome do tipo
+        cliente:
+          type: object
+          properties:
+            id:
+              type: integer
+              format: int32
+              description: Id o cliente
+            nome:
+              type: string
+              description: Nome do cliente
+            cpf:
+              type: string
+              description: CPF do cliente
+            cnpj:
+              type: string
+              description: CNPJ do cliente
+            idConta:
+              type: integer
+              format: int32
+              description: Id da conta
+            descricaoConta:
+              type: string
+              description: Descricao da conta
+        status:
+          type: object
+          description: Status da solicitação
+          properties:
+            id:
+              type: integer
+              format: int32
+              description: Id do status da solicitação do ajuste
+            nome:
+              type: string
+              description: Descrição do status da solicitação do ajuste
+        loginUsuario:
+          type: string
+          description: Login do usuário
+        nomeUsuario:
+          type: string
+          description: Nome do usuário
+        idSolicitacao:
+          type: integer
+          format: int32
+          description: Id da solicitação
+        operacao:
+          type: object
+          description: Operação do ajuste
+          properties:
+            id:
+              type: integer
+              format: int32
+              description: Id da operação
+            descricao:
+              type: string
+              description: Descrição da operação do ajuste
+        codigoExterno:
+          type: integer
+          format: int32
+          description: Código da transação
+        motivo:
+          type: object
+          description: Motivo da solicitação
+          properties:
+            id:
+              type: integer
+              format: int32
+              description: Id do status da solicitação do ajuste
+            descricao:
+              type: string
+              description: Descrição do motivo
+          format: int32
+        observacao:
+          type: string
+          description: Observação da solicitação
+        valor:
+          type: number
+          format: double
+        dataVencimento:
+          type: string
+          format:  zoneddatetime
+          description: Data de vencimento do ajuste
+        dataCriacao:
+          type: string
+          format:  zoneddatetime
+          description: Data de abertura do ajuste
+        dataFinalizacao:
+          type: string
+          format:  zoneddatetime
+          description: Data de atualização do ajuste
+
+    AjusteFinanceiro:
+      type: object
+      properties:
+        meta:
+          $ref: '#/components/schemas/Meta'
+        ajustes:
+          type: array
+          items:
+            $ref: '#/components/schemas/AjusteFinanceiroBody'
+    CriaAjuste:
+      type: object
+      properties:
+        tipo:
+          type: string
+          enum:
+            - EC
+            - PORTADOR
+            - RH
+        operacao:
+          type: string
+          enum:
+            - DEBITO
+            - CREDITO
+        usuario:
+          type: object
+          description: Usuário solicitante
+          properties:
+            loginUsuario:
+              type: string
+              description: Login do usuário
+            nomeUsuario:
+              type: string
+              description: Nome do usuário
+        cliente:
+          type: object
+          description: Cliente
+          properties:
+            nome:
+              type: string
+              description: Nome do cliente
+            cpf:
+              type: string
+              description: CPF do cliente
+            cnpj:
+              type: string
+              description: CNPJ do cliente
+            idConta:
+              type: integer
+              format: int32
+              description: Id da conta
+            descricaoConta:
+              type: string
+              description: Descricao da conta
+        documento:
+          type: string
+          description: Documento (Array de bytes / base64) 
+        codigoExterno:
+          type: integer
+          format: int32
+          description: Código da transação
+        dataVencimento:
+          type: string
+          format: zoneddatetime
+          description: Data de vencimento do ajuste
+        idMotivo:
+          type: integer
+          format: int32
+          description: Id do motivo
+        observacao:
+          type: string
+          description: Observação da solicitação
+        valor:
+          type: number
+          format: double
+    ApiErro:
+      type: object
+      properties:
+        mensagem:
+          type: string
+          description: Tipo da mensagem de erro
+        erros:
+          type: array
+          items:
+            $ref: '#/components/schemas/Erro'
+          description: Lista de erros
+      required:
+        - mensagem
+        - erros
+    Erro:
+      type: object
+      properties:
+        codigo:
+          type: string
+          description: Código do erro
+        mensagem:
+          type: string
+          description: Mensagem de erro
+      required:
+        - codigo
+        - mensagem

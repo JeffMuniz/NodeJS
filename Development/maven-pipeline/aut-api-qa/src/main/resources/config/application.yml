@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: segurancaApi
+  task:
+    execution:
+      thread-name-prefix: seguranca-api-task-
+      pool:
+        core-size: 1
+        max-size: 50
+        queue-capacity: 10000
+    scheduling:
+      thread-name-prefix: seguranca-api-scheduling-
+      pool:
+        size: 1
+  http:
+    encoding:
+      enabled: true
+      charset: UTF-8
+  elasticsearch:
+    jest:
+      uris: http://172.31.23.81:9200
+
+app:
+  resttemplate:
+    timeout: 30000
+
+server:
+  port: 8080
+  maxHttpHeaderSize: 131072
+  servlet:
+    session:
+      cookie:
+        http-only: true
+      timeout: 40
+
+info:
+  app:
+    name: '@name@'
+    description: '@project.description@'
+  build:
+    groupId: '@project.groupId@'
+    artifact: '@project.artifactId@'
+    name: '@project.name@'
+    version: '@project.version@'
+  env:
+    java:
+      vendor: ${java.specification.vendor}
+      vm-name: ${java.vm.name}
+      runtime-version: ${java.runtime.version}
+
+keycloak:
+  realm: backoffice
+  client:
+    id: autenticacao
+    secret: some-token-shakey-somekey
+  auth-url: https://keycloak-qa.macpreprod.com/auth
+  admin-username: admin
+  admin-password: 1qazadmin2wsxadmin$
+
+integration:
+  elasticsearch:
+    active: false
+    endpoint: http://172.31.23.81:9200
+    index: backoffice

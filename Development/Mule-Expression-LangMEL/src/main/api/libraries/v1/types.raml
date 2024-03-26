@@ -1,0 +1,200 @@
+#%RAML 1.0 Library
+usage: API model example
+types:
+  Autorizacao:
+    type: object
+    properties: 
+      statusTransacao:
+        type: string
+        required: false
+        enum: [Processada, Baixada por fraude, Desfeita, Cancelada, Pendente, Cancelada Fraude Negada]
+      statusContestacao:
+        type: string | nil
+        required: false
+      valorBruto:
+        required: false
+        type: number
+      cpnj:
+        type: string
+        required: false
+      nome:
+        type: string
+        required: false
+      comentario:
+        type: string
+        required: false
+      dataTransacao:
+        type: string
+        required: false
+      numeroCartao:
+        type: string
+        required: false
+      codigoAutorizacao:
+        type: string
+        required: false
+      meioCaptura:
+        type: string
+        required: false
+      produto:
+        type: string
+        required: false
+        enum: [VA, VR]
+      idTransacao:
+        type: integer
+        required: false
+      cpf:
+        type: string
+        required: false
+      adquirente:
+        type: string
+        required: false
+      razaoSocialEstabelecimento:
+        type: string
+        required: false
+
+  Meta:
+    displayName: Meta
+    description: Meta dados do recurso
+    type: object
+    properties:
+      total:
+        required: false
+        displayName: total
+        description: Total de registros do recurso
+        type: integer
+        format: int32
+      limit:
+        required: false
+        displayName: limit
+        description: Limite de registros para busca no recurso
+        type: integer
+        format: int32
+      offset:
+        required: false
+        displayName: offset
+        description: A partir de qual registro a busca ocorre no recurso
+        type: integer
+        format: int32
+
+  Transacao: 
+    type: object
+    properties: 
+      valorLiquido:
+        required: false
+        type: number
+      valorBruto:
+        required: false
+        type: number
+      cpnj:
+        type: string
+        required: false
+      valorTaxa:
+        required: false
+        type: number
+      indicadorServicoDePrazo:
+        type: string
+        required: false
+      dataTransacao:
+        type: string
+        required: false
+      codigoAutorizacao:
+        type: string
+        required: false
+      codigoPagamento:
+        type: integer
+        required: false
+      dataCancelamentoOuContestacao:
+        type: string
+        required: false
+      meioCaptura:
+        type: string
+        required: false
+      produto:
+        type: string
+        required: false
+        enum: [VA, VR]
+      idTransacao:
+        type: integer
+        required: false
+      dataVencimento:
+        type: string
+        required: false
+      adquirente:
+        type: string
+        required: false
+      razaoSocialEstabelecimento:
+        type: string
+        required: false
+      status:
+        type: string
+        required: false
+        enum: [Processada, Cancelada, Contesta, Liquidada]
+
+  AutorizacaoWrapper:
+    type: object
+    properties:
+      autorizacoes:
+        type: Autorizacao[]
+      meta:
+        type: Meta
+        
+  TransacaoWrapper:
+    type: object
+    properties:
+      transacao:
+        type: Transacao
+
+  CriaContestacao-Cancelamento:
+    type: object
+    properties:
+      idTransacao:
+        required: true
+        type: number
+      usuario:
+        required: true
+        type: object
+        properties:
+          loginUsuario:
+            required: true
+            type: string
+          nomeUsuario:
+            required: true
+            type: string        
+      cliente:
+        required: true
+        type: object
+        properties:
+          nome:
+            required: true
+            type: string
+          cnpjCriptografado:
+            required: true
+            type: string
+      valor:
+        required: true
+        type: number
+      documento:
+        required: false
+        type: string
+      comentario:
+        required: true
+        type: string
+      detalhe:
+        required: true
+        type: detalhes
+  
+  detalhe:
+    type: object
+    required: true
+  detalhes:  
+     type: detalhe[]
+     minItems: 1
+     maxItems: 1
+     required: true
+     
+  Contestacao-CancelamentoBody:
+    type: object
+    properties: 
+      result:
+        required: true
+        type: object[]

@@ -1,0 +1,14 @@
+[
+  {
+    "controle": "REPASSE_PEDIDO",
+    "ledgersCredito": [
+      "CREDITO_PENDENTE"
+    ],
+    "ledgersDebito": [
+      "CREDITO_CANCELADO",
+      "CREDITO_DISPONIVEL"
+    ],
+    "ledgerSuporte": "CREDITO_PENDENTE",
+    "campoAtuacao" : "RH"
+  }
+]

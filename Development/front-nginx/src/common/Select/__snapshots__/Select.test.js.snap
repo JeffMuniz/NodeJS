@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select Component should render it 1`] = `
+<styled.div
+  isCapitalized={false}
+>
+  <
+    disabled={false}
+    hasError={false}
+    id="id"
+    items={
+      Array [
+        Object {
+          "id": 1,
+          "name": "test",
+        },
+        Object {
+          "id": 2,
+          "name": "test2",
+        },
+      ]
+    }
+    maxMenuHeight=""
+    multiSelect={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onMenuScrollToBottom={[Function]}
+    selectText="Selecione..."
+    selectedItem={null}
+  />
+</styled.div>
+`;
+
+exports[`Select Component should render it when error is given 1`] = `
+<styled.div
+  isCapitalized={false}
+>
+  <
+    disabled={false}
+    hasError={false}
+    id="id"
+    items={
+      Array [
+        Object {
+          "id": 1,
+          "name": "test",
+        },
+        Object {
+          "id": 2,
+          "name": "test2",
+        },
+      ]
+    }
+    maxMenuHeight=""
+    multiSelect={false}
+    onBlur={[Function]}
+    onChange={[Function]}
+    onMenuScrollToBottom={[Function]}
+    selectText="Selecione..."
+    selectedItem={null}
+  />
+</styled.div>
+`;

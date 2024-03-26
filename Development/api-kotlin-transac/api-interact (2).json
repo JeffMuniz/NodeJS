@@ -1,0 +1,15 @@
+POST /salesforce-api/estabelecimentos/indicacoes/worker HTTP/1.1
+Host: apis-mac-staging-v2.devcdt.com.br
+Content-Type: application/json
+Accept: application/json
+{
+"nome": "MACUNAIMA MACNAMARA",
+"cpf": "00001044699",
+"email": "lucas.nadalete@platformbuilders.io",
+"telefone": "12981495686",
+"razaoSocial": "LANCHES E ROTISSERIE DO MARIO LTDA.",
+"cnpj": "62746110000235",
+"nomeFantasia": "Nome Fantasia 1"
+}
+
+curl -H "Accept: application/json;Content-Type: application/json" http://apis-mac-staging-v2.devcdt.com.br/salesforce-api/estabelecimentos/indicacoes/worker

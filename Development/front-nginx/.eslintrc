@@ -1,0 +1,63 @@
+{
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true,
+    "jest/globals": true
+  },
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb",
+    "prettier",
+    "plugin:jest/recommended"
+  ],
+  "plugins": [
+    "prettier",
+    "jest",
+    "import"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": ["error", { "ignore": ["navigator", "history"] }],
+    "react/destructuring-assignment": [1, "always"],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": true, "packageDir": "./"}],
+    "import/prefer-default-export": 0,
+    "import/no-named-as-default": 0,
+    "import/extensions": "off",
+    "react/no-array-index-key": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "consistent-return": "off",
+    "jsx-a11y/aria-props": "off",
+    "prefer-destructuring": ["error", {
+      "array": true,
+      "object": true
+    }],
+    "jsx-a11y/anchor-is-valid": [ "error", {
+      "components": [ "Link" ],
+      "specialLink": [ "to" ]
+    }],
+    "no-unused-expressions": ["error", { "allowShortCircuit": true }]
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {},
+      "alias": {
+        "map": [
+          ["src", "./src"],
+          ["@assets", "./src/assets"],
+          ["@base", "./src/base"],
+          ["@common", "./src/common"],
+          ["@scenes", "./src/scenes"],
+          ["@utils", "./src/utils"],
+          ["@colors", "./src/styles/colors"],
+          ["@enums", "./src/enums"],
+          ["@api", "./src/api"],
+          ["@dtos", "./src/api/dtos"]
+        ],
+        "extensions": [".js", ".json"]
+      }
+    }
+  }
+}

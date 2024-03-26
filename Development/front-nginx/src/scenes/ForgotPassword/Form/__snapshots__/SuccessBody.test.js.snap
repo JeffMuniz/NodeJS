@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SuccessBody Should render SuccessBody 1`] = `
+<UNDEFINED>
+  <Row
+    center="md"
+  >
+    <Styled(Col)>
+      Enviamos um e-mail para a criação da sua nova senha.
+    </Styled(Col)>
+  </Row>
+  <styled.div />
+  <Row
+    center="md"
+  >
+    <Styled(Styled(Col))>
+      Caso exista algum problema com seu email, entre em contato com o usuário administrador da sua empresa.
+    </Styled(Styled(Col))>
+  </Row>
+  <Styled(Row)
+    center="md"
+  >
+    <UNDEFINED
+      buttonType="actionButton"
+      id="pwd_btn_goback"
+      onPress={[MockFunction]}
+      title="Voltar"
+      value="voltar"
+    />
+  </Styled(Row)>
+</UNDEFINED>
+`;

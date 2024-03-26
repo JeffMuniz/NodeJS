@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reports - Table - EmptyState should render EmptyState 1`] = `
+<div>
+  <styled.div>
+    <SvgIcon
+      name="emptyGrid"
+    />
+  </styled.div>
+  <styled.p
+    id="report-empty-state"
+  >
+    Você ainda não possui relatórios.
+  </styled.p>
+  <styled.div />
+  <Styled(Row)>
+    <Col
+      xs={6}
+    >
+      <Button
+        id="report-button-new-report-empty-state"
+        onClick={[MockFunction]}
+        value="Novo Relatório"
+      />
+    </Col>
+  </Styled(Row)>
+</div>
+`;

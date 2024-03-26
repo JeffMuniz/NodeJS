@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Delivery Places - Processing Warning - Unit Tests Should render Processing Warning 1`] = `
+<styled.div
+  id="proc_warn_empty_state"
+>
+  <styled.div>
+    <SvgIcon
+      fill="#DADADA"
+      name="pendingStatus"
+      size={128}
+    />
+  </styled.div>
+  <styled.p>
+    Seus locais de entrega estão sendo processados. Eles aparecerão aqui assim que o processamento for concluído.
+  </styled.p>
+  <styled.div />
+</styled.div>
+`;

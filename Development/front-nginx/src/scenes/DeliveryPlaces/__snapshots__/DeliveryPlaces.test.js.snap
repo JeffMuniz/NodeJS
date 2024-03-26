@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Delivery Places - Unit Tests Should render with default props 1`] = `
+<ContainerWrapper
+  headerClickHandler={undefined}
+  isBiggerTitle={true}
+  showBackIcon={true}
+  subtitle={
+    <div>
+      Gerencie os locais de entrega dos cartões. Você pode atualizar ou cadastrar novos locais manualmente ou enviando os dados pela
+      <styled.a
+        download="Modelo-de-Unidades-de-Entrega-mac-visa-card.xlsx"
+        href="delivery-place-template-mac.xlsx"
+      >
+        Planilha Modelo
+      </styled.a>
+      .
+    </div>
+  }
+  title="Locais de Entrega"
+>
+  <If
+    test={false}
+  >
+    <styled.div>
+      <UNDEFINED
+        loading={true}
+      />
+    </styled.div>
+  </If>
+  <If
+    test={true}
+  >
+    <If
+      test={false}
+    >
+      <styled.div>
+        <styled.label
+          id="delivery_place_register"
+          onClick={undefined}
+        >
+          <styled.div>
+            <SvgIcon
+              name="add"
+            />
+          </styled.div>
+          cadastrar
+        </styled.label>
+        <styled.label
+          id="file_button"
+          onClick={[MockFunction]}
+        >
+          <SvgIcon
+            name="upload"
+          />
+          enviar planilha
+        </styled.label>
+        <input
+          name="file"
+          onChange={[Function]}
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+          type="file"
+        />
+      </styled.div>
+    </If>
+    <If
+      test={false}
+    >
+      <Warning />
+    </If>
+    <If
+      test={true}
+    >
+      <styled.div>
+        <WithPagination
+          callback={[MockFunction]}
+          currentPage={0}
+          data={
+            Object {
+              "totalItems": 2,
+            }
+          }
+          emptyStateComponent={[Function]}
+          fieldsToFilterBy={
+            Array [
+              Object {
+                "description": "Busque pelo ID do Local",
+                "key": "placeId",
+              },
+            ]
+          }
+          itemsPerPage={10}
+          render={[Function]}
+          showLoading={true}
+          showSimpleInput={true}
+          status="success"
+        />
+      </styled.div>
+    </If>
+  </If>
+</ContainerWrapper>
+`;

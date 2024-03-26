@@ -1,0 +1,199 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmployeesList Component should render default message when not pass data to employeesList component 1`] = `
+<UNDEFINED>
+  <TableHeader
+    id="employee_list_header"
+  >
+    <TableHeaderCol
+      id="employee_list_header_employee"
+      md={2}
+    >
+      Funcionário
+    </TableHeaderCol>
+    <TableHeaderCol
+      id="employee_list_header_cpf"
+      md={2}
+    >
+      CPF
+    </TableHeaderCol>
+    <TableHeaderCol
+      id="employee_list_header_registry"
+      md={2}
+    >
+      Matrícula
+    </TableHeaderCol>
+    <TableHeaderCol
+      id="employee_list_header_birth_date"
+      md={2}
+    >
+      Data Nasc.
+    </TableHeaderCol>
+    <TableHeaderCol
+      id="employee_list_header_delivery_address"
+      md={3}
+    >
+      Local de Entrega
+    </TableHeaderCol>
+    <TableHeaderCol
+      id="employee_list_header_delivery_address"
+      md={1}
+    >
+      Status
+    </TableHeaderCol>
+  </TableHeader>
+</UNDEFINED>
+`;
+
+exports[`EmployeesList Component should render employees list 1`] = `
+<UNDEFINED>
+  <TableHeader
+    id="employee_list_header"
+  >
+    <TableHeaderCol
+      id="employee_list_header_employee"
+      md={2}
+    >
+      Funcionário
+    </TableHeaderCol>
+    <TableHeaderCol
+      id="employee_list_header_cpf"
+      md={2}
+    >
+      CPF
+    </TableHeaderCol>
+    <TableHeaderCol
+      id="employee_list_header_registry"
+      md={2}
+    >
+      Matrícula
+    </TableHeaderCol>
+    <TableHeaderCol
+      id="employee_list_header_birth_date"
+      md={2}
+    >
+      Data Nasc.
+    </TableHeaderCol>
+    <TableHeaderCol
+      id="employee_list_header_delivery_address"
+      md={3}
+    >
+      Local de Entrega
+    </TableHeaderCol>
+    <TableHeaderCol
+      id="employee_list_header_delivery_address"
+      md={1}
+    >
+      Status
+    </TableHeaderCol>
+  </TableHeader>
+  <TableRow
+    id="employee_list_row_12345678901"
+  >
+    <TableCol
+      md={2}
+    >
+      <styled.Link
+        id="employee_0"
+        title="Bruno Santiago Roedel"
+        to={
+          Object {
+            "pathname": "/funcionarios/extrato-funcionario/12345678901",
+            "state": Object {
+              "page": NaN,
+              "status": undefined,
+            },
+          }
+        }
+      >
+        Bruno Santiago Roedel
+      </styled.Link>
+    </TableCol>
+    <TableCol
+      id="employee_cpf_0"
+      md={2}
+    >
+      123.456.789-01
+    </TableCol>
+    <styled.TableCol
+      md={2}
+    >
+      <span
+        id="employee_registry_0"
+      >
+        1123
+      </span>
+    </styled.TableCol>
+    <TableCol
+      id="employee_birth_date_0"
+      md={2}
+    >
+      2000-11-01
+    </TableCol>
+    <styled.TableCol
+      id="employee_delivery_address_0"
+      md={3}
+    >
+      Grupo Empresarial
+    </styled.TableCol>
+    <TableCol
+      id="employee_birth_date_0"
+      md={1}
+    />
+  </TableRow>
+  <TableRow
+    id="employee_list_row_12345678904"
+  >
+    <TableCol
+      md={2}
+    >
+      <styled.Link
+        id="employee_1"
+        title="Bruno Santiago Roedel"
+        to={
+          Object {
+            "pathname": "/funcionarios/extrato-funcionario/12345678904",
+            "state": Object {
+              "page": NaN,
+              "status": undefined,
+            },
+          }
+        }
+      >
+        Bruno Santiago Roedel
+      </styled.Link>
+    </TableCol>
+    <TableCol
+      id="employee_cpf_1"
+      md={2}
+    >
+      123.456.789-04
+    </TableCol>
+    <styled.TableCol
+      md={2}
+    >
+      <span
+        id="employee_registry_1"
+      >
+        1124
+      </span>
+    </styled.TableCol>
+    <TableCol
+      id="employee_birth_date_1"
+      md={2}
+    >
+      2000-11-01
+    </TableCol>
+    <styled.TableCol
+      id="employee_delivery_address_1"
+      md={3}
+    >
+      Grupo Empresarial
+    </styled.TableCol>
+    <TableCol
+      id="employee_birth_date_1"
+      md={1}
+    />
+  </TableRow>
+</UNDEFINED>
+`;

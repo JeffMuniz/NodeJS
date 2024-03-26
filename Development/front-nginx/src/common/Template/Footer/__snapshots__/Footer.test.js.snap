@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should render it when not logged 1`] = `
+<Styled(Row)>
+  <Styled(Styled(Col))
+    xs={12}
+  >
+    <Row>
+      <Col
+        md={4}
+        mdOffset={2}
+        xs={12}
+      >
+        <Row>
+          <Styled(Styled(Col))
+            xs={12}
+          >
+            <styled.span>
+              Atendimento
+            </styled.span>
+          </Styled(Styled(Col))>
+          <Styled(Styled(Col))
+            xs={2}
+          >
+            <Styled(Icon)
+              name="telephone"
+            />
+          </Styled(Styled(Col))>
+          <Styled(Styled(Col))
+            xs={10}
+          >
+            <Styled(styled.p)>
+              4004 4474 
+              <small>
+                (Capitais e Regiões Metropolitanas)
+              </small>
+            </Styled(styled.p)>
+            <Styled(styled.p)>
+              0800 723 4474 
+              <small>
+                (Demais localidades)
+              </small>
+            </Styled(styled.p)>
+            <Styled(styled.p)>
+              Disponível de segunda à sexta, das 8h às 20h, exceto em feriados nacionais.
+            </Styled(styled.p)>
+          </Styled(Styled(Col))>
+          <Styled(Styled(Col))
+            xs={10}
+            xsOffset={2}
+          >
+            <div>
+              <Styled(styled.p)>
+                <strong>
+                  SAC
+                </strong>
+              </Styled(styled.p)>
+              <Styled(styled.p)>
+                0800 723 5013 
+                <styled.small>
+                  para todo brasil
+                </styled.small>
+              </Styled(styled.p)>
+              <Styled(styled.p)>
+                0800 723 5014
+                 
+                <styled.small>
+                  para deficientes auditivos e pessoas com disturbio de fala
+                </styled.small>
+              </Styled(styled.p)>
+            </div>
+          </Styled(Styled(Col))>
+        </Row>
+      </Col>
+      <Col
+        md={3}
+        mdOffset={1}
+        xs={12}
+      >
+        <Row>
+          <Styled(Styled(Col))
+            xs={12}
+          >
+            Uma empresa 
+            <img
+              alt="macnabank"
+              src={
+                Object {
+                  "testUri": "../../../src/assets/pngs/logo-banco.png",
+                }
+              }
+            />
+          </Styled(Styled(Col))>
+        </Row>
+      </Col>
+    </Row>
+  </Styled(Styled(Col))>
+  <Col
+    xs={12}
+  >
+    <styled.div />
+    <styled.div>
+      <Styled(styled.p)>
+        Copyright Grupo macnabank© 2018
+      </Styled(styled.p)>
+    </styled.div>
+  </Col>
+</Styled(Row)>
+`;

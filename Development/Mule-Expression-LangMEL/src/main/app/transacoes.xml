@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:metadata="http://www.mulesoft.org/schema/mule/metadata" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd">
+
+	<http:request-config name="HTTP_Request_Transacao" host="${http.conductor.host}" port="${http.transacao.port}"  usePersistentConnections="false" doc:name="HTTP Request Configuration"/>
+	<http:request-config name="HTTP_Request_Autorizacao" host="${http.conductor.host}" port="${http.autorizacao.port}"  usePersistentConnections="false" doc:name="HTTP Request Configuration"/>
+	<http:request-config name="HTTP_Request_Aprovacao" host="${http.aprovacao.host}" port="${http.aprovacao.port}"  usePersistentConnections="false" doc:name="HTTP Request Configuration" basePath="${http.aprovacao.base.path}"  />
+	<http:request-config name="HTTP_Request_Contestacao" host="${http.conductor.host}" port="${http.contestacao.port}"  usePersistentConnections="false" doc:name="HTTP Request Configuration" responseTimeout="50000" basePath="${http.contestacao.base.path}"/>
+	
+	<sub-flow name="get-transacoes-flow">
+		
+		<http:request config-ref="HTTP_Request_Transacao" path="${http.transacao.recuperar}" method="GET" doc:name="HTTP_TRANSACAO_RECUPERAR">
+			<http:request-builder>
+				<http:query-params expression="#[message.inboundProperties['http.query.params']]"/>
+				<http:uri-params expression="#[message.inboundProperties['http.uri.params']]"/>
+				<http:headers expression="#[message.inboundProperties]"/>
+			</http:request-builder>
+            <http:success-status-code-validator values="200,400,401,404,500"/>
+		</http:request>
+		<logger level="INFO" doc:name="Logger"/>
+		<set-property propertyName="#['http.status']" value="#[message.inboundProperties.'http.status']" doc:name="http.status"/>
+		<component class="util.TransacaoUtil" doc:name="Java"/>
+        <set-payload value="#[payload] " doc:name="Set Payload" mimeType="application/json"/>
+
+	</sub-flow>
+    <sub-flow name="get-autorizacoes-flow">
+		<http:request config-ref="HTTP_Request_Autorizacao" path="${http.autorizacao.recuperar}" method="GET" doc:name="HTTP_AUTORIZACAO_RECUPERAR">
+				<http:request-builder>
+					<http:query-params expression="#[message.inboundProperties['http.query.params']]"/>
+					<http:uri-params expression="#[message.inboundProperties['http.uri.params']]"/>
+					<http:headers expression="#[message.inboundProperties]"/>
+				</http:request-builder>
+				<http:success-status-code-validator values="200,400,401,404,500"/>
+		</http:request>
+		<logger level="INFO" doc:name="Logger"/>
+		<set-property propertyName="#['http.status']" value="#[message.inboundProperties.'http.status']" doc:name="http.status"/>
+		<component class="util.AutorizacaoUtil" doc:name="Java"/>
+        <set-payload value="#[payload] " doc:name="Set Payload" mimeType="application/json"/>
+		
+	</sub-flow>
+	
+	<sub-flow name="post-contestacao-flow">
+		<component class="util.ContestacaoUtil" doc:name="Java"/>
+		<scatter-gather doc:name="Scatter-Gather">
+			<processor-chain>
+				<set-payload value="#[flowVars.aprovacaoPayload]" doc:name="Set Payload"/>
+				<http:request config-ref="HTTP_Request_Aprovacao" path="${http.aprovacao.solicitacoes.path}" method="POST" doc:name="HTTP_POST_APROVACAO">
+					<http:request-builder>
+						<http:header headerName="Authorization" value="#[message.inboundProperties[&quot;Authorization&quot;]]"/>
+						<http:header headerName="Content-Type" value="application/json"/>
+						<http:header headerName="Content-Length" value="#[flowVars.aprovacaoContLength]"/>
+					</http:request-builder>
+					<http:success-status-code-validator values="200,201,400,401,403,404,500"/>
+				</http:request>
+				<object-to-string-transformer doc:name="Object to String"/>
+				<set-payload value="{ &quot;aprovacao&quot;: #[message.payload], &quot;aprovacaoCode&quot;:  #[message.inboundProperties.'http.status']}" doc:name="Set Payload"/>
+			</processor-chain>
+			<processor-chain>
+				<set-payload value="#[flowVars.contestacaoCancelamentoPayload]" doc:name="Set Payload"/>
+				<http:request config-ref="HTTP_Request_Contestacao" path="${http.contestacao.post}" method="POST" doc:name="HTTP_POST_CONTESTACAO">
+					<http:request-builder>
+						<http:header headerName="${http.contestacao.auth.name}" value="${http.contestacao.auth.value}"/>
+						<http:header headerName="Content-Length" value="#[flowVars.contCancelamentoLength]"/>
+						<http:header headerName="Content-Type" value="application/json"/>
+					</http:request-builder>
+					<http:success-status-code-validator values="200,201,400,401,403,404,500"/>
+				</http:request>
+				<object-to-string-transformer doc:name="Object to String"/>
+				<set-payload value="{&quot;contestacao&quot;: #[message.payload], &quot;contestacaoCode&quot;:  #[message.inboundProperties.'http.status'] }" doc:name="Set Payload"/>
+			</processor-chain>
+		</scatter-gather>
+		<component class="util.HttpResponseUtil" doc:name="Java"/>
+		<set-property propertyName="#['http.status']" value="#[flowVars.httpResponse]" doc:name="Property"/>
+		<logger message="#[flowVars]" level="INFO" doc:name="Logger"/>
+		
+		
+     	<set-payload value="{ &quot;result&quot;: [ #[message.payload[0]], #[message.payload[1]] ]}" doc:name="Set Payload"/>
+    	
+	</sub-flow>
+	
+	
+	<sub-flow name="post-cancelamento-flow">
+		<component class="util.ContestacaoUtil" doc:name="Java"/>
+		<scatter-gather doc:name="Scatter-Gather">
+			<processor-chain>
+				<set-payload value="#[flowVars.aprovacaoPayload]" doc:name="Set Payload" />
+				<http:request config-ref="HTTP_Request_Aprovacao" path="${http.aprovacao.solicitacoes.path}" method="POST" doc:name="HTTP_POST_APROVACAO" >
+					<http:request-builder>
+						<http:header headerName="Authorization" value="#[message.inboundProperties[&quot;Authorization&quot;]]"/>
+						<http:header headerName="Content-Type" value="application/json"/>
+						<http:header headerName="Content-Length" value="#[flowVars.aprovacaoContLength]"/>
+					</http:request-builder>
+					<http:success-status-code-validator values="200,201,400,401,403,404,500"/>
+				</http:request>
+				<object-to-string-transformer doc:name="Object to String"/>
+				<set-payload value="{ &quot;aprovacao&quot;: #[message.payload], &quot;aprovacaoCode&quot;:  #[message.inboundProperties.'http.status']}" doc:name="Set Payload"/>
+			</processor-chain>
+			<processor-chain>
+				<set-payload value="#[flowVars.contestacaoCancelamentoPayload]" doc:name="Set Payload"/>
+				<http:request config-ref="HTTP_Request_Contestacao" path="${http.contestacao.post}" method="POST" doc:name="HTTP_POST_CANCELAMENTO">
+					<http:request-builder>
+						<http:header headerName="${http.contestacao.auth.name}" value="${http.contestacao.auth.value}"/>
+						<http:header headerName="Content-lengh" value="#[flowVars.contCancelamentoLength]"/>
+						<http:header headerName="Content-Type" value="application/json"/>
+					</http:request-builder>
+					<http:success-status-code-validator values="200,201,400,401,403,404,500"/>
+				</http:request>
+				<object-to-string-transformer doc:name="Object to String"/>
+				<set-payload value="{&quot;cancelamento&quot;: #[message.payload], &quot;cancelamentoCode&quot;:  #[message.inboundProperties.'http.status'] }" doc:name="Set Payload"/>
+			</processor-chain>
+		</scatter-gather>
+		<component class="util.HttpResponseUtil" doc:name="Java"/>
+		<set-property propertyName="#['http.status']" value="#[flowVars.httpResponse]" doc:name="Property"/>
+		<logger message="#[flowVars]" level="INFO" doc:name="Logger"/>
+		
+     	<set-payload value="{ &quot;result&quot;: [ #[message.payload[0]], #[message.payload[1]] ]}" doc:name="Set Payload" doc:description="Version 4.x or higher 
+#[write(payload, &quot;application/json&quot;, {&quot;encoding&quot;: &quot;UTF-8&quot;})]
+
+Mule 3.x
+#[message.payloadAs(String)]"/>
+    	
+	</sub-flow>
+</mule>

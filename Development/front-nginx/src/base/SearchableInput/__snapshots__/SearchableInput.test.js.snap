@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Searchable Input - Unit Tests Should render component with default props 1`] = `
+<styled.div
+  marginRight="0"
+  position=""
+>
+  <styled.div>
+    <Styled(Component)
+      name="search"
+    />
+  </styled.div>
+  <Styled(Component)
+    hasIcon={true}
+    id="x"
+    onChange={[Function]}
+    onInput={[Function]}
+    placeholder="Buscar por"
+    value=""
+  />
+  <styled.span
+    cursorPointer={true}
+    data-customselect="custom-select"
+    id="pagination-custom-select"
+    onClick={[Function]}
+  >
+    <styled.div
+      id="custom-select"
+      innerRef={
+        Object {
+          "current": null,
+        }
+      }
+      onClick={[Function]}
+    >
+      <If
+        test={true}
+      >
+        <Styled(Component)
+          fill="#009CFF"
+          name="arrowDown"
+          triggerRef={
+            Object {
+              "current": null,
+            }
+          }
+        />
+      </If>
+    </styled.div>
+  </styled.span>
+  <If
+    test={false}
+  >
+    <styled.ul>
+      <styled.li
+        active={false}
+        id="custom-select-option-value"
+        onClick={[Function]}
+      >
+        value
+      </styled.li>
+      <styled.li
+        active={false}
+        id="custom-select-option-name"
+        onClick={[Function]}
+      >
+        name
+      </styled.li>
+    </styled.ul>
+  </If>
+</styled.div>
+`;

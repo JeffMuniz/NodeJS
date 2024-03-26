@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Voucher Section - Unit Test Should render Voucher Section type food 1`] = `
+<UNDEFINED>
+  <Styled(styled.div)>
+    <VoucherListComponent
+      active={0}
+      changeVoucherStatus={[MockFunction]}
+      items={
+        Array [
+          Object {
+            "activationDate": "Wed Sep 12 2018 15:00:04 GMT-0300",
+            "cardNumber": "1111 22xx xxxx 4444",
+            "id": "1",
+            "idProduct": "1",
+            "issueDate": "01/01/2019",
+            "printedName": "teste",
+            "type": "food",
+          },
+          Object {
+            "activationDate": "Wed Sep 12 2018 15:00:04 GMT-0300",
+            "cardNumber": "1111 22xx xxxx 4444",
+            "id": "1",
+            "idProduct": "1",
+            "issueDate": "01/01/2019",
+            "printedName": "teste",
+            "type": "food",
+          },
+          Object {
+            "activationDate": "Wed Sep 12 2018 15:00:04 GMT-0300",
+            "cardNumber": "1111 22xx xxxx 4444",
+            "id": "2",
+            "idProduct": "2",
+            "issueDate": "01/01/2019",
+            "printedName": "teste",
+            "type": "meal",
+          },
+        ]
+      }
+      updateVouchers={[MockFunction]}
+    />
+  </Styled(styled.div)>
+</UNDEFINED>
+`;

@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AlertMessage Should render AlertMessage 1`] = `
+<styled.div
+  height={null}
+  id="small_modal"
+  width="312px"
+>
+  <styled.div
+    iconName="Ipsum"
+  >
+    <SvgIcon
+      name="Ipsum"
+    />
+  </styled.div>
+  <styled.h1
+    iconName="Ipsum"
+  >
+    Lorem
+  </styled.h1>
+  <If
+    test={undefined}
+  >
+    <styled.p />
+  </If>
+  <If
+    test={undefined}
+  >
+    <styled.div>
+      <If
+        test={undefined}
+      >
+        <Button
+          buttonType="light"
+          id="action_btn_cancel"
+          onClick={undefined}
+          value={undefined}
+        />
+      </If>
+      <If
+        test={undefined}
+      >
+        <Button
+          id="action_btn"
+          onClick={[Function]}
+          value={undefined}
+        />
+      </If>
+    </styled.div>
+  </If>
+</styled.div>
+`;

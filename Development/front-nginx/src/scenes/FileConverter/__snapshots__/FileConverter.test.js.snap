@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Order Should render empty dashboard 1`] = `
+<ContainerWrapper
+  title="Arquivo TXT"
+>
+  <styled.div>
+    Envie o arquivo TXT para que seja automaticamente convertido para o formato mac.
+  </styled.div>
+  <Styled(Row)>
+    <Col
+      xs={12}
+    >
+      <Connect(FormContainer) />
+    </Col>
+  </Styled(Row)>
+</ContainerWrapper>
+`;

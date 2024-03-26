@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar container should render it 1`] = `
+<NavBar
+  companySegment={null}
+  deliveryType="HR"
+  dropDownHasBorder={false}
+  groupListLength={0}
+  handleGroupModal={[Function]}
+  handleLogout={[Function]}
+  isAuthenticated={false}
+  isContractDownload={false}
+  isDropDownNotification={false}
+  isDropDownOpen={false}
+  showChangeGroup={false}
+  toggleDropDown={[Function]}
+  toggleNotification={[Function]}
+/>
+`;
+
+exports[`NavBar container should render navbarcontainer with userData empty 1`] = `
+<NavBar
+  companySegment={null}
+  deliveryType="HR"
+  dropDownHasBorder={false}
+  groupListLength={0}
+  handleGroupModal={[Function]}
+  handleLogout={[Function]}
+  isAuthenticated={false}
+  isContractDownload={false}
+  isDropDownNotification={false}
+  isDropDownOpen={false}
+  showChangeGroup={false}
+  toggleDropDown={[Function]}
+  toggleNotification={[Function]}
+/>
+`;

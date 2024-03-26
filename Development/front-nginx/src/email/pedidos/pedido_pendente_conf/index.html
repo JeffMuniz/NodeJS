@@ -1,0 +1,172 @@
+<html>
+
+<body style="margin: 0; padding: 0; background: #666666; text-align:center;">
+	<table cellspacing="0"
+		style="text-align: center; padding: 0; min-width: 540px; max-width: 620px; margin: 40px auto auto; background: #FFF; font-family: Arial, Helvetica, sans-serif; line-height: 18px; border-radius: 8px;">
+		<tr>
+			<td style="padding: 0;">
+				<img src="{{header_img}}"
+					style="height: 300px; width: 100%; padding: 0; background: center no-repeat;" />
+			</td>
+		</tr>
+		<tr style="width: 640px;">
+			<td style="padding: 0;">
+				
+				<div style="margin: 10px 83px 12px 77px;font-family: Arial; line-height: 140%; font-size: 18px; text-align: left; letter-spacing: 0.116667px;">
+
+					<span style="font-size: 17px;">Olá, tudo mac? </span><br/><br/>
+					<span style="font-size: 17px;font-weight: bold">O pedido {{order_number}} com data de crédito {{credit_date}} </span> <br/>
+					<span style="font-size: 17px;">está aguardando a sua confirmação na plataforma da mac</span>
+	
+					<br><br>
+
+					<span style="font-size: 14px; font-weight: bold">Resumo do pedido:</span><br/>
+					<span style="font-size: 14px; font-weight: bold">Quantidade de:</span>
+
+					<table border="0" cellspacing="0"
+					style="width: 640px; font-family: Arial; line-height: 140%; font-size: 18px; text-align: left; letter-spacing: 0.116667px;">
+
+
+						<tr style="width: 100%;background: #EEE">
+							<td style="width: 60%;padding-left: 5px;">
+								<span style="font-size: 14px;">Funcionários:</span>
+							</td>
+							<td style="width: 40%;text-align:right;padding-right: 5px;">
+								<span style="font-size: 14px;">{{num_employees}}</span>
+							</td>
+						</tr>
+
+						<tr style="width: 100%;background: #FFF">
+							<td style="width: 60%;padding-left: 5px;">
+								<span style="font-size: 14px;">Cartões gerados:</span>
+							</td>
+							<td style="width: 40%;text-align:right;padding-right: 5px;">
+								<span style="font-size: 14px;">{{generated_cards}}</span>
+							</td>
+						</tr>
+
+
+						<tr style="width: 100%;background: #EEE">
+							<td style="width: 60%;padding-left: 5px;">
+								<span style="font-size: 14px;">Funcionários com créditos:</span>
+							</td>
+							<td style="width: 40%;text-align:right;padding-right: 5px;">
+								<span style="font-size: 14px;">{{emp_with_credit}}</span>
+							</td>
+						</tr>
+
+					</table>
+
+					<br><br>
+
+					<span style="font-size: 14px; font-weight: bold">Valores do Pedido</span><br>
+
+					<table border="0" cellspacing="0" class="full_table_list"
+						style="width: 640px; font-family: Arial; line-height: 140%; font-size: 18px; text-align: left; letter-spacing: 0.116667px;">
+
+		
+							<tr id="col-va" style="width: 100%;display: {{display_mac_Alimenta}}">
+								<td style="width: 60%;padding-left: 5px;">
+									<span style="font-size: 14px;">mac alimentação:</span>
+								</td>
+								<td style="width: 1%;padding-right: 10px;text-align:right">
+									<span style="font-size: 14px;">  R$</span>
+								</td>
+								<td style="width: 39%;text-align:left;padding-right: 5px;">
+									<span style="font-size: 14px;">{{mac_Alimenta}}</span>
+								</td>
+							</tr>
+
+							<tr id="col-vr" style="width: 100%;display: {{display_mac_Refei}}">
+								<td style="width: 60%;padding-left: 5px;">
+									<span style="font-size: 14px;">mac refeição:</span>
+								</td>
+								<td style="width: 1%;padding-right: 10px;text-align:right">
+									<span style="font-size: 14px;">  R$</span>
+								</td>
+								<td style="width: 39%;text-align:left;padding-right: 5px;">
+									<span style="font-size: 14px;">{{mac_Refei}}</span>
+								</td>
+							</tr>
+
+
+							<tr id="col-desconto" style="width: 100%;">
+								<td style="width: 60%;padding-left: 5px;">
+									<span style="font-size: 14px;">Desconto:</span>
+								</td>
+								<td style="width: 1%;padding-right: 10px;text-align:right">
+									<span style="font-size: 14px;">- R$</span>
+								</td>
+								<td style="width: 39%;text-align:left;padding-right: 5px;">
+									<span style="font-size: 14px;">{{discount}}</span>
+								</td>
+							</tr>
+
+							<tr id="col-taxas" style="width: 100%;display: {{display_taxes}}">
+								<td style="width: 60%;padding-left: 5px;">
+									<span style="font-size: 14px;">Taxas:</span>
+								</td>
+								<td style="width: 1%;padding-right: 10px;text-align:right">
+									<span style="font-size: 14px;">- R$</span>
+								</td>
+								<td style="width: 39%;text-align:left;padding-right: 5px;">
+									<span style="font-size: 14px;">{{taxes}}</span>
+								</td>
+							</tr>
+
+							<tr id="col-rebate" style="width: 100%;display: {{display_rebate}}">
+								<td style="width: 60%;padding-left: 5px;">
+									<span style="font-size: 14px;">Rebate:</span>
+								</td>
+								<td style="width: 39%;padding-right: 10px;text-align:right">
+									<span style="font-size: 14px;">- R$</span>
+								</td>
+								<td style="width: 1%;text-align:left;padding-right: 5px;">
+									<span style="font-size: 14px;">{{rebate}}</span>
+								</td>
+							</tr>
+
+							<tr style="width: 100%; font-weight: bold">
+								<td>
+									<div style="border-bottom: 1px solid rgba(155, 155, 155, 0.298);width: 100%;"></div>
+								</td>
+								<td>
+									<div style="border-bottom: 1px solid rgba(155, 155, 155, 0.298);width: 100%;"></div>
+								</td>
+								<td>
+									<div style="border-bottom: 1px solid rgba(155, 155, 155, 0.298);width: 100%;"></div>
+								</td>
+							</tr>
+
+							<tr style="width: 100%; font-weight: bold">
+								<td style="width: 60%;padding-left: 5px;">
+									<span style="font-size: 14px;">Valor total:</span>
+								</td>
+								<td style="width: 39%;padding-right: 10px;text-align:right">
+									<span style="font-size: 14px;">  R$</span>
+								</td>
+								<td style="width: 1%;text-align:left;padding-right: 10px;">
+									<span style="font-size: 14px;">{{total}}</span>
+								</td>
+							</tr>
+
+
+					</table>
+
+				</div>
+
+				<br/>
+				<p style="margin: 0 auto 25px; font-size: 23px; line-height: 37px;">Um abraço do time do <span
+						style="color: #FF053F; font-weight: 700;">mac!</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0;">
+				<img src="{{footer_img}}"
+					style="margin-top: 11px; height: 185px; width: 100%; background: center no-repeat; padding: 0">
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>

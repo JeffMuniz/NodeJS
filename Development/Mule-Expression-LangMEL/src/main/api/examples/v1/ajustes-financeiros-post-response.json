@@ -1,0 +1,32 @@
+{
+  "id": 1,
+  "tipo": {
+    "id": 1,
+    "nome": "EC"
+  },
+  "cliente": {
+    "id": 1,
+    "nome": "Nome Cliente",
+    "cpf": "40376523492",
+    "cnpj": "",
+    "idConta": 1,
+    "descricaoConta": "VR | LIBERADO | EMPRESA 1"
+  },
+  "status": {
+    "id": 1,
+    "nome": "PENDENTE"
+  },
+  "loginUsuario": "Login Usuário",
+  "nomeUsuario": "Nome Usuário",
+  "idSolicitacao": 1,
+  "operacao": {
+    "id": 1,
+    "descricao": "Crédito"
+  },
+  "codigoExterno": 3123,
+  "observacao": "Ajuste de MDR",
+  "valor": 200,
+  "dataVencimento": "2020-03-25",
+  "dataCriacao": "2020-03-25",
+  "dataFinalizacao": "2020-03-25"
+}

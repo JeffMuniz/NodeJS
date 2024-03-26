@@ -1,0 +1,30 @@
+apiVersion: v1
+clusters:
+- cluster:
+    certificate-authority-data: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUM1ekNDQWMrZ0F3SUJBZ0lCQURBTkJna3Foa2lHOXcwQkFRc0ZBREFWTVJNd0VRWURWUVFERXdwcmRXSmwKY201bGRHVnpNQjRYRFRJeE1UQXdOREUzTVRFd00xb1hEVE14TVRBd01qRTNNVEV3TTFvd0ZURVRNQkVHQTFVRQpBeE1LYTNWaVpYSnVaWFJsY3pDQ0FTSXdEUVlKS29aSWh2Y05BUUVCQlFBRGdnRVBBRENDQVFvQ2dnRUJBTkYxCkNlMklOZDZxd0toQkVzYUpNM2N5ejYrV2xJdTNRNkEwL0dOMmRvaDNLTWxJRXppK3BzTzIxZ1RtVFplakpMM3EKNk5KdDdmb2xBeFpKbWRIVUFGb2k1MnNGMDJEWTU3YWx3UjZyMllVTkQ3UmVMQ1VYZzQrelhyS1VGMkZEMXBBSApyVzAzelZYZ2IwQzdkWk8yczdyL3dMTDVVVi9HOHVySDRsSnZpY2ZNNldTNy9YNkJYMzM0dFBGTVpaa25YNGFSCmI1bStVazFHa25LNXRFN3Vaekp2SjdKVmw2ZDF0WjRSb2x5QTUvK2pETk5Tb1IwcWRFSjBXU3BNUnBOaC84aU0KV00wQVM5ME90aVE3N2hQYUtZRUx0SzN6SXJFQk92WXhZajI2OE1Zd24wMmwyQlhvTElzbnJ1V01nVHJoSVB3bwo1cStzZW1tbmlXa2Iybkx5UkxjQ0F3RUFBYU5DTUVBd0RnWURWUjBQQVFIL0JBUURBZ0trTUE4R0ExVWRFd0VCCi93UUZNQU1CQWY4d0hRWURWUjBPQkJZRUZPZW42eVd0bWp3cHpRR3pUb1plcGxsMTc4TFZNQTBHQ1NxR1NJYjMKRFFFQkN3VUFBNElCQVFCK2lYYkFkc29SZExWSktXMTBGU202dXJhSTRuWFEzZ0RWY2pWR2hFZ2h2ZTlySU14YgpqZkU4R29pcFpqT0oxaHdJNEVqU3E1R3FKdmg3bUlJRFJtZ2owa2xJcGQvZ3BaaTArTDR6WXdiNmdVb2pZSmVxCmtXcEFuVEFTenM0cnpwa0NDK2Jock15NjlrYkFyOVZXWjhPeFFDbEVvcXFnMnlqaFJBVHdvT2NFVmt0WVJMb1YKS3h1dTI1KytVZ3BGakNCVFI4WkZBMzBTUVcvYjBSSHJKbW4zRTEzRkQ1U3pHZDY2L0xpZHl2RVpHTitCbGl5Rwp3dEtJQVc3M01maURtRU92NitrZHViNzBja3M5QWpzRlV4RHlxRWNQZnRGOUFNYzV6RjJmdFdaN1dWcDVhRVg5CkRaSFZocEpsK25IbzlaakdHVTVCYVRtVmJlWjczOVU1ZXg3MQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+    server: https://3CDBA65282A1A329497381CBD8CDAEF4.gr7.us-east-2.eks.amazonaws.com
+  name: arn:aws:eks:us-east-2:282684517591:cluster/macnai
+contexts:
+- context:
+    cluster: arn:aws:eks:us-east-2:282684517591:cluster/macnai
+    user: arn:aws:eks:us-east-2:282684517591:cluster/macnai
+  name: arn:aws:eks:us-east-2:282684517591:cluster/macnai
+current-context: arn:aws:eks:us-east-2:282684517591:cluster/macnai
+kind: Config
+preferences: {}
+users:
+- name: arn:aws:eks:us-east-2:282684517591:cluster/macnai
+  user:
+    exec:
+      apiVersion: client.authentication.k8s.io/v1alpha1
+      args:
+      - --region
+      - us-east-2
+      - eks
+      - get-token
+      - --cluster-name
+      - macnai
+      command: aws
+      env:
+      - name: AWS_PROFILE
+        value: bruno-sandbox

@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Balance Transfer - Scene Should render it 1`] = `
+<styled.section>
+  <styled.div>
+    <styled.span>
+      Painel de Controle
+    </styled.span>
+    <styled.div>
+      <Switch
+        checked={false}
+        id="balance_transfer"
+        name="balance_transfer"
+        onChange={[Function]}
+      />
+      <styled.div>
+        <Styled(styled.p)>
+          Habilitar a transferência de saldo.
+        </Styled(styled.p)>
+        <styled.span
+          onClick={[Function]}
+        >
+          Entenda a transferência de saldo
+        </styled.span>
+      </styled.div>
+    </styled.div>
+    <Styled(styled.p)>
+      * Esta funcionalidade permite realizar a transferência apenas para o macefício de mesma titularidade.
+    </Styled(styled.p)>
+  </styled.div>
+  <styled.div>
+    <styled.span>
+      Valor mínimo de utilização
+    </styled.span>
+    <Styled(styled.p)>
+      Defina um valor mínimo de uso para macefício.
+    </Styled(styled.p)>
+    <styled.div>
+      <styled.div>
+        <span>
+          R$
+        </span>
+        <CustomField
+          component="input"
+          disabled={true}
+          errors={Object {}}
+          iconErro={false}
+          id={null}
+          label="Alimentação"
+          mask={null}
+          maxLength="12"
+          onChange={[Function]}
+          placeholder={null}
+          touched={Object {}}
+          value="0,00"
+          width={null}
+        />
+      </styled.div>
+      <styled.div>
+        <span>
+          R$
+        </span>
+        <CustomField
+          component="input"
+          disabled={true}
+          errors={Object {}}
+          iconErro={false}
+          id={null}
+          label="Refeição"
+          mask={null}
+          maxLength="12"
+          onChange={[Function]}
+          placeholder={null}
+          touched={Object {}}
+          value="0,00"
+          width={null}
+        />
+      </styled.div>
+    </styled.div>
+    <Styled(styled.p)>
+      * O não preenchimento indica que os colaboradores podem transferir o valor integral de cada macefício.
+    </Styled(styled.p)>
+    <CheckBox
+      checked={false}
+      disabled={false}
+      id="accept_terms"
+      label="Concordo com as habilitações de transferência de saldo entre os  macefícios dos cartões mac Refeição e Alimentação, de todos os meus  colaboradores, conforme acordo sindical da minha categoria isentando a  mac de qualquer responsabilidade."
+      name="accept_terms"
+      onChange={[Function]}
+    />
+    <styled.div>
+      <Button
+        buttonType=""
+        disabled={true}
+        id="button_submit"
+        loading={undefined}
+        onPress={[Function]}
+        type="submit"
+        value="Salvar Alteração"
+      />
+    </styled.div>
+  </styled.div>
+</styled.section>
+`;

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link link rel="icon" type="image/png" href="favicon.png" />
+    <title>Backoffice - mac</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Barlow:300,400,600,700"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "@backoffice/aprovacao": "<%= process.env.APP_BACKOFFICE_APROVACAO %>/aprovacao.js",
+          "@backoffice/ec": "<%= process.env.APP_BACKOFFICE_EC %>/ec.js",
+          "@backoffice/pagamento": "<%= process.env.APP_BACKOFFICE_PAGAMENTO %>/pagamento.js",
+          "@backoffice/pedido": "<%= process.env.APP_BACKOFFICE_PEDIDO %>/pedido.js",
+          "@backoffice/financeiro": "<%= process.env.APP_BACKOFFICE_FINANCEIRO %>/financeiro.js",
+          "@backoffice/transacao": "<%= process.env.APP_BACKOFFICE_TRANSACAO %>/transacao.js",
+          "@backoffice/conciliacao": "<%= process.env.APP_BACKOFFICE_CONCILIACAO %>/conciliacao.js",
+          "@backoffice/extrato": "<%= process.env.APP_BACKOFFICE_EXTRATO %>/extrato.js"
+        }
+      }
+    </script>
+
+    <script src="https://unpkg.com/systemjs@6.4.1/dist/system.js"></script>
+    <script src="https://unpkg.com/systemjs@6.4.1/dist/extras/amd.js"></script>
+    <script src="https://unpkg.com/systemjs@6.4.1/dist/extras/named-exports.js"></script>
+    <script src="https://unpkg.com/systemjs@6.4.1/dist/extras/use-default.js"></script>
+  </body>
+</html>

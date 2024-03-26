@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextInput Component should render it 1`] = `
+<UNDEFINED>
+  <TextInputMask
+    className=""
+    colorBorder="#BEBEBE"
+    disabled={false}
+    hasIcon={false}
+    id="1"
+    maskChar=""
+    maskType=""
+    maxLength={null}
+    onBlur={[Function]}
+    onChange={[MockFunction]}
+    onClick={[Function]}
+    onInput={[Function]}
+    placeholder={null}
+    value=""
+  />
+  <Styled(Row)>
+    <If
+      test={false}
+    >
+      <styled.span>
+        <Icon
+          name=""
+        />
+      </styled.span>
+    </If>
+    <If
+      test={false}
+    >
+      <styled.span>
+        <Icon
+          name="eye"
+          onClick={[Function]}
+        />
+      </styled.span>
+    </If>
+  </Styled(Row)>
+</UNDEFINED>
+`;
+
+exports[`TextInput Component should render text input mask 1`] = `
+<UNDEFINED>
+  <TextInputMask
+    className=""
+    colorBorder="#BEBEBE"
+    disabled={false}
+    hasIcon={false}
+    id="1"
+    maskChar=""
+    maskType="cel-phone"
+    maxLength={null}
+    onBlur={[Function]}
+    onChange={[MockFunction]}
+    onClick={[Function]}
+    onInput={[Function]}
+    placeholder={null}
+    value=""
+  />
+  <Styled(Row)>
+    <If
+      test={false}
+    >
+      <styled.span>
+        <Icon
+          name=""
+        />
+      </styled.span>
+    </If>
+    <If
+      test={false}
+    >
+      <styled.span>
+        <Icon
+          name="eye"
+          onClick={[Function]}
+        />
+      </styled.span>
+    </If>
+  </Styled(Row)>
+</UNDEFINED>
+`;
+
+exports[`TextInput Component should render web input error when the error props is given 1`] = `
+<UNDEFINED>
+  <TextInputMask
+    className=""
+    colorBorder="#FF053F"
+    disabled={false}
+    hasIcon={false}
+    id="1"
+    maskChar=""
+    maskType=""
+    maxLength={null}
+    onBlur={[Function]}
+    onChange={[MockFunction]}
+    onClick={[Function]}
+    onInput={[Function]}
+    placeholder={null}
+    value=""
+  />
+  <Styled(Row)>
+    <If
+      test={true}
+    >
+      <styled.span>
+        <Icon
+          name="nocheck-input"
+        />
+      </styled.span>
+    </If>
+    <If
+      test={false}
+    >
+      <styled.span>
+        <Icon
+          name="eye"
+          onClick={[Function]}
+        />
+      </styled.span>
+    </If>
+  </Styled(Row)>
+</UNDEFINED>
+`;
+
+exports[`TextInput Component should render web input success 1`] = `
+<UNDEFINED>
+  <TextInputMask
+    className=""
+    colorBorder="#15C759"
+    disabled={false}
+    hasIcon={false}
+    id="1"
+    maskChar=""
+    maskType=""
+    maxLength={null}
+    onBlur={[Function]}
+    onChange={[MockFunction]}
+    onClick={[Function]}
+    onInput={[Function]}
+    placeholder={null}
+    value="Teste"
+  />
+  <Styled(Row)>
+    <If
+      test={true}
+    >
+      <styled.span>
+        <Icon
+          name="check-input"
+        />
+      </styled.span>
+    </If>
+    <If
+      test={false}
+    >
+      <styled.span>
+        <Icon
+          name="eye"
+          onClick={[Function]}
+        />
+      </styled.span>
+    </If>
+  </Styled(Row)>
+</UNDEFINED>
+`;

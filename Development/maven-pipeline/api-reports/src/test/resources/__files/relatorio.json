@@ -1,0 +1,11 @@
+{
+  "descricao": "Teste",
+  "diasExpurgo": 365,
+  "id": "b7f1e3b4-4d50-4dd5-9f1e-e2933a703793",
+  "nomeRelatorio": "RELATORIO_CARGA",
+  "formatoArquivo": "PDF",
+  "idJasper": "0dc823009fa7a040291636a83cc6b0d8",
+  "tipoCallback": "ASSINCRONO",
+  "tipoDados": "QUERY",
+  "versao": "1.0"
+}

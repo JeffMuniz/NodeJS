@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+  ctb-api-transacao:
+    container_name: mac-ctb-api-transacao
+    build: .
+    mem_limit: 128MB
+    ports:
+      - "8080:8080"
+    environment:
+      LOGGING_LEVEL_ROOT: INFO
+      LOGGING_BR_COM_mac: INFO
+      SERVER_PORT: 8080
+      CASSANDRA_CONTACTPOINTS: 10.70.30.26
+      CASSANDRA_PORT: 9042
+      CASANDRA_DATACENTER: DC1
+      CASSANDRA_KEYSPACE: financeiro_contabil_qa
+      INFORMATIONAL_KEYSPACE: informacional_hom
+      ORDER_CUSTOM_INDEX: informacional_hom-info_pedido
+      mac_LEDGER_CONTROLE_CONFIG_FILE: /opt/mac/ponto-controles.json
+      mac_LEDGER_CONCILIACAO_CONFIG_FILE: /opt/mac/conciliacao-fields.json

@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserDetails Should render UserDetails 1`] = `
+<ContainerWrapper
+  headerClickHandler={[Function]}
+  showBackIcon={true}
+  title="Usuários com Acesso à Matriz"
+>
+  <WithPagination
+    callback={[Function]}
+    data={
+      Object {
+        "totalItems": 0,
+      }
+    }
+    fieldsToFilterBy={
+      Array [
+        Object {
+          "description": "nº do CPF",
+          "key": "cpf",
+          "mask": "cpf",
+          "optionDescription": "CPF",
+        },
+        Object {
+          "description": "Nome",
+          "key": "name",
+        },
+      ]
+    }
+    fieldsToFilterDropdownGeneric={
+      Array [
+        Object {
+          "description": "Ativos",
+          "key": "ATIVO",
+          "label": "status",
+        },
+        Object {
+          "description": "Inativos",
+          "key": "INATIVO",
+          "label": "status",
+        },
+        Object {
+          "description": "Todos",
+          "key": null,
+          "label": "status",
+        },
+      ]
+    }
+    itemsPerPage={20}
+    render={[Function]}
+    showFilterDropdownGeneric={true}
+    showLoading={true}
+    showSearchInput={true}
+    status=""
+  />
+</ContainerWrapper>
+`;

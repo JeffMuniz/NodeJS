@@ -1,0 +1,176 @@
+openapi: 3.0.1
+info:
+  title: Segurança API
+  version: 1.0.0
+servers:
+  - url: /v1
+paths:
+  '/seguranca/autenticacao':
+    post:
+      operationId: autenticacao
+      description: Faz a autenticação dos usuários
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: 'OK'
+          headers:
+            ACCESS_TOKEN:
+              schema:
+                type: string
+              description: Token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenDeAcesso'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/seguranca/autorizacao':
+    get:
+      operationId: autorizacao
+      description: Faz a autorizacao por meio do token
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            format: token
+          required: true
+      responses:
+        '200':
+          description: 'OK'
+          headers:
+            ACCESS_TOKEN:
+              schema:
+                type: string
+              description: Token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenDeAcesso'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+  '/seguranca/perfis':
+    get:
+      description: Lista de perfis disponíveis
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            format: token
+          required: true
+      responses:
+        '200':
+          description: 'OK'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Perfis'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+components:
+  responses:
+    NoContent:
+      description: Nenhum conteúdo.
+    NotFound:
+      description: Recurso não encontrado.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErro'
+    Unauthorized:
+      description: Usuário não autorizado.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErro'
+    InternalServerError:
+      description: Erro interno do sistema.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErro'
+  schemas:
+    ApiErro:
+      type: object
+      properties:
+        mensagem:
+          type: string
+          description: Tipo da mensagem de erro
+        erros:
+          type: array
+          items:
+            properties:
+              code:
+                type: string
+                description: Código do erro
+              messagem:
+                type: string
+                description: Mensagem de erro
+          description: List de erros
+    LoginRequest:
+      type: object
+      properties:
+        usuario:
+          type: string
+          format: email
+          description: E-mail do usuário
+        senha:
+          type: string
+          description: Senha do usuário
+      required:
+        - usuario
+        - senha
+    TokenDeAcesso:
+      type: object
+      properties:
+        permissoes:
+          type: array
+          items:
+            type: string
+          description: Lista de permissões
+        grupos:
+          type: array
+          items:
+            type: string
+          description: Lista de grupos
+        nome:
+          type: string
+          description: Nome
+        usuario:
+          type: string
+          description: Usuário
+        email:
+          type: string
+          format: email
+          description: Usuário
+    Perfis:
+      type: array
+      items:
+        $ref: '#/components/schemas/Perfil'
+    Perfil:
+      type: object
+      properties:
+        id:
+          type: string
+        nome:
+          type: string
+      required:
+        - id
+        - nome

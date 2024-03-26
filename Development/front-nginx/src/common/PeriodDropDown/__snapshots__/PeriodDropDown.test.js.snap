@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PeriodDropDown Container Component should render it 1`] = `
+<styled.div
+  calendarInfo={[Function]}
+  canEditPeriod={true}
+  datePickerMaxDate=""
+  datePickerMinDate=""
+  datepickerOpen={true}
+  editDateText="Editar período"
+  id="TestDropDown"
+  isDropDownOpen={false}
+  maxRange={Object {}}
+  onClickPeriod={[Function]}
+  onCloseDatePicker={[Function]}
+  onSelectValue={[Function]}
+  onSetCustomPeriod={[Function]}
+  padding=""
+  position={true}
+  selectedEndDate=""
+  selectedStartDate=""
+  selectedValue=""
+  toggleDropDown={[Function]}
+  valueList={
+    Array [
+      "1",
+      "2",
+      "3",
+    ]
+  }
+>
+  <div>
+    <styled.div
+      id="TestDropDown"
+      onClick={[Function]}
+    >
+      <div>
+        
+      </div>
+      <styled.div>
+        <ArrowIcon
+          isUp={false}
+        />
+      </styled.div>
+    </styled.div>
+  </div>
+  <PeriodDatePicker
+    handleClickOutside={[Function]}
+    id="period_dropdown_TestDropDown"
+    isListening={false}
+    triggerRef={
+      Object {
+        "current": null,
+      }
+    }
+  >
+    <styled.div
+      isOpen={false}
+      padding=""
+    >
+      <styled.div
+        id="pdd_1"
+        onClick={[Function]}
+      >
+        1
+      </styled.div>
+      <styled.div
+        id="pdd_2"
+        onClick={[Function]}
+      >
+        2
+      </styled.div>
+      <styled.div
+        id="pdd_3"
+        onClick={[Function]}
+      >
+        3
+      </styled.div>
+      <If
+        test={true}
+      >
+        <Styled(styled.div)
+          id="pdd_period_selector"
+          onClick={[Function]}
+        >
+          Editar período
+        </Styled(styled.div)>
+      </If>
+    </styled.div>
+  </PeriodDatePicker>
+  <If
+    test={true}
+  >
+    <PeriodDatePicker
+      calendarInfo={[Function]}
+      id="pdd_date"
+      initialEndDate=""
+      initialStartDate=""
+      maxDate=""
+      maxRange={Object {}}
+      minDate=""
+      onCloseDatePicker={[Function]}
+      onDatesChange={[Function]}
+    />
+  </If>
+</styled.div>
+`;

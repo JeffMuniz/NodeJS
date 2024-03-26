@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WithAuthentication - Unit Test Should render component with default props 1`] = `
+<Redirect
+  push={false}
+  to={
+    Object {
+      "pathname": "/login",
+      "state": null,
+    }
+  }
+/>
+`;

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loading Should render Loading 1`] = `
+<styled.div>
+  <styled.div>
+    <Styled(styled.div) />
+    <Styled(styled.div) />
+  </styled.div>
+</styled.div>
+`;

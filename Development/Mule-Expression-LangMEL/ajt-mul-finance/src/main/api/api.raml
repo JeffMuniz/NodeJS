@@ -1,0 +1,352 @@
+#%RAML 1.0
+title: Ajuste Financeiro API
+baseUri: ${base.uri}
+
+protocols: [ HTTP ]
+mediaType: application/json
+
+uses:
+  types: libraries/v1/types.raml
+  resourceTypes: libraries/v1/resourcesTypes.raml
+  traits: libraries/v1/traits.raml
+
+types:
+  MotivoResponse:
+    type: types.MotivoResponse
+  AjusteFinanceiro:
+    type: types.AjusteFinanceiro
+  AjusteFinanceiroBody:
+    type: types.AjusteFinanceiroBody
+  CriaAjuste:
+    type: types.CriaAjuste
+  CriaAjusteConductor:
+    type: types.AjusteConductorWrapper
+  AjusteFinanceiroPatchRequest:
+    type: types.AjusteFinanceiroPatchRequestWrapper
+    
+/financeiros:
+  get:
+    displayName: buscaAjustesFinanceiros
+    description: Recurso para realizar a busca de ajustes financeiros.
+    headers:
+      Authorization:
+        type: string
+        required: true
+    queryParameters:
+      id:
+        required: false
+        displayName: id
+        description: Filtro por id
+        type: integer
+        format: int64
+      idSolicitacao:
+        required: false
+        displayName: idSolicitacao
+        description: Filtro por id da solicitacao
+        type: integer
+        format: int64
+      tipo:
+        type: string
+        required: false
+        enum:
+          - EC
+          - PORTADOR
+          - RH
+      operacao:
+        type: string
+        required: false
+        enum:
+          - CREDITO
+          - DEBITO
+      status:
+        type: string
+        required: false
+        enum:
+          - PENDENTE
+          - EM_PROCESSAMENTO
+          - APROVADO
+          - RECUSADO
+          - EM_EXECUCAO
+          - ERRO
+      clienteNome:
+        required: false
+        displayName: clienteNome
+        description: Nome do cliente
+        type: string
+      clienteCpf:
+        required: false
+        displayName: clienteCpf
+        description: CPF do cliente
+        type: string
+      clienteCnpj:
+        required: false
+        displayName: clienteCnpj
+        description: CNPJ do cliente
+        type: string
+      dataCriacaoInicial:
+        required: false
+        displayName: dataCriacaoInicial
+        description: Data de criação (abertura) inicial da solicitação
+        type: string
+      dataCriacaoFinal:
+        required: false
+        displayName: dataCriacaoFinal
+        description: Data de criação (abertura) final da solicitação
+        type: string
+      dataFinalizacaoInicial:
+        required: false
+        displayName: dataFinalizacaoInicial
+        description: Data de finalização inicial da solicitação
+        type: string
+      dataFinalizacaoFinal:
+        required: false
+        displayName: dataFinalizacaoFinal
+        description: Data de finalização final da solicitação
+        type: string
+      valor:
+        required: false
+        displayName: valor
+        description: Valor da solicitação
+        type: string
+      valorMaiorque:
+        required: false
+        displayName: valorMaiorque
+        description: Valor maior que da solicitação
+        type: string
+      valorMenorque:
+        required: false
+        displayName: valorMenorque
+        description: Valor menor que da solicitação
+        type: string
+      limite:
+        required: false
+        displayName: limite
+        description: Limite de registros 
+        type: integer
+      pagina:
+        required: false
+        displayName: página
+        description: Offset de registros 
+        type: integer
+      tipoOrdenacao:
+        required: false
+        displayName: tipoOrdenacao
+        description: Tipo de ordenação dos registros
+        type: string        
+      campoOrdenacao:
+        required: false
+        displayName: campoOrdenacao
+        description: Campo no qual será aplicado a ordenação dos registros
+        type: string
+    responses:
+      200:
+        description: Busca realizada com sucesso
+        body:
+          application/json:
+            displayName: response
+            description: Busca realizada com sucesso
+            type: AjusteFinanceiro
+            example: !include examples/v1/get-ajustes-financeiros-response.json
+      400:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-400.json
+      401:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-401.json
+      500:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-500.json
+  post:
+    displayName: criaAjuste
+    description: Recurso para realizar a criação de ajuste financeiro.
+    body:
+      application/json:
+        displayName: body
+        type: CriaAjuste
+        example: !include examples/v1/ajustes-financeiros-post-request.json
+    headers:
+      Authorization:
+        type: string
+        required: true
+      Content-Type:
+        required: false
+        default: application/json
+        example:
+          value: application/json
+        displayName: Content-Type
+        type: string
+    responses:
+      201:
+        description: Criado com sucesso.
+        body:
+          application/json:
+            displayName: response
+            description: Criado com sucesso.
+            type: AjusteFinanceiroBody
+            example: !include examples/v1/ajustes-financeiros-post-response.json
+      400:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-400.json
+      401:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-401.json
+      500:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-500.json     
+  
+  options:
+  
+  /{id}:
+    uriParameters:
+      id:
+        required: true
+        displayName: id
+        description: Id do ajuste financeiro
+        type: integer
+        format: int64
+    get:
+      displayName: BuscaAjusteFinanceiroPorID
+      description: Recurso para realizar a busca de um ajuste financeiro por ID.
+      headers:
+        Authorization:
+          type: string
+          required: true
+      responses:
+        200:
+          description: Busca realizada com sucesso
+          body:
+            application/json:
+              displayName: response
+              description: Busca realizada com sucesso
+              type: AjusteFinanceiroBody
+              example: !include examples/v1/get-ajustes-financeiros-id-response.json
+        400:       
+          body: 
+            application/json:
+              example: !include examples/v1/errors/error-400.json
+        401:
+          body: 
+            application/json:
+              example: !include examples/v1/errors/error-401.json
+        500:
+          body: 
+            application/json:
+              example: !include examples/v1/errors/error-500.json
+            
+    patch:
+      displayName: AlteracaoAjusteFinanceiroPorID
+      description: Recurso para realizar a alteração parcial de um ajuste financeiro por ID.
+      headers:
+        Authorization:
+          type: string
+          required: true
+      body:
+        application/json:
+          type: AjusteFinanceiroPatchRequest
+          example: !include examples/v1/patch-ajustes-financeiros-id-request.json
+      responses:
+        200:
+          description: Alteração realizada com sucesso
+          body:
+            application/json:
+              displayName: response
+              description: Alteração realizada com sucesso
+              type: AjusteFinanceiroBody
+              example: !include examples/v1/patch-ajustes-financeiros-id-response.json
+        400:       
+          body: 
+            application/json:
+              example: !include examples/v1/errors/error-400.json
+        401:
+          body: 
+            application/json:
+              example: !include examples/v1/errors/error-401.json
+        500:
+          body: 
+            application/json:
+              example: !include examples/v1/errors/error-500.json
+      
+    options:             
+/:
+  post:    
+    headers:
+      Authorization:
+        type: string
+        required: true
+    body:
+      application/json:
+        displayName: body
+        type: CriaAjusteConductor
+        example: !include examples/v1/ajustes-post-request.json
+    responses:
+      201:
+        description: Criado com sucesso.
+        body:
+          application/json:
+            displayName: response
+            description: Criado com sucesso.
+            type: CriaAjusteConductor
+            example: !include examples/v1/ajustes-post-response.json
+      400:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-400.json
+      401:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-401.json
+      500:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-500.json    
+            
+  options: 
+/motivos:
+  get:
+    headers:
+      Authorization:
+        type: string
+        required: true
+    displayName: BuscaMotivosPorIdOperacaoEtipo
+    description: Recurso para realizar a busca de motivos por id da operação e id do tipo.
+    queryParameters:
+      operacao:
+        required: true
+        displayName: idOperacao
+        description: Id da operacao
+        type: integer
+        format: int64
+      tipo:
+        required: true
+        displayName: idTipo
+        description: Id do tipo
+        type: integer
+        format: int64
+    responses:
+      200:
+        description: Busca realizada com sucesso
+        body:
+          application/json:
+            displayName: response
+            description: Busca realizada com sucesso
+            type: MotivoResponse
+            example: !include examples/v1/get-motivos-financeiros-id-operacao-e-id-tipo-response.json
+      400:       
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-400.json
+      401:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-401.json
+      500:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-500.json  
+  options:

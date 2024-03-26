@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextInputMask Component should render it 1`] = `
+<Styled(InputElement)
+  autocomplete="off"
+  className=""
+  colorBorder=""
+  disabled={false}
+  hasIcon={false}
+  id="x"
+  mask="(99) 9999-9999?"
+  maskChar=""
+  maxLength={null}
+  onBlur={[MockFunction]}
+  onChange={[MockFunction]}
+  onClick={[Function]}
+  onInput={[Function]}
+  placeholder=""
+  type="cel-phone"
+  value=""
+/>
+`;

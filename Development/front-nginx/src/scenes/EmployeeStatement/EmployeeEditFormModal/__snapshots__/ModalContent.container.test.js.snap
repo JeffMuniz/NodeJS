@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Employee Edit Modal - Modal Content Container Should render ModalContent 1`] = `
+<div>
+  <styled.div>
+    <styled.span>
+      Editar Funcionário
+    </styled.span>
+  </styled.div>
+  <styled.div>
+    <FormWrapper
+      initialValues={
+        Object {
+          "cpf": "lorem",
+          "idCompany": 123,
+          "status": "ativo",
+        }
+      }
+      onSubmit={[Function]}
+      render={[Function]}
+      validationSchema="FormSchema"
+    />
+  </styled.div>
+</div>
+`;

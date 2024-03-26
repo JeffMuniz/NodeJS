@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert Should render Alert 1`] = `
+<styled.div
+  id="alert"
+  type=""
+>
+  <styled.div>
+    <styled.h6
+      id="alert_title"
+      type=""
+    >
+      <If
+        test=""
+      >
+        <If
+          test={true}
+        >
+          <SvgIcon
+            id="alert_image"
+            name=""
+          />
+        </If>
+        <If
+          test={null}
+        >
+          <SvgIcon
+            id="alert_image"
+            name=""
+            size={null}
+          />
+        </If>
+      </If>
+      <span>
+        
+      </span>
+    </styled.h6>
+    <If
+      test=""
+    >
+      <styled.div
+        id="alert_description"
+      >
+        
+      </styled.div>
+    </If>
+  </styled.div>
+</styled.div>
+`;
+
+exports[`Alert Should render Alert with prop type 1`] = `
+<styled.div
+  id="alert"
+  type="error"
+>
+  <styled.div>
+    <styled.h6
+      id="alert_title"
+      type="error"
+    >
+      <If
+        test=""
+      >
+        <If
+          test={true}
+        >
+          <SvgIcon
+            id="alert_image"
+            name=""
+          />
+        </If>
+        <If
+          test={null}
+        >
+          <SvgIcon
+            id="alert_image"
+            name=""
+            size={null}
+          />
+        </If>
+      </If>
+      <span>
+        
+      </span>
+    </styled.h6>
+    <If
+      test=""
+    >
+      <styled.div
+        id="alert_description"
+      >
+        
+      </styled.div>
+    </If>
+  </styled.div>
+</styled.div>
+`;

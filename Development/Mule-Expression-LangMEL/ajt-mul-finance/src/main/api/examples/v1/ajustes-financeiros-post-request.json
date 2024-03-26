@@ -1,0 +1,21 @@
+{
+  "tipo": "EC",
+  "operacao": "DEBITO",
+  "usuario": {
+    "loginUsuario": "Login Usuário",
+    "nomeUsuario": "Nome Usuário"
+  },
+  "cliente": {
+    "nome": "Nome Cliente",
+    "cpf": "403.765.234-92",
+    "cnpj": "18.617.919/0001-94",
+    "idConta": 1,
+    "descricaoConta": "VR | LIBERADO | EMPRESA 1"
+  },
+  "documento": "Array de bytes / base64",
+  "codigoExterno": 3123,
+  "dataVencimento": "2020-03-25",
+  "idMotivo": 2,
+  "observacao": "Ajuste de MDR",
+  "valor": 200
+}

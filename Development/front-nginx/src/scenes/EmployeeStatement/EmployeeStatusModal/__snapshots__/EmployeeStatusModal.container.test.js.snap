@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Employee Status Modal - Employee Status Modal Container Should render EmployeeStatusModal 1`] = `
+<div>
+  <styled.div>
+    <styled.h1>
+       Confirmação da 
+      inativação
+       
+    </styled.h1>
+    <styled.h2>
+      Verifique os dados abaixo para realizar a 
+      inativação
+    </styled.h2>
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <styled.p>
+        Selecione o motivo
+      </styled.p>
+      <Select
+        hasError={false}
+        isCapitalized={false}
+        isDisabled={false}
+        isPassingSelectedItem={false}
+        maxMenuHeight=""
+        multiSelect={false}
+        onBlur={[Function]}
+        onMenuScrollToBottom={[Function]}
+        onValueChange={[Function]}
+        placeholder="Selecione o motivo"
+        value=""
+        values={
+          Array [
+            Object {
+              "id": 1,
+              "name": "desligamento",
+            },
+            Object {
+              "id": 2,
+              "name": "erro operacional",
+            },
+            Object {
+              "id": 3,
+              "name": "fraude",
+            },
+            Object {
+              "id": 4,
+              "name": "óbito",
+            },
+            Object {
+              "id": 5,
+              "name": "afastamento",
+            },
+          ]
+        }
+      />
+    </styled.div>
+    <styled.span>
+      A partir do momento que você confirmar a 
+      inativação
+      , esse funcionário 
+       deixará de 
+       receber a(s) carga(s) em seu(s) cartão(s) novamente.
+    </styled.span>
+    
+    <styled.div>
+      <Styled(Component)
+        buttonType="light"
+        id="btn_cancel"
+        onPress={[MockFunction]}
+        type="button"
+        value="CANCELAR"
+      />
+      <styled.div>
+        <Styled(Component)
+          disabled={true}
+          id="btn_submit"
+          loading={false}
+          onPress={[Function]}
+          type="button"
+          value="Inativar"
+        />
+      </styled.div>
+    </styled.div>
+  </styled.div>
+</div>
+`;

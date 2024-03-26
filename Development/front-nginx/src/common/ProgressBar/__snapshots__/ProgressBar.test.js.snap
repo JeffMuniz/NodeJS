@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Progress Bar - Unit Tests should render progress bar with default props 1`] = `
+<Row>
+  <Col
+    xs={12}
+  >
+    <styled.ul>
+      <styled.li
+        complete={true}
+        onClick={[Function]}
+      >
+        <span>
+          Seus dados cadastrais
+        </span>
+        <styled.div
+          complete={true}
+        />
+      </styled.li>
+      <styled.li
+        complete={true}
+        onClick={[Function]}
+      >
+        <span>
+          Adicionar usuários
+        </span>
+        <styled.div
+          complete={true}
+        />
+      </styled.li>
+      <styled.li
+        complete={false}
+        onClick={[Function]}
+      >
+        <span>
+          Seu pedido
+        </span>
+        <styled.div
+          complete={false}
+        />
+      </styled.li>
+      <styled.li
+        complete={false}
+        onClick={[Function]}
+      >
+        <span>
+          Pagamento
+        </span>
+        <styled.div
+          complete={false}
+        />
+      </styled.li>
+      <styled.li
+        complete={false}
+        onClick={[Function]}
+      >
+        <span>
+          Sua entrega
+        </span>
+        <styled.div
+          complete={false}
+        />
+      </styled.li>
+    </styled.ul>
+  </Col>
+</Row>
+`;

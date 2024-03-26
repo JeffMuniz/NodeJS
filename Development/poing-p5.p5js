@@ -1,0 +1,269 @@
+function setup() {
+    createCanvas(600, 400);
+}
+
+function draw() {
+    background(0);
+    circle(0, 0, 50);
+}
+
+
+let xBolinha = 300;
+let yBolinha = 200;
+let diametro = 15;
+
+function setup() {
+    createCanvas(600, 400);
+}
+
+function draw() {
+    background(0);
+    circle(xBolinha, yBolinha, diametro);
+}
+
+
+function draw() {
+    background(0);
+    circle(xBolinha, yBolinha, diametro);
+    xBolinha = xBolinha + 1;
+}
+
+
+
+xBolinha += velocidadeXBolinha || yBolinha, e a variável velocidadeYBolinha, com valor 6
+
+let xBolinha = 300;
+let yBolinha = 200;
+let diametro = 15;
+
+let velocidadeXBolinha = 6;
+let velocidadeYBolinha = 6;
+
+function setup() {
+    createCanvas(600, 400);
+}
+
+function draw() {
+    background(0);
+    circle(xBolinha, yBolinha, diametro);
+    xBolinha += velocidadeXBolinha;
+    yBolinha += velocidadeYBolinha;
+}
+
+
+ Quanto maiores os valores das variáveis de velocidade para os eixos x e y da bolinha, maior será sua velocidade. Logo, ao diminuirmos esses valores, a velocidade também diminuirá.
+
+function draw() {
+    background(0);
+    circle(xBolinha, yBolinha, diametro);
+    xBolinha += velocidadeXBolinha;
+    //yBolinha += velocidadeYBolinha;
+
+    if (xBolinha > width) {
+        velocidadeXBolinha *= -1;
+    }
+}
+if (xBolinha > width || xBolinha < 0) {
+    velocidadeXBolinha *= -1;
+}
+function draw() {
+    background(0);
+    circle(xBolinha, yBolinha, diametro);
+    //xBolinha += velocidadeXBolinha;
+    yBolinha += velocidadeYBolinha;
+
+    if (xBolinha > width || xBolinha < 0) {
+        velocidadeXBolinha *= -1;
+    }
+    if (yBolinha > height || yBolinha < 0) {
+        velocidadeYBolinha *= -1;
+    }
+}
+
+
+if (xBolinha > width) { }
+Alternativa correta. Nessa opção, temos a condicional apresentada com if, seguido da variável em parênteses e, ao fim, o par de chaves para indicar a ação.
+
+comentar no código js
+xBolinha += velocidadeXBolinha;
+//yBolinha += velocidadeYBolinha;
+
+Transcrição
+Alteraremos as velocidades relativas tanto ao eixo X quanto ao eixo Y para 2 para deixar a bolinha mais lenta e assim conseguirmos observar melhor estes movimentos. Uma parte da bolinha ainda ultrapassa os limites das bordas, e não queremos que isso aconteça. Vamos voltar às velocidades originais, 6, e pensar no porquê disso estar acontecendo.
+
+Na documentação do circle(), é indicado que o X é o centro do círculo, o que será levado em consideração para que se reconheça que houve uma colisão da bolinha com alguma das bordas. No entanto, queremos que isto se dê a partir do raio, isto é, das extremidades da bolinha. Uma vez que o diâmetro é 2x o valor do raio, criaremos a variável raio, que receberá diametro / 2.
+
+Com isso, diminuiremos as velocidades da bolinha novamente (para 2), para enxergarmos melhor os movimentos, e comentaremos a linha com yBolinha para testar primeiro no eixo X, em que somaremos o valor do raio para o lado direito, e subtrairemos o mesmo valor do lado esquerdo:
+
+if (xBolinha + raio > width || xBolinha - raio < 0) {
+    velocidadeXBolinha *= -1;
+}COPIAR CÓDIGO
+Em seguida, descomentaremos a linha com yBolinha e comentaremos a linha com xBolinha. Da mesma forma como fizemos em relação ao eixo X, para o eixo vertical teremos:
+
+if (yBolinha + raio > height || yBolinha - raio < 0) {
+    velocidadeYBolinha *= -1;
+}COPIAR CÓDIGO
+Voltaremos a velocidade da bolinha para 6 e testaremos mais uma vez, agora sem nenhum trecho comentado. Nossa bolinha está reconhecendo todas as bordas da tela do jogo!
+
+Transcrição
+Em nosso jogo, criamos uma bolinha e verificamos suas colisões com as bordas e, para que pudéssemos ter este resultado, criamos variáveis para a bolinha, melhorando a legibilidade do código. Na função draw() fazemos várias ações: desenhamos e movimentamos a bolinha dentro de uma determinada área, e verificamos se a bolinha está de fato colidindo ou não com as bordas.
+
+Será que existe uma maneira de deixarmos nosso código ainda melhor?
+
+Poderemos fazê-lo sem alterar seu comportamento por meio da refatoração e o uso de funções para melhor identificarmos cada trecho de código. Fora do escopo de draw(), criaremos a função mostraBolinha(), mas isto não será o suficiente, pois é necessário chamá-la em draw(). Do mesmo modo, criaremos movimentaBolinha() e verificaColisaoBorda()
+
+function draw() {
+    background(0);
+    mostraBolinha();
+    movimentaBolinha();
+    verificaColisaoBorda();
+}
+
+function mostraBolinha() {
+    circle(xBolinha, yBolinha, diametro)
+}
+
+function movimentaBolinha() {
+    xBolinha += velocidadeXBolinha;
+    yBolinha += velocidadeYBolinha;
+}
+
+function verificaColisaoBorda() {
+    if (xBolinha + raio > width || xBolinha - raio < 0) {
+        velocidadeXBolinha *= -1;
+    }
+    if (yBolinha + raio > height || yBolinha - raio < 0) {
+        velocidadeYBolinha *= -1;
+    }
+}COPIAR CÓDIGO
+Continuando, as variáveis xBolinha, yBolinha, diametro e raio se referem à bolinha, portanto poderemos adicionar um comentário //variáveis da bolinha, assim como um //variáveis da velocidade da bolinha logo acima das linhas que contém velocidadeXBolinha e velocidadeYBolinha.
+
+//variáveis da bolinha
+let xBolinha = 300;
+let yBolinha = 200;
+let diametro = 15;
+let raio = diametro / 2;
+
+//velocidade da bolinha
+let velocidadeXBolinha = 6;
+let velocidadeYBolinha = 6;COPIAR CÓDIGO
+Esta é uma das formas de melhorarmos nosso código, deixando-o mais compreensível e organizado, sem modificar o comportamento final.
+
+
+função (f)
+Um conjunto de comandos ou códigos que realiza uma tarefa específica.
+Certo! No nosso caso, cada função criada é responsável por um comportamento, tornando a leitura do código mais intuitiva e simples.
+
+
+
+v1
+//variáveis da bolinha
+let xBolinha = 300;
+let yBolinha = 200;
+let diametro = 15;
+let raio = diametro / 2 ;
+
+//velocidade da bolinha
+let velocidadeXBolinha = 6;
+let velocidadeYBolinha = 6;
+
+function setup() {
+  createCanvas(600, 400);
+}
+
+function draw() {
+  background(0);
+  mostraBolinha();
+  movimentaBolinha();
+  verificaColisaoBorda();
+}
+
+function mostraBolinha(){
+  circle(xBolinha, yBolinha, diametro);
+}
+
+function movimentaBolinha(){
+  xBolinha += velocidadeXBolinha;
+  yBolinha += velocidadeYBolinha;
+}
+
+function verificaColisaoBorda(){
+  if (xBolinha + raio> width ||
+     xBolinha - raio< 0){
+    velocidadeXBolinha *= -1;
+  }
+  if (yBolinha + raio> height ||
+     yBolinha - raio < 0){
+    velocidadeYBolinha *= -1;
+  }
+}
+
+
+//rect(x, y, w, h, [tl], [tr], [br], [bl])
+
+function draw() {
+    background(0);
+    mostraBolinha();
+    movimentaBolinha();
+    verificaColisaoBorda();
+    rect(5, 150, 10, 90);
+}
+
+//variáveis da raquete
+let xRaquete = 5;
+let yRaquete = 150;
+let raqueteComprimento = 10;
+let raqueteAltura = 90;
+
+function mostraRaquete() {
+    rect(xRaquete, yRaquete, raqueteComprimento, raqueteAltura);
+}
+
+
+function draw() {
+    background(0);
+    mostraBolinha();
+    movimentaBolinha();
+    verificaColisaoBorda();
+    mostraRaquete();
+}
+
+Uma mensagem de erro aparecerá, avisando que o nome não está definido.
+
+
+Alternativa correta. Nossa raquete será um retângulo. No p5, já existe uma função predefinida para desenhá-lo, esta chamada de rect(). É possível criar uma função chamada raquete() e obter o mesmo resultado na tela. Mas para isso, devemos inserir a função rect() dentro da função raquete() e chamá-la na função draw(). Para facilitar, vamos usar somente a função rect() e criar nossa raquete através dela.
+
+
+Validar funcionamento da racket
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Access Permission Should render it 1`] = `
+<ContainerWrapper
+  actionButtons={
+    Array [
+      Object {
+        "handleClick": [Function],
+        "id": "access-permissions-button-add-user",
+        "imgSrc": "add",
+        "imgWidth": 20,
+        "value": "ADICIONAR USUÁRIOS",
+      },
+    ]
+  }
+  isBiggerTitle={true}
+  title="Permissão de Acesso"
+>
+  <Tabs
+    activeTab="test active tab"
+    onClick={[MockFunction]}
+  >
+    <div
+      id="access-permission-group-tab"
+      label="Grupo"
+    >
+      <styled.p
+        subtitleMessage="Nesta sessão você encontra a lista de pessoas com permissões de acesso a todo o grupo."
+      >
+        Nesta sessão você encontra a lista de pessoas com permissões de acesso a todo o grupo.
+      </styled.p>
+      <styled.h2>
+        test name
+      </styled.h2>
+      <If
+        test={false}
+      >
+        <styled.div>
+          <UNDEFINED
+            loading={true}
+          />
+        </styled.div>
+      </If>
+      <If
+        test={true}
+      >
+        <WithPagination
+          callback={[MockFunction]}
+          data={
+            Object {
+              "content": Array [
+                Object {},
+              ],
+              "totalItems": 1,
+            }
+          }
+          fieldsToFilterBy={
+            Array [
+              Object {
+                "description": "nº do CPF",
+                "key": "cpf",
+                "mask": "cpf",
+                "optionDescription": "CPF",
+              },
+              Object {
+                "description": "Nome",
+                "key": "name",
+              },
+            ]
+          }
+          fieldsToFilterDropdownGeneric={
+            Array [
+              Object {
+                "description": "Ativos",
+                "key": "ATIVO",
+                "label": "status",
+              },
+              Object {
+                "description": "Inativos",
+                "key": "INATIVO",
+                "label": "status",
+              },
+              Object {
+                "description": "Todos",
+                "key": null,
+                "label": "status",
+              },
+            ]
+          }
+          itemsPerPage={20}
+          render={[Function]}
+          showFilterDropdownGeneric={true}
+          showLoading={true}
+          showSearchInput={true}
+          status="test group status"
+        />
+      </If>
+    </div>
+    <div
+      id="access-permission-matrix-tab"
+      label="Subgrupo"
+    >
+      <WithPagination
+        callback={[MockFunction]}
+        data={
+          Object {
+            "totalItems": 1,
+          }
+        }
+        itemsPerPage={10}
+        render={[Function]}
+        status="test subgroup status"
+      />
+    </div>
+  </Tabs>
+</ContainerWrapper>
+`;

@@ -1,0 +1,125 @@
+spring:
+  application:
+    name: ajuste-financeiro
+  profiles:
+    active: ${ENV}
+    include:
+      - swagger
+  datasource:
+    continue-on-error: false
+    driverClassName: org.postgresql.Driver
+    jdbc-url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USERNAME}
+    password: ${DATASOURCE_PASSWORD}
+  jpa:
+    show-sql: true
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL10Dialect
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        proc:
+          param_null_passing: true
+  liquibase:
+    change-log: classpath:/config/liquibase/master.xml
+    url: ${DATASOURCE_URL}
+
+  http:
+    encoding:
+      enabled: true
+      charset: UTF-8
+  jackson:
+    serialization.INDENT_OUTPUT: true
+    time-zone: America/Sao_Paulo
+    default-property-inclusion: non_null
+  elasticsearch:
+    jest:
+      uris: ${INTEGRATION_ELASTICSEARCH_ENDPOINT}
+
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 40
+    context-path: /
+
+app:
+  resttemplate:
+    timeout: 30000
+  thread:
+    poolsize: 5
+  aprovacao:
+    host: ${API_APROVACAO}
+  ajuste:
+    core:
+      host: ${API_AJUSTE_CORE}
+  estorno:
+    host: ${API_ESTORNO_HOST}
+
+#logging:
+#  level: DEBUG
+#  br.com.conductor: INFO
+#  org.mongodb.driver: WARN
+
+management:
+  security.enabled: false
+  server.ssl.enabled: false
+  info:
+    build.enabled: true
+    defaults.enabled: true
+  endpoints:
+    web.base-path: /actuator
+    jmx.exposure.include: "*"
+    web:
+      exposure:
+        include:
+        - info
+        - health
+        - metrics
+  endpoint:
+    health:
+      enabled: true
+    metrics:
+      enabled: true
+    heapdump:
+      enabled: true
+  health:
+    defaults.enabled: true
+    diskspace.enabled: true
+    jms.enabled: true
+    mongo.enabled: false
+    rabbit.enabled: false
+    redis.enabled: false
+    elasticsearch:
+      enabled: false
+
+info:
+  app:
+    name: '@name@'
+    description: '@project.description@'
+  build:
+    groupId: '@project.groupId@'
+    artifact: '@project.artifactId@'
+    name: '@project.name@'
+    version: '@project.version@'
+  env:
+    java:
+      vendor: ${java.specification.vendor}
+      vm-name: ${java.vm.name}
+      runtime-version: ${java.runtime.version}
+
+integration:
+  elasticsearch:
+    active: ${INTEGRATION_ELASTICSEARCH_ACTIVE}
+    endpoint: ${INTEGRATION_ELASTICSEARCH_ENDPOINT}
+    index: ${INTEGRATION_ELASTICSEARCH_INDEX}
+
+logging:
+  level: info
+  br.com.conductor: INFO
+  org.mongodb.driver: WARN
+secretKey: ${SECRET_KEY}

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{PROJECT_NAME}}-{{BRANCH_NAME}}
+  namespace: {{NAMESPACE}}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-{{NAMESPACE}}-{{PROJECT_NAME}}-{{BRANCH_NAME}}
+  template:
+    metadata:
+      labels:
+        app: {{PROJECT_NAME}}-{{BRANCH_NAME}}
+    spec:
+      containers:
+       - name: {{PROJECT_NAME}}-{{BRANCH_NAME}}
+         image: {{IMAGE_URL}}
+         readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /actuator/health
+            port: 8080
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+         resources:
+          requests:
+            memory: 50Mi
+          limits:
+            memory: 450Mi
+
+---
+apiVersion: getambassador.io/v2
+kind: Mapping
+metadata:
+  name: {{PROJECT_NAME}}-{{BRANCH_NAME}}
+  namespace: {{NAMESPACE}}
+spec:
+  prefix: /{{PREFIX}}/
+  service: 	{{PROJECT_NAME}}-{{BRANCH_NAME}}.{{NAMESPACE}}:8080

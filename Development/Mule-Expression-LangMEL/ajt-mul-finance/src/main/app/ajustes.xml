@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:context="http://www.springframework.org/schema/context" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-current.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd">
+	<context:property-placeholder location="${mule.env}.properties"/>
+	<http:request-config name="HTTP_AJUSTE_FINANCEIRO" host="${http.ajustes.host}" port="${http.ajustes.port}" basePath="${http.ajustes.base.path}" doc:name="HTTP Request Configuration" usePersistentConnections="false"/>
+	<http:request-config name="HTTP_AJUSTE_CONDUCTOR" host="${http.ajuste.conductor.host}" port="${http.ajuste.conductor.port}" basePath="${http.ajuste.conductor.base.path}" doc:name="HTTP Request Configuration" usePersistentConnections="false"/>
+
+    <flow name="get-ajustes-financeiros">
+		<http:request config-ref="HTTP_AJUSTE_FINANCEIRO" path="${http.ajustes.financeiros.path}" method="GET" doc:name="HTTP">
+			<http:request-builder>
+                <http:query-params expression="#[message.inboundProperties.'http.query.params']"/>
+                <http:headers expression="#[message.inboundProperties]"/>
+			</http:request-builder>
+			<http:success-status-code-validator values="200,400,401,403,404,500"/>
+		</http:request>
+		<set-property propertyName="#['http.status']" value="#[message.inboundProperties.'http.status']" doc:name="http.status"/>
+    </flow>
+    <flow name="get-ajustes-financeiros-id">
+		<http:request config-ref="HTTP_AJUSTE_FINANCEIRO" path="${http.ajustes.financeiros.id.path}" method="GET" doc:name="HTTP">
+			<http:request-builder>
+                <http:query-params expression="#[message.inboundProperties.'http.query.params']"/>
+                <http:uri-params expression="#[message.inboundProperties.'http.uri.params']"/>
+                <http:headers expression="#[message.inboundProperties]"/>
+			</http:request-builder>
+			<http:success-status-code-validator values="200,400,401,403,404,500"/>
+		</http:request>
+		<set-property propertyName="#['http.status']" value="#[message.inboundProperties.'http.status']" doc:name="http.status"/>
+    </flow>
+    <flow name="post-ajustes-financeiros">
+        <byte-array-to-string-transformer doc:name="Byte Array to String"/>
+        <scripting:component doc:name="JavaScript - replace cpf and cnpj">
+            <scripting:script engine="JavaScript"><![CDATA[var p = JSON.parse(payload);
+
+if (p && p.cliente) {
+	if (p.cliente.cnpj)
+		p.cliente.cnpj = p.cliente.cnpj.replace(/[^\d]/g, '');
+
+	if (p.cliente.cpf)
+		p.cliente.cpf = p.cliente.cpf.replace(/[^\d]/g, '');
+}
+
+message.setPayload(JSON.stringify(p));
+result = message;]]></scripting:script>
+        </scripting:component>
+    	<http:request config-ref="HTTP_AJUSTE_FINANCEIRO" path="${http.ajustes.financeiros.path}" method="POST" doc:name="HTTP">
+			<http:request-builder>
+                <http:headers expression="#[message.inboundProperties]"/>
+			</http:request-builder>
+			<http:success-status-code-validator values="201,400,401,403,404,500"/>
+		</http:request>
+		<set-property propertyName="#['http.status']" value="#[message.inboundProperties.'http.status']" doc:name="http.status"/>
+    </flow>
+    <flow name="patch-ajustes-financeiros-id">
+		<http:request config-ref="HTTP_AJUSTE_FINANCEIRO" path="${http.ajustes.financeiros.id.path}" method="PATCH" doc:name="HTTP">
+			<http:request-builder>
+                <http:uri-params expression="#[message.inboundProperties.'http.uri.params']"/>
+                <http:headers expression="#[message.inboundProperties]"/>
+			</http:request-builder>
+			<http:success-status-code-validator values="200,400,401,403,404,500"/>
+		</http:request>
+		<set-property propertyName="#['http.status']" value="#[message.inboundProperties.'http.status']" doc:name="http.status"/>
+    </flow>
+    <flow name="post-ajuste-conductor">
+		<byte-array-to-string-transformer doc:name="Byte Array to String"/>
+		<set-payload value="#[json:ajuste]" doc:name="Set Payload" mimeType="application/json"/>
+
+    	<http:request config-ref="HTTP_AJUSTE_CONDUCTOR" path="${http.ajuste.conductor.path}" method="POST" doc:name="HTTP">
+			<http:request-builder>
+                <http:header headerName="Content-Type" value="application/json"/>
+			</http:request-builder>
+			<http:success-status-code-validator values="201,400,401,403,404,500"/>
+		</http:request>
+
+
+        <set-property propertyName="#['http.status']" value="#[message.inboundProperties.'http.status']" doc:name="http.status"/>
+    </flow>
+</mule>

@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NavBar should render it when is authenticated 1`] = `
+<styled.nav
+  id="nav_navbar"
+>
+  <styled.Container>
+    <Styled(Row)
+      middle="xs"
+    >
+      <Styled(Col)
+        xs={1}
+      >
+        <Icon
+          name="mac"
+        />
+      </Styled(Col)>
+      <Styled(Col)
+        xs={9}
+      >
+        <If
+          test={true}
+        >
+          <Styled(NavLink)
+            activeStyle={
+              Object {
+                "borderBottom": "4px solid #FF053F",
+              }
+            }
+            id="nav_link_RhFront.OrdersDashboard"
+            to="/pedidos"
+          >
+            Pedidos
+          </Styled(NavLink)>
+        </If>
+        <If
+          test={true}
+        >
+          <Styled(NavLink)
+            activeStyle={
+              Object {
+                "borderBottom": "4px solid #FF053F",
+              }
+            }
+            id="nav_link_RhFront.Employees"
+            to="/funcionarios"
+          >
+            Gerenciar Funcionários
+          </Styled(NavLink)>
+        </If>
+        <If
+          test={true}
+        >
+          <Styled(NavLink)
+            activeStyle={
+              Object {
+                "borderBottom": "4px solid #FF053F",
+              }
+            }
+            id="nav_link_RhFront.Finances"
+            to="/financeiro"
+          >
+            Financeiro
+          </Styled(NavLink)>
+        </If>
+        <If
+          test={true}
+        >
+          <Styled(NavLink)
+            activeStyle={
+              Object {
+                "borderBottom": "4px solid #FF053F",
+              }
+            }
+            id="nav_link_RhFront.Reports"
+            to="/relatorios"
+          >
+            Relatórios
+          </Styled(NavLink)>
+        </If>
+      </Styled(Col)>
+      <Styled(Col)
+        lg={2}
+      >
+        <Styled(Col)
+          id="nav_link_userData"
+          onClick={[Function]}
+        >
+          <div>
+            <styled.div>
+              <Icon
+                name="person"
+              />
+            </styled.div>
+          </div>
+        </Styled(Col)>
+      </Styled(Col)>
+    </Styled(Row)>
+    <DropDown
+      deliveryType="HR"
+      groupListLength={0}
+      handleClickOutside={[Function]}
+      handleGroupModal={[MockFunction]}
+      handleLogout={[MockFunction]}
+      isOpen={false}
+      showChangeGroup={false}
+      triggerRef={
+        Object {
+          "current": null,
+        }
+      }
+    />
+  </styled.Container>
+</styled.nav>
+`;

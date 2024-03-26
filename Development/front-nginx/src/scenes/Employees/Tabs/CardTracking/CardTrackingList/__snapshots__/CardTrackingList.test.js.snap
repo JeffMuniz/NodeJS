@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardTrackingList Should render CardTrackingList 1`] = `
+<styled.table>
+  <styled.thead>
+    <styled.tr>
+      <styled.th
+        width="80px"
+      >
+        Dt. solicitação
+      </styled.th>
+      <styled.th
+        width="220px"
+      >
+        Nome
+      </styled.th>
+      <styled.th
+        centered={true}
+        width="50px"
+      >
+        Produto
+      </styled.th>
+      <styled.th
+        width="140px"
+      >
+        Nº do Cartão
+      </styled.th>
+      <styled.th
+        width="100px"
+      >
+        Status do cartão
+      </styled.th>
+      <styled.th>
+        Endereço
+      </styled.th>
+      <styled.th>
+        Status da entrega
+      </styled.th>
+    </styled.tr>
+  </styled.thead>
+  <styled.tbody>
+    <styled.tr>
+      <styled.td>
+        19/09/18
+      </styled.td>
+      <styled.td>
+        TESTE
+      </styled.td>
+      <styled.td
+        centered={true}
+      >
+        VA
+      </styled.td>
+      <styled.td>
+        1111xxxxxxxx2222
+      </styled.td>
+      <styled.td>
+        <strong />
+      </styled.td>
+      <styled.td />
+      <styled.td />
+    </styled.tr>
+  </styled.tbody>
+</styled.table>
+`;

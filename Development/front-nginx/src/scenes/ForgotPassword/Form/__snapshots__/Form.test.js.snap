@@ -1,0 +1,217 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ForgotPassword - Form Should render ForgotPassword 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Row
+    center="md"
+  >
+    <Col
+      md={12}
+      xs={12}
+    >
+      <FormGroup
+        error={undefined}
+        fieldId="lg_fp_cpf"
+        label="CPF"
+        responseError={false}
+        showSuccess={undefined}
+      >
+        <TextInput
+          error={undefined}
+          id="forgotCpf"
+          maskChar=""
+          maskType="cpf"
+          name="forgotCpf"
+          onBlur={[MockFunction]}
+          onChange={[MockFunction]}
+          onClick={undefined}
+          placeholder="Insira o seu CPF aqui"
+          value={undefined}
+        />
+      </FormGroup>
+    </Col>
+  </Row>
+  <Row
+    center="md"
+  >
+    <Col
+      md={12}
+      xs={12}
+    >
+      <FormGroup
+        error={undefined}
+        fieldId="lg_fp_email"
+        label="E-mail"
+        responseError={false}
+        showSuccess={undefined}
+      >
+        <TextInput
+          error={undefined}
+          id="email"
+          name="email"
+          onBlur={[MockFunction]}
+          onChange={[MockFunction]}
+          onClick={undefined}
+          placeholder="Insira o seu e-mail"
+          value={undefined}
+        />
+      </FormGroup>
+    </Col>
+  </Row>
+  <If
+    test={null}
+  >
+    <Row
+      center="md"
+    >
+      <Col
+        md={12}
+        xs={12}
+      >
+        <styled.span
+          id="ResetPwdError"
+        />
+      </Col>
+    </Row>
+  </If>
+  <Styled(Row)
+    center="md"
+  >
+    <Col
+      md={12}
+      xs={12}
+    >
+      <Styled(Row)>
+        <UNDEFINED
+          hl="pt-BR"
+          onChange={undefined}
+          onErrored={undefined}
+          onExpired={undefined}
+          sitekey=""
+        />
+        <div />
+      </Styled(Row)>
+      <styled.Button
+        action="Enviou form 'Esqueceu a Senha'"
+        disabled={true}
+        id="lg_fp_btn_submit"
+        loading={false}
+        onPress={[MockFunction]}
+        type="submit"
+        value="CONTINUAR"
+      />
+    </Col>
+  </Styled(Row)>
+</form>
+`;
+
+exports[`ForgotPassword - Form Should render it when error is given 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Row
+    center="md"
+  >
+    <Col
+      md={12}
+      xs={12}
+    >
+      <FormGroup
+        error="Inválida"
+        fieldId="lg_fp_cpf"
+        label="CPF"
+        responseError={false}
+        showSuccess={false}
+      >
+        <TextInput
+          error="Inválida"
+          id="forgotCpf"
+          maskChar=""
+          maskType="cpf"
+          name="forgotCpf"
+          onBlur={[MockFunction]}
+          onChange={[MockFunction]}
+          onClick={undefined}
+          placeholder="Insira o seu CPF aqui"
+          value={undefined}
+        />
+      </FormGroup>
+    </Col>
+  </Row>
+  <Row
+    center="md"
+  >
+    <Col
+      md={12}
+      xs={12}
+    >
+      <FormGroup
+        error="Inválido"
+        fieldId="lg_fp_email"
+        label="E-mail"
+        responseError={false}
+        showSuccess={false}
+      >
+        <TextInput
+          error="Inválido"
+          id="email"
+          name="email"
+          onBlur={[MockFunction]}
+          onChange={[MockFunction]}
+          onClick={undefined}
+          placeholder="Insira o seu e-mail"
+          value={undefined}
+        />
+      </FormGroup>
+    </Col>
+  </Row>
+  <If
+    test="Error"
+  >
+    <Row
+      center="md"
+    >
+      <Col
+        md={12}
+        xs={12}
+      >
+        <styled.span
+          id="ResetPwdError"
+        >
+          Error
+        </styled.span>
+      </Col>
+    </Row>
+  </If>
+  <Styled(Row)
+    center="md"
+  >
+    <Col
+      md={12}
+      xs={12}
+    >
+      <Styled(Row)>
+        <UNDEFINED
+          hl="pt-BR"
+          onChange={undefined}
+          onErrored={undefined}
+          onExpired={undefined}
+          sitekey=""
+        />
+        <div />
+      </Styled(Row)>
+      <styled.Button
+        action="Enviou form 'Esqueceu a Senha'"
+        disabled={true}
+        id="lg_fp_btn_submit"
+        loading={false}
+        onPress={[MockFunction]}
+        type="submit"
+        value="CONTINUAR"
+      />
+    </Col>
+  </Styled(Row)>
+</form>
+`;

@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Template should render it with default props 1`] = `
+<Connect(WithTheme(Template))
+  history={Object {}}
+  location={
+    Object {
+      "pathname": "",
+    }
+  }
+  theme={
+    Object {
+      "main": "test",
+    }
+  }
+>
+  <div
+    id="test"
+  >
+    Test
+  </div>
+</Connect(WithTheme(Template))>
+`;
+
+exports[`Template should render template with default props 1`] = `
+<ThemeProvider
+  theme={
+    Object {
+      "main": "test",
+    }
+  }
+>
+  <styled.div>
+    <withRouter(ScrollToTop)>
+      <styled.div
+        theme={
+          Object {
+            "main": "test",
+          }
+        }
+      >
+        <withRouter(Connect(NavBarContainer)) />
+        <If
+          test={false}
+        >
+          <withRouter(Connect(SubGroupSelectorContainer)) />
+        </If>
+        <Warning />
+        <If
+          test={true}
+        >
+          <styled.div>
+            <styled.div />
+            <Container>
+              <Footer />
+            </Container>
+          </styled.div>
+        </If>
+        <Toast />
+        <If
+          test={false}
+        >
+          <Modal />
+        </If>
+      </styled.div>
+    </withRouter(ScrollToTop)>
+  </styled.div>
+</ThemeProvider>
+`;

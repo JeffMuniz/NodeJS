@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reports - Table - TableContent should render TableContent 1`] = `
+<styled.div
+  id="table_reports"
+>
+  <If
+    test={10}
+  >
+    <HeaderColumns />
+    <BodyColumns
+      data={
+        Array [
+          Object {
+            "ano": 2019,
+            "chave": "25d55ad283aa400af464c76d713c07aCa",
+            "cnpj": "50478677000108",
+            "razaoSocial": "Blogtag",
+            "tipo": 1,
+          },
+          Object {
+            "ano": 2019,
+            "chave": "25d55ad283aa400af464c76d713c07ad",
+            "cnpj": "96373604000152",
+            "razaoSocial": "Zoomlounge",
+            "tipo": 1,
+          },
+          Object {
+            "ano": 2019,
+            "chave": "25d55ad283aa400af464c76d713c07ad",
+            "cnpj": "89102617000121",
+            "razaoSocial": "Wordify",
+            "tipo": 1,
+          },
+          Object {
+            "ano": 2019,
+            "chave": "25d55ad283aa400af464c76d713c07ad",
+            "cnpj": "81258283000178",
+            "razaoSocial": "Skalith",
+            "tipo": 1,
+          },
+          Object {
+            "ano": 2019,
+            "chave": "25d55ad283aa400af464c76d713c07ad",
+            "cnpj": "06963279000195",
+            "razaoSocial": "Geba",
+            "tipo": 1,
+          },
+          Object {
+            "ano": 2019,
+            "chave": "25d55ad283aa400af464c76d713c07ad",
+            "cnpj": "76237257000123",
+            "razaoSocial": "Photofeed",
+            "tipo": 1,
+          },
+          Object {
+            "ano": 2019,
+            "chave": "25d55ad283aa400af464c76d713c07ad",
+            "cnpj": "34919560000166",
+            "razaoSocial": "Eayo",
+            "tipo": 1,
+          },
+          Object {
+            "ano": 2019,
+            "chave": "25d55ad283aa400af464c76d713c07ad",
+            "cnpj": "46462506000113",
+            "razaoSocial": "Jabberbean",
+            "tipo": 1,
+          },
+          Object {
+            "ano": 2019,
+            "chave": "25d55ad283aa400af464c76d713c07ad",
+            "cnpj": "61164172000195",
+            "razaoSocial": "Abatz",
+            "tipo": 1,
+          },
+          Object {
+            "ano": 2019,
+            "chave": "25d55ad283aa400af464c76d713c07ad",
+            "cnpj": "62412143000168",
+            "razaoSocial": "Voomm",
+            "tipo": 1,
+          },
+        ]
+      }
+    />
+  </If>
+</styled.div>
+`;

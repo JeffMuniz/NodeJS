@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/solicitacao?chavePesquisa=date",
+    "queryParameters": {
+      "date": {
+        "equalTo": "5bdab8d3-12c7-4ad5-922b-41145d733fc6"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "documento_response.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Order Should render Order 1`] = `
+<styled.div>
+  <SvgIcon
+    name="search"
+    size={100}
+  />
+  <styled.h2>
+    Dados não encontrados
+  </styled.h2>
+  <styled.div />
+  <styled.p>
+    Não encontramos o CPF 
+    <b>
+      111.22remoteShellVulner33-44
+    </b>
+    .
+  </styled.p>
+  <styled.p>
+    Por favor, confira os dados informados e tente a busca novamente.
+  </styled.p>
+</styled.div>
+`;

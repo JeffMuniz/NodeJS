@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ValueLabelText should render it 1`] = `
+<styled.header
+  subtitle=""
+  title=""
+>
+  <styled.h1>
+    
+  </styled.h1>
+  <styled.span>
+    
+  </styled.span>
+</styled.header>
+`;
+
+exports[`ValueLabelText should render it with props 1`] = `
+<styled.header
+  subtitle="Subtítulo Teste"
+  title="Título Teste"
+>
+  <styled.h1>
+    Título Teste
+  </styled.h1>
+  <styled.span>
+    Subtítulo Teste
+  </styled.span>
+</styled.header>
+`;

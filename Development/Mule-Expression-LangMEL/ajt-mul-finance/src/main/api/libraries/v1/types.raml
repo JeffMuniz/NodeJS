@@ -1,0 +1,387 @@
+#%RAML 1.0 Library
+usage: API Model
+types:
+  Meta:
+    displayName: Meta
+    description: Meta dados do recurso
+    type: object
+    properties:
+      total:
+        required: false
+        displayName: total
+        description: Total de registros do recurso
+        type: integer
+        format: int32
+      limit:
+        required: false
+        displayName: limit
+        description: Limite de registros para busca no recurso
+        type: integer
+        format: int32
+      offset:
+        required: false
+        displayName: offset
+        description: A partir de qual registro a busca ocorre no recurso
+        type: integer
+        format: int32
+  AjusteFinanceiroBody:
+    displayName: AjusteFinanceiroBody
+    type: object
+    properties:
+      id:
+        required: false
+        displayName: id
+        description: Id do ajuste financeiro
+        type: integer
+        format: int64
+      tipo:
+        required: false
+        displayName: tipo
+        type: Tipo
+      cliente:
+        required: false
+        displayName: cliente
+        type: Cliente
+      status:
+        required: false
+        displayName: status
+        description: Status da solicitação
+        type: Status
+      loginUsuario:
+        required: false
+        displayName: loginUsuario
+        description: Login do usuário solicitante
+        type: string
+      nomeUsuario:
+        required: false
+        displayName: nomeUsuario
+        description: Nome do usuário solicitante
+        type: string
+      idSolicitacao:
+        required: false
+        displayName: id
+        description: Id da solicitação
+        type: integer
+        format: int64
+      operacao:
+        required: false
+        displayName: operacao
+        type: Operacao
+      codigoExterno:
+        required: false
+        displayName: codigoExterno
+        description: Código Externo
+        type: integer
+      motivo:
+        required: false
+        displayName: motivo
+        type: Motivo
+      observacao:
+        required: false
+        displayName: observacao
+        description: Observação da solicitação
+        type: string
+      valor:
+        required: false
+        displayName: valor
+        type: number
+        format: double
+      dataVencimento:
+        required: false
+        displayName: dataVencimento
+        description: Data de vencimento
+        type: string
+      dataCriacao:
+        required: false
+        displayName: dataCriacao
+        description: Data de abertura da solicitação
+        type: string
+      dataFinalizacao:
+        required: false
+        displayName: dataFinalizacao
+        description: Data de atualização da solicitação
+        type: string
+  AjusteFinanceiro:
+    displayName: AjusteFinanceiro
+    type: object
+    properties:
+      meta:
+        required: false
+        displayName: meta
+        description: Meta dados do recurso
+        type: Meta
+      ajustes:
+        required: false
+        displayName: ajustes
+        type: array
+        items:
+          type: AjusteFinanceiroBody
+  CriaAjuste:
+    displayName: CriaAjuste
+    type: object
+    properties:
+      tipo:
+        required: false
+        displayName: tipo
+        description: Tipo EC/PORTADOR/RH
+        type: string
+      operacao:
+        required: false
+        displayName: operacao
+        description: Operação CREDITO/DEBITO
+        type: string
+      usuario:
+        required: false
+        displayName: usuario
+        type: Usuario
+      cliente:
+        required: false
+        displayName: cliente
+        type: Cliente
+      documento:
+        required: false
+        displayName: documento
+        description: Documento (Array de bytes / base64) 
+        type: string
+      codigoExterno:
+        required: false
+        displayName: codigoExterno
+        description: Código Externo
+        type: integer
+      dataVencimento:
+        required: false
+        displayName: dataVencimento
+        description: Data de vencimento
+        type: string
+      idMotivo:
+        required: false
+        displayName: id
+        description: Id do motivo
+        type: integer
+        format: int64
+      observacao:
+        required: false
+        displayName: observacao
+        description: Observação da solicitação
+        type: string
+      valor:
+        required: false
+        displayName: valor
+        type: number
+        format: double
+
+  ApiErro:
+    displayName: ApiErro
+    type: object
+    properties:
+      mensagem:
+        required: true
+        displayName: mensagem
+        description: Tipo da mensagem de erro
+        type: string
+      erros:
+        required: true
+        displayName: erros
+        description: Lista de erros
+        type: array
+        items:
+          type: Erro
+  Erro:
+    displayName: Erro
+    type: object
+    properties:
+      codigo:
+        required: true
+        displayName: codigo
+        description: Código do erro
+        type: string
+      mensagem:
+        required: true
+        displayName: mensagem
+        description: Mensagem de erro
+        type: string
+  Tipo:
+    displayName: Tipo
+    type: object
+    properties:
+      id:
+        required: false
+        displayName: id
+        description: Id do tipo
+        type: integer
+        format: int64
+      nome:
+        required: false
+        displayName: nome
+        description: Nome do tipo
+        type: string
+  Motivo:
+    displayName: Motivo
+    type: object
+    properties:
+      id:
+        required: false
+        displayName: id
+        description: Id do motivo
+        type: integer
+        format: int64
+      descricao:
+        required: false
+        displayName: descricao
+        description: Descricao do motivo
+        type: string
+            
+  MotivoBody:
+    displayName: MotivoBody
+    type: object
+    properties:
+      id:
+        displayName: id
+        description: Id do motivo
+        type: integer
+        format: int64
+      tipo:
+        displayName: tipo
+        description: Tipo do motivo
+        type: string
+      operacao:
+        displayName: operacao
+        description: Operacao do motivo
+        type: string
+      motivoDescricao:
+        displayName: motivoDescricao
+        description: Descricao do motivo
+        type: string
+  MotivoResponse:
+    displayName: MotivoResponse
+    type: object
+    properties:
+      motivos:
+        displayName: motivos
+        type: array
+        items:
+          type: MotivoBody
+  Cliente:
+    displayName: Cliente
+    type: object
+    properties:
+      id:
+        required: false
+        displayName: id
+        description: Id o cliente
+        type: integer
+        format: int64
+      nome:
+        required: false
+        displayName: nome
+        description: Nome do cliente
+        type: string
+      cpf:
+        required: false
+        displayName: cpf
+        description: CPF do cliente
+        type: string
+      cnpj:
+        required: false
+        displayName: cnpj
+        description: CNPJ do cliente
+        type: string
+      idConta:
+        required: false
+        displayName: id
+        description: Id da conta
+        type: integer
+      descricaoConta:
+        required: false
+        displayName: descricaoConta
+        description: Descrição da conta
+        type: string
+  Usuario:
+    displayName: Usuario
+    type: object
+    properties:
+      loginUsuario:
+        required: false
+        displayName: descricaoConta
+        description: Login do usuário 
+        type: string
+      nomeUsuario:
+        required: false
+        displayName: nomeUsuario
+        description: Nome do usuário 
+        type: string
+  Status:
+    displayName: Status
+    description: Status da solicitação
+    type: object
+    properties:
+      id:
+        required: false
+        displayName: id
+        description: Id do status da solicitação
+        type: integer
+        format: int64
+      nome:
+        required: false
+        displayName: nome
+        description: Descrição do status da solicitação
+        type: string
+  Operacao:
+    displayName: Operacao
+    type: object
+    properties:
+      id:
+        required: false
+        displayName: id
+        description: Id da operação
+        type: integer
+        format: int64
+      nome:
+        required: false
+        displayName: nome
+        description: Descrição da operação
+        type: string
+        
+  AjusteFinanceiroPatchRequest:
+   type: object
+   properties:
+    status:
+      type: string
+      required: false
+    dataFinalizacao:
+      type: string
+      required: false
+
+  AjusteFinanceiroPatchRequestWrapper:
+    type: object
+    properties:
+      ajuste:
+        type: AjusteFinanceiroPatchRequest
+        required: true
+        
+  AjusteConductor: 
+    type: object
+    properties: 
+      idTipoAjusteLojista:
+        type: integer
+        required: false
+      dataVencimento:
+        type: string
+        required: false
+      valor:
+        type: number
+        format: double
+        required: false
+      id:
+        type: integer
+        required: false
+      cnpj:
+        type: string
+        required: false
+        
+  AjusteConductorWrapper:
+    type: object
+    properties:
+      ajuste:
+        type: AjusteConductor
+        required: true

@@ -1,0 +1,120 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckBox Should render CheckBox 1`] = `
+<styled.div>
+  <styled.label
+    htmlFor="test"
+  >
+    <styled.span
+      strongFont={false}
+    >
+      test
+    </styled.span>
+    <styled.input
+      borderColor={null}
+      checked={false}
+      disabled={false}
+      id="test"
+      name="test"
+      onChange={[MockFunction]}
+      type="checkbox"
+    />
+    <styled.span
+      id="test_span"
+      isBig={false}
+    >
+      <Styled(Icon)
+        name="check-small"
+      />
+    </styled.span>
+  </styled.label>
+</styled.div>
+`;
+
+exports[`CheckBox Should render CheckBox with big icon 1`] = `
+<styled.div>
+  <styled.label
+    htmlFor="test"
+  >
+    <styled.input
+      borderColor={null}
+      checked={false}
+      disabled={false}
+      id="test"
+      name="test"
+      onChange={[MockFunction]}
+      type="checkbox"
+    />
+    <styled.span
+      id="test_span"
+      isBig={true}
+    >
+      <Styled(Icon)
+        name="check"
+      />
+    </styled.span>
+  </styled.label>
+</styled.div>
+`;
+
+exports[`CheckBox Should render CheckBox without labelBefore 1`] = `
+<styled.div>
+  <styled.label
+    htmlFor="test"
+  >
+    <styled.input
+      borderColor={null}
+      checked={false}
+      disabled={false}
+      id="test"
+      name="test"
+      onChange={[MockFunction]}
+      type="checkbox"
+    />
+    <styled.span
+      id="test_span"
+      isBig={false}
+    >
+      <Styled(Icon)
+        name="check-small"
+      />
+    </styled.span>
+    <styled.span
+      strongFont={false}
+    >
+      test
+    </styled.span>
+  </styled.label>
+</styled.div>
+`;
+
+exports[`CheckBox Should render errors in CheckBox 1`] = `
+<styled.div>
+  <styled.label
+    htmlFor="test"
+  >
+    <styled.input
+      borderColor={null}
+      checked={false}
+      disabled={false}
+      id="test"
+      name="test"
+      onChange={[MockFunction]}
+      type="checkbox"
+    />
+    <styled.span
+      id="test_span"
+      isBig={false}
+    >
+      <Styled(Icon)
+        name="check-small"
+      />
+    </styled.span>
+  </styled.label>
+  <styled.span
+    id="test_error"
+  >
+    error test
+  </styled.span>
+</styled.div>
+`;

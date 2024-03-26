@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageTitle should render it 1`] = `
+<styled.div
+  subtitle=""
+  title=""
+>
+  <styled.span>
+    
+  </styled.span>
+  <styled.span>
+    
+  </styled.span>
+</styled.div>
+`;
+
+exports[`PageTitle should render it with props 1`] = `
+<styled.div
+  subtitle="Subtítulo Teste"
+  title="Título Teste"
+>
+  <styled.span>
+    Título Teste
+  </styled.span>
+  <styled.span>
+    Subtítulo Teste
+  </styled.span>
+</styled.div>
+`;

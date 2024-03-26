@@ -1,0 +1,65 @@
+pipeline {
+    agent none
+    environment {
+        PROJECT = "$env.JOB_BASE_NAME"
+    }
+    stages {
+        stage ('CI') {
+            agent {
+                label 'master'
+            }
+            stages {
+                stage ('Tests') {
+                    steps {
+                        sh 'mvn clean install -DskipTests'
+                    }
+                }
+                stage ('SonarQube'){
+                    stages {
+                        stage('Analysis'){
+                            steps {
+                                script{
+                                    if(env.GIT_BRANCH == 'origin/release'){
+                                        stage('SONARQUBE'){
+                                            withSonarQubeEnv('SONAR'){
+                                                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.3.0.603:sonar -Dsonar.host.url='+env.SONAR_SERVER+' -Dsonar.projectName=$PROJECT -Dsonar.projectKey=$PROJECT '
+                                            }                                            
+                                        }
+                                    }
+                                    if(env.GIT_BRANCH == 'origin/develop'){
+                                        stage('SONARQUBE - SNAPSHOT'){
+                                            withSonarQubeEnv('SONAR'){
+                                                sh 'mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.3.0.603:sonar -Dsonar.host.url='+env.SONAR_SERVER+' -Dsonar.projectName=$PROJECT'+'-SNAPSHOT'+' -Dsonar.projectKey=$PROJECT '
+                                            }                                            
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        stage('Quality gate'){
+                            steps {
+                                timeout ( time: 1, unit: 'HOURS'){
+                                    script{
+                                        def qg = waitForQualityGate()
+                                        if (qg.status != 'OK'){
+                                            error "Pipeline aborted due to a quality gate failure: ${qg.status}"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                stage('Build') {
+                    steps {
+                        git branch: 'release',
+                        credentialsId: '87d13a40-000c-4795-82f4-3ce642d8817a',
+                        url: "${env.GIT_URL}"
+                        sh 'mvn package -DskipTests deploy -DaltReleaseDeploymentRepository=deploymentRepo::default::http://ec2-18-229-139-6.sa-east-1.compute.amazonaws.com:8081/repository/maven-releases/ -DaltSnapshotDeploymentRepository=deploymentRepo::default::http://ec2-18-229-139-6.sa-east-1.compute.amazonaws.com:8081/repository/maven-snapshots/ '
+                        sh "mvn build-helper:parse-version versions:set -DnewVersion='\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion'} versions:commit"
+                    }
+                }
+            }
+        }
+    }
+}

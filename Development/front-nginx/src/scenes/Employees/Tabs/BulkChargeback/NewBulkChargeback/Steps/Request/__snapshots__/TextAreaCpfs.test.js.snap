@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextAreaCpfs Render Text Area 1`] = `
+<textarea
+  className="sc-bdVaJa jtTXiQ"
+  id="textarea-cpfs"
+  name="teste"
+  onBlur={[MockFunction]}
+  onChange={[MockFunction]}
+  onKeyPress={[Function]}
+  placeholder="Ex.:
+000.000.000-00
+000.000.000-00
+000.000.000-00"
+/>
+`;
+
+exports[`TextAreaCpfs Render Text Area Error  1`] = `
+<textarea
+  className="sc-bdVaJa cmPVGY"
+  id="textarea-cpfs"
+  name="teste"
+  onBlur={[MockFunction]}
+  onChange={[MockFunction]}
+  onKeyPress={[Function]}
+  placeholder="Ex.:
+000.000.000-00
+000.000.000-00
+000.000.000-00"
+/>
+`;

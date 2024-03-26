@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar should render it with default props 1`] = `
+<Styled(Row)>
+  <Styled(Col)
+    xs={12}
+  >
+    <Icon
+      name="mac"
+    />
+  </Styled(Col)>
+</Styled(Row)>
+`;

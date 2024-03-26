@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Popover should render it with default props 1`] = `
+<Styled(Popover)
+  body={
+    <UNDEFINED>
+      <h1>
+        
+      </h1>
+      <div>
+        
+      </div>
+    </UNDEFINED>
+  }
+  isOpen={false}
+  place="y"
+  preferPlace="x"
+>
+  <div
+    id="id"
+    onBlur={[MockFunction]}
+    onFocus={[MockFunction]}
+    onMouseOut={[MockFunction]}
+    onMouseOver={[MockFunction]}
+  >
+    <div
+      id="test"
+    >
+      Test
+    </div>
+  </div>
+</Styled(Popover)>
+`;

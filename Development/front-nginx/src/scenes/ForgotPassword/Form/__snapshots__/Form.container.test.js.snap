@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Forgot Password - Container should not render SuccessBody when receiving a not successful forgot password request 1`] = `
+<UNDEFINED>
+  <If
+    test={true}
+  >
+    <div
+      id="ForgotPwdForm"
+    >
+      <FormWrapper
+        enableReinitialize={true}
+        initialValues={
+          Object {
+            "email": "",
+            "forgotCpf": "",
+          }
+        }
+        onSubmit={[Function]}
+        render={[Function]}
+        validationSchema="FormSchema"
+      />
+    </div>
+  </If>
+  <If
+    test={false}
+  >
+    <div
+      id="ForgotPwdSuccess"
+    >
+      <SuccessBody
+        returnToLogin={[Function]}
+      />
+    </div>
+  </If>
+</UNDEFINED>
+`;

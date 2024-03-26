@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Voucher - Unit Test Should render Voucher type food 1`] = `
+<UNDEFINED>
+  <styled.div
+    id="food-card-0"
+  >
+    <styled.div
+      canceled={false}
+    />
+    <styled.div>
+      <img
+        alt="food"
+        src={null}
+      />
+    </styled.div>
+    <styled.div>
+      <styled.span
+        id="employee_statement_voucher_card_number_0"
+      >
+        1111 22xx xxxx 4444
+      </styled.span>
+      <NormalStatus
+        blockVoucherButtonId="food-link-block-0"
+        changeVoucherStatus={[Function]}
+        dateMessage="desde 12/09/2018"
+        handleToggleBlockModal={[MockFunction]}
+        handleToggleNewVoucherModal={[MockFunction]}
+        newVoucherButtonId="food-link-new-voucher-0"
+        newVoucherMessageId="food-new-voucher-message-0"
+        statusDate="Wed Sep 12 2018 15:00:04 GMT-0300"
+        statusName="Normal"
+        statusNameId="food-status-0"
+      />
+    </styled.div>
+  </styled.div>
+</UNDEFINED>
+`;
+
+exports[`Voucher - Unit Test Should render Voucher type meal 1`] = `
+<UNDEFINED>
+  <styled.div
+    id="meal-card-0"
+  >
+    <styled.div
+      canceled={false}
+    />
+    <styled.div>
+      <img
+        alt="meal"
+        src={null}
+      />
+    </styled.div>
+    <styled.div>
+      <styled.span
+        id="employee_statement_voucher_card_number_0"
+      >
+        1111 22xx xxxx 4444
+      </styled.span>
+      <NormalStatus
+        blockVoucherButtonId="meal-link-block-0"
+        changeVoucherStatus={[Function]}
+        dateMessage="desde 12/09/2018"
+        handleToggleBlockModal={[MockFunction]}
+        handleToggleNewVoucherModal={[MockFunction]}
+        newVoucherButtonId="meal-link-new-voucher-0"
+        newVoucherMessageId="meal-new-voucher-message-0"
+        statusDate="Wed Sep 12 2018 15:00:04 GMT-0300"
+        statusName="Normal"
+        statusNameId="meal-status-0"
+      />
+    </styled.div>
+  </styled.div>
+</UNDEFINED>
+`;

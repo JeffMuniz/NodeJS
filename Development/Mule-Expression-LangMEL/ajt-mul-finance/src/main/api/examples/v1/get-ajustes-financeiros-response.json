@@ -1,0 +1,45 @@
+{
+	"meta": {
+		"total": 1,
+		"limit": 1,
+		"offset": 1
+	},
+	"ajustes": [
+		{
+			"id": 123213,
+			"tipo": {
+				"id": 2,
+				"nome": "Portador"
+			},
+			"cliente": {
+				"id": 2,
+				"nome": "Teste Cliente",
+				"cpf": "49883794607",
+				"cnpj": "",
+				"idConta": 1,
+				"descricaoConta": "VR | LIBERADO | EMPRESA 1"
+			},
+			"status": {
+				"id": 1,
+				"nome": "PENDENTE"
+			},
+			"loginUsuario": "teste@macvisacard.com.br",
+			"nomeUsuario": "Teste Solicitante",
+			"idSolicitacao": 123,
+			"operacao": {
+				"id": 1,
+				"descricao": "CREDITO"
+			},
+			"codigoExterno": 3121312,
+			"motivo": {
+				"id": 2,
+				"descricao": "Mudança de MDR"
+			},
+			"observacao": "Crédito para o portador",
+			"valor": 50,
+			"dataVencimento": "2020-12-01",
+			"dataCriacao": "2020-01-01",
+			"dataFinalizacao": ""
+		}
+	]
+}

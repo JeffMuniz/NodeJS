@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WarningContainer should render WarningContainer with default props 1`] = `
+<If
+  test={false}
+>
+  <Warning
+    button={Object {}}
+    hasCloseBtn={false}
+    icon={
+      Object {
+        "testUri": "../../../src/assets/pngs/white-warning-icon.png",
+      }
+    }
+    id="top-warning"
+    onClickCloseBtn={[Function]}
+    showMe={false}
+    title=""
+    type={
+      Object {
+        "backgroundColor": "#FABD59",
+        "color": "#FFFFFF",
+      }
+    }
+  >
+    <span>
+      test
+    </span>
+  </Warning>
+</If>
+`;

@@ -1,0 +1,429 @@
+@NonCPS
+def slackNotifier(String buildResult) {
+  if ( buildResult == "SUCCESS" ) {
+    slackSend ( color: "good",
+    teamDomain: 'macmaceficios',
+    tokenCredentialId: 'mac-slack',
+    channel: '#team_portador-build',
+    message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Sucesso \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+  else if( buildResult == "FAILURE" ) {
+    slackSend( color: "danger",
+    teamDomain: 'macmaceficios',
+    tokenCredentialId: 'mac-slack',
+    channel: '#team_portador-build',
+    message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Falha \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+  else if( buildResult == "UNSTABLE" ) {
+    slackSend( color: "warning",
+      teamDomain: 'macmaceficios',
+      tokenCredentialId: 'mac-slack',
+      channel: '#team_portador-build',
+      message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Unstable \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+  else if( buildResult == "ABORTED" ) {
+    slackSend( teamDomain: 'macmaceficios',
+      tokenCredentialId: 'mac-slack',
+      channel: '#team_portador-build',
+      message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Abortado \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+  else if( buildResult == "null" ) {
+    slackSend( color: "warning",
+      teamDomain: 'macmaceficios',
+      tokenCredentialId: 'mac-slack',
+      channel: '#team_portador-build',
+      message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Desconhecido \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+}
+
+def startMsg() {
+  commit_desc = sh(script: "git log -1 --format='format:%s'", returnStdout: true).trim()
+  slackSend(teamDomain: 'macmaceficios',
+    tokenCredentialId: 'mac-slack',
+    channel: '#team_portador-build',
+    message: "Job: ${env.JOB_NAME} \nBuild: <${env.BUILD_URL}|build ${env.BUILD_DISPLAY_NAME}> \nIniciado por: ${env.BUILD_USER}\n Commit: ${commit_desc}\nBranch: ${env.BRANCH_NAME}")
+}
+
+@NonCPS
+def configFromBranch(branch) {
+    def env_dev = [
+        rancherContext: 'c-lh4tc:p-pcbzj',
+        deploymentFile: 'deployment.yml',
+        namespace: 'portador-dev'
+    ]
+    def env_qa = [
+        rancherContext: 'c-lh4tc:p-pcbzj',
+        deploymentFile: 'deployment.yml',
+        namespace: 'portador-qa'
+    ]
+    def env_staging = [
+        rancherContext: 'c-lh4tc:p-pcbzj',
+        deploymentFile: 'deployment.yml',
+        namespace: 'portador-staging'
+    ]
+    def env_prd = [
+        filePath: 'prod',
+        projectName: 'stack-mac-api-corporativo-prd'
+    ]
+    if (branch ==~ /(develop)/) {
+        return [
+            shouldTest: true,
+            shouldAnalyze: true,
+            shouldBuildImage: true,
+            shouldPushImage: true,
+            shouldDeploy: true,
+            shouldStoreArtifact: false,
+            dockerfile: 'Dockerfile.jvm',
+            swagger: 'true',
+            rancherCred: 'rancher2-dev-token',
+            rancherURL: 'rancher2-dev-url',
+            registryURL: '123721783999.dkr.ecr.sa-east-1.amazonaws.com',
+            testAgent: 'TestContainer',
+            buildAgent: 'Build',
+            tag: 'dev',
+            env: 'dev',
+            deployments: [env_dev]
+        ]
+    }
+    else if (branch ==~ /(qa)/) {
+        return [
+            shouldTest: true,
+            shouldAnalyze: true,
+            shouldBuildImage: true,
+            shouldPushImage: true,
+            shouldDeploy: true,
+            shouldStoreArtifact: false,
+            dockerfile: 'Dockerfile.jvm',
+            swagger: 'true',
+            rancherCred: 'rancher2-dev-token',
+            rancherURL: 'rancher2-dev-url',
+            registryCred: 'macReg',
+            registryURL: '123721783999.dkr.ecr.sa-east-1.amazonaws.com',
+            testAgent: 'TestContainer',
+            buildAgent: 'Build',
+            tag: 'qa',
+            env: 'qa',
+            deployments: [env_qa]
+        ]
+    }
+    else if (branch ==~ /(staging)/) {
+        return [
+            shouldTest: false,
+            shouldAnalyze: false,
+            shouldBuildImage: true,
+            shouldPushImage: true,
+            shouldDeploy: true,
+            shouldStoreArtifact: false,
+            dockerfile: 'Dockerfile.jvm',
+            swagger: 'true',
+            rancherCred: 'rancher2-dev-token',
+            rancherURL: 'rancher2-dev-url',
+            registryURL: '123721783999.dkr.ecr.sa-east-1.amazonaws.com',
+            testAgent: 'TestContainer',
+            buildAgent: 'Build',
+            tag: 'stg',
+            env: 'stg',
+            deployments: [env_staging]
+        ]
+    }
+    else if (branch ==~ /(master)/) {
+        return [
+            shouldTest: false,
+            shouldAnalyze: false,
+            shouldBuildImage: true,
+            shouldPushImage: true,
+            shouldDeploy: false,
+            shouldStoreArtifact: true,
+            dockerfile: 'Dockerfile.jvm',
+            swagger: 'false',
+            rancherCred: 'rancher2-dev-token',
+            rancherURL: 'rancher2-dev-url',
+            registryURL: '123721783999.dkr.ecr.sa-east-1.amazonaws.com',
+            testAgent: 'TestContainer',
+            buildAgent: 'Build',
+            tag: 'prd',
+            env: 'prd',
+            deployments: [env_prd]
+        ]
+    }
+    else {
+        return [
+            shouldTest: true,
+            shouldAnalyze: true,
+            shouldBuildImage: false,
+            shouldPushImage: false,
+            shouldDeploy: false,
+            shouldStoreArtifact: false,
+            dockerfile: 'Dockerfile.jvm',
+            swagger: 'false',
+            rancherCred: 'rancher2-dev-token',
+            rancherURL: 'rancher2-dev-url',
+            registryURL: '123721783999.dkr.ecr.sa-east-1.amazonaws.com',
+            testAgent: 'TestContainer',
+            buildAgent: 'Build',
+            tag: 'dft',
+            env: 'dft',
+            deployments: []
+        ]
+    }
+}
+
+pipeline {
+    agent none
+
+    environment {
+        CONFIG = configFromBranch(BRANCH_NAME)
+        SHOULD_TEST = "${CONFIG.shouldTest}"
+        SHOULD_ANALYZE = "${CONFIG.shouldAnalyze}"
+        SHOULD_BUILD_IMAGE = "${CONFIG.shouldBuildImage}"
+        SHOULD_PUSH_IMAGE = "${CONFIG.shouldPushImage}"
+        SHOULD_DEPLOY = "${CONFIG.shouldDeploy}"
+        SHOUD_STORE_ARTIFACT = "${CONFIG.shouldStoreArtifact}"
+        
+        RANCHER_CRED = "${CONFIG.rancherCred}"
+        RANCHER_URL = "${CONFIG.rancherURL}"
+
+        DOCKERFILE = "${CONFIG.dockerfile}"
+
+        ENV = "${CONFIG.env}"
+        TEST_AGENT = "${CONFIG.testAgent}"
+        BUILD_AGENT = "${CONFIG.buildAgent}"
+        SWAGGER = "${CONFIG.swagger}"
+        
+        NEXUS_VERSION = "nexus3"
+        NEXUS_PROTOCOL = "http"
+        NEXUS_URL = "https://nexus-qa.com/:8081"
+        NEXUS_REPOSITORY = "nexusrepo"
+        NEXUS_CREDENTIAL_ID = "NexusRepo"
+
+        PROJECT_NAME= "mac-api-reports"
+        GIT_URL= "git@bitbucket.org:macvisavale/"${PROJECT_NAME}".git"
+
+        REGISTRY_CRED = "${CONFIG.registryCred}"
+        REGISTRY_URL = "${CONFIG.registryURL}"
+
+        IMAGE_TAG = "${CONFIG.tag}"
+        IMAGE_NAME = "${PROJECT_NAME}"
+        IMAGE_URL = "${CONFIG.registryURL}"
+    }
+
+    stages {
+        stage ('CI') {
+            agent {
+                label "${TEST_AGENT}"
+            }
+            stages {
+                stage('SCM - Checkout') {
+                    steps{
+                        cleanWs()
+                        git branch: BRANCH_NAME,
+                        url: GIT_URL
+                        echo 'SCM Checkout'
+                    }
+                }
+                stage ('Tests'){
+                    when {
+                        expression { SHOULD_TEST == 'true' }
+                    }
+                    stages {
+                        stage('Integration Tests - Maven'){
+                            steps {
+                                withMaven( maven: 'maven-3', jdk: 'jdk11-open'){
+                                    timeout ( time: 15, unit: 'MINUTES'){
+                                        sh "./mvnw test verify"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                stage ('SonarQube & Quality Gate'){
+                    when {
+                        expression { SHOULD_ANALYZE == 'true' }
+                    }
+                    stages{
+                        stage('Analysis - SonarQube'){
+                            steps {
+                                withSonarQubeEnv('SONAR'){
+                                    sh "./mvnw sonar:sonar \
+                                        -Dsonar.projectName=\"${PROJECT_NAME}\" \
+                                        -Dsonar.projectKey=\"${PROJECT_NAME}\""
+                                }
+                            }
+                        }
+                        stage('Quality gate'){
+                            steps {
+                                timeout ( time: 1, unit: 'HOURS'){
+                                    script{
+                                        def qg = waitForQualityGate()
+                                        if (qg.status != 'OK'){
+                                            error "Pipeline aborted due to a quality gate failure: ${qg.status}"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                stage("Publish Artifact - Nexus") {
+                    when {
+                      expression { SHOUD_STORE_ARTIFACT == 'true' }
+                    }
+                    steps {
+                        withMaven( maven: 'maven-3', jdk: 'jdk11-open'){
+                            sh "./mvnw clean install -DskipTests"
+                        }
+                        script {
+                            pom = readMavenPom file: "pom.xml";
+                            filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+                            echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                            artifactPath = filesByGlob[0].path;
+                            artifactExists = fileExists artifactPath;
+                            if(artifactExists) {
+                                echo "*** Arquivo: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                                nexusArtifactUploader(
+                                    nexusVersion: NEXUS_VERSION,
+                                    protocol: NEXUS_PROTOCOL,
+                                    nexusUrl: NEXUS_URL,
+                                    groupId: pom.groupId,
+                                    version: pom.version,
+                                    repository: NEXUS_REPOSITORY,
+                                    credentialsId: NEXUS_CREDENTIAL_ID,
+                                   artifacts: [
+                                        [artifactId: pom.artifactId, classifier: '', file: artifactPath,type: 'jar']
+                                    ]
+                                );
+                            } else {
+                                error "*** Arquivo: ${artifactPath}, não encontrado";
+                            }
+                        }
+                    }
+                }
+
+            }
+        }
+        stage ('CD') {
+            stages {
+                stage ('Deploy') {
+                    agent {
+                       label "${BUILD_AGENT}"
+                    }
+                    stages{
+                        stage ('Docker - Build') {
+                            when {
+                              expression { SHOULD_BUILD_IMAGE == 'true' }
+                            }
+                            steps {
+                                script {
+                                    VERSION  = sh(script: 'printf \'VER\t${project.version}\' | mvn help:evaluate | grep \'^VER\' | cut -f2', , returnStdout: true).trim()
+                                }
+                                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'mac-ecr', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                                    withMaven( maven: 'maven-3', jdk: 'jdk11-open'){
+                                        withCredentials([
+                                            string(credentialsId: "newrelic-licence", variable: 'newRelicLicence'),
+                                            ]){
+                                                sh """
+                                                sed -i '
+                                                   s,{{LICENCE_KEY}},${newRelicLicence},g;
+                                                   s,{{PROJECT_NAME}},${PROJECT_NAME},g;
+                                                 ' newrelic.yml
+                                                """
+                                            }
+                                        sh "export AWS_DEFAULT_REGION=sa-east-1"
+                                        sh "\$(/usr/local/bin/aws ecr get-login --no-include-email --region sa-east-1)"
+                                        sh "./mvnw clean package -U -DskipTests"
+                                        sh "docker build -f src/main/docker/${DOCKERFILE} -t ${IMAGE_URL}/${PROJECT_NAME}:${ENV}-${VERSION} ."
+                                    }
+                                }
+                            }
+                        }
+                        stage('Docker - Push'){
+                            when {
+                              expression { SHOULD_PUSH_IMAGE == 'true' }
+                            }
+                            steps{
+                                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'mac-ecr', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                                    sh "docker push ${IMAGE_URL}/${PROJECT_NAME}:${ENV}-${VERSION}"
+                                    sh "echo ${IMAGE_URL}/${PROJECT_NAME}:${ENV}-${VERSION} > sysdig_secure_images"
+                                    echo "Image push complete"
+                                }
+                            }
+                        }
+                        stage('Sysdig Analysis - Scan'){
+                            when {
+                              expression { SHOULD_PUSH_IMAGE == 'true' }
+                            }
+                            steps{
+                                script {
+                                    try {
+                                        sysdig engineCredentialsId: 'sysdig-token', name: 'sysdig_secure_images', inlineScanning: true, bailOnFail: true, bailOnPluginFail: true
+                                    } catch (err) {
+                                        echo err.getMessage()
+                                        COMMIT_AUTHOR_EMAIL= sh(script: "git log -1 --pretty=format:\"%ae\"", , returnStdout: true).trim()
+                                        wrap([$class: 'BuildUser']) {
+                                            mail body: "Atenção, o job ${env.JOB_NAME} não passou na análise do Sysdig. Para mais informações, consulte o link abaixo.\
+                                                        \n\nLink do build: ${BUILD_URL}", 
+                                                         from: 'jenkins@macpreprod.com', 
+                                                         mimeType: 'text/plain', 
+                                                         replyTo: 'no-reply@macpreprod.com', 
+                                                         subject: 'Falha no Sysdig', 
+                                                         to: "${COMMIT_AUTHOR_EMAIL}"
+                                        }
+                                        sh "exit 1"
+                                    }
+                                }
+                            }
+                        }
+                        stage('Rancher - Deploy'){
+                            when {
+                              expression { SHOULD_DEPLOY == 'true' }
+                            }
+                            steps {
+                                script { 
+                                    for (deployment in configFromBranch(BRANCH_NAME).deployments) {
+                                        withCredentials([
+                                            string(credentialsId: "${RANCHER_CRED}", variable: 'rancherToken'),
+                                            string(credentialsId: "${RANCHER_URL}", variable: 'rancherURL')
+                                            ]){
+                                                sh "echo yes | /usr/bin/rancher login --token token-some-token  --context ${deployment.rancherContext} --name rancher2 https://ec2-18-228-89-100.sa-east-1.compute.amazonaws.com/v3"
+	                                            //sh "echo yes | /usr/bin/rancher login --token ${rancherToken} --context ${deployment.rancherContext} --name rancher2 ${rancherURL}" 
+                                            }  
+                                                sh """
+                                                sed '
+                                                  s,{{IMAGE_URL}}, ${IMAGE_URL}/${PROJECT_NAME}:${ENV}-${VERSION},g;
+                                                  s,{{NAMESPACE}},${deployment.namespace},g;
+                                                  s,{{PROJECT_NAME}},${PROJECT_NAME},g;
+                                                ' ${deployment.deploymentFile} | /usr/bin/rancher kubectl apply -f -
+                                                """
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            script{
+                slackNotifier('SUCCESS')
+            }
+        }
+        failure{
+            script{
+                slackNotifier('FAILURE')
+            }
+        }
+        unstable{
+            script{
+                slackNotifier('UNSTABLE')
+            }
+        }
+        aborted{
+            script{
+                slackNotifier('ABORTED')
+            }
+        }
+    }
+}

@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Should change value button when loading is true 1`] = `
+<UNDEFINED>
+  <span
+    data-tip={null}
+  >
+    <styled.button
+      buttonType="primary"
+      disabled={true}
+      id="teste"
+      onClick={[Function]}
+    >
+      <ReactTooltip
+        clickable={false}
+        effect="solid"
+        html={true}
+        insecure={true}
+        place="top"
+        resizeHide={true}
+        wrapper="div"
+      />
+      <If
+        test="teste"
+      >
+        <styled.div
+          disabled={false}
+          size={16}
+        >
+          <If
+            test={null}
+          >
+            <SvgIcon
+              fill={null}
+              name="teste"
+              size={16}
+            />
+          </If>
+          <If
+            test={true}
+          >
+            <SvgIcon
+              name="teste"
+              size={16}
+            />
+          </If>
+        </styled.div>
+      </If>
+      <span>
+        Carregando
+      </span>
+    </styled.button>
+  </span>
+</UNDEFINED>
+`;
+
+exports[`Button Should render Button 1`] = `
+<UNDEFINED>
+  <span
+    data-tip={null}
+  >
+    <styled.button
+      buttonType="primary"
+      disabled={false}
+      id="teste"
+      onClick={[Function]}
+    >
+      <ReactTooltip
+        clickable={false}
+        effect="solid"
+        html={true}
+        insecure={true}
+        place="top"
+        resizeHide={true}
+        wrapper="div"
+      />
+      <If
+        test="teste"
+      >
+        <styled.div
+          disabled={false}
+          size={16}
+        >
+          <If
+            test={null}
+          >
+            <SvgIcon
+              fill={null}
+              name="teste"
+              size={16}
+            />
+          </If>
+          <If
+            test={true}
+          >
+            <SvgIcon
+              name="teste"
+              size={16}
+            />
+          </If>
+        </styled.div>
+      </If>
+      <span>
+        btn
+      </span>
+    </styled.button>
+  </span>
+</UNDEFINED>
+`;

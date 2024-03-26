@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Statement Section - Unit Test Should render Statement Section 1`] = `
+<styled.div
+  id="employee_section_container"
+>
+  <Styled(Row)>
+    <Styled(Col)>
+      <styled.span
+        id="employee_section_name"
+      />
+      <styled.span
+        id="employee_section_status"
+        inactive={true}
+      >
+        funcionário undefined
+      </styled.span>
+    </Styled(Col)>
+    <styled.div>
+      <Styled(Col)>
+        <styled.span>
+          CPF
+        </styled.span>
+        <styled.span
+          id="employee_section_cpf"
+        >
+          
+        </styled.span>
+      </Styled(Col)>
+      <Styled(Col)>
+        <styled.span>
+          Matrícula
+        </styled.span>
+        <styled.span
+          id="employee_section_registry"
+        />
+      </Styled(Col)>
+      <Styled(Col)>
+        <styled.span>
+          CNPJ
+        </styled.span>
+        <styled.span
+          id="employee_section_cnpj"
+        >
+          
+        </styled.span>
+      </Styled(Col)>
+    </styled.div>
+  </Styled(Row)>
+</styled.div>
+`;

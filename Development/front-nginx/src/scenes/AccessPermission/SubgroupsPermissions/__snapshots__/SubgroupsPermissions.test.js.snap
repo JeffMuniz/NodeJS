@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Subgroups Permissions Should render it 1`] = `
+<UNDEFINED>
+  <styled.TableRow
+    id="matrix_row_0"
+    onClick={[Function]}
+  >
+    <styled.TableCol
+      md={11}
+    />
+    <styled.TableCol
+      md={1}
+      right={true}
+    >
+      <SvgIcon
+        name="arrowDown"
+      />
+    </styled.TableCol>
+  </styled.TableRow>
+</UNDEFINED>
+`;

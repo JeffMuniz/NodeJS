@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reports - Table - EmptyState should render EmptyState 1`] = `
+<div>
+  <If
+    test={true}
+  >
+    <styled.div>
+      <Loading
+        loading={true}
+      />
+    </styled.div>
+  </If>
+  <If
+    test={false}
+  >
+    <styled.div
+      id="cashback-empty-state-icon"
+    >
+      <SvgIcon
+        name="emptyGrid"
+      />
+    </styled.div>
+    <styled.p
+      id="cashback-empty-state-text"
+    >
+      Você ainda não tem nenhum estorno para acompanhar. Todos os estornos pedidos serão exibidos aqui.
+    </styled.p>
+  </If>
+</div>
+`;

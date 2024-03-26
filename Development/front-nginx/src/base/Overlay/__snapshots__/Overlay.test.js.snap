@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Voucher Section - Unit Test Should render Voucher Section type food 1`] = `
+<styled.div
+  id="overlay"
+  onClick={[Function]}
+>
+  <div>
+    test
+  </div>
+</styled.div>
+`;

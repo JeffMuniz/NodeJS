@@ -1,0 +1,21 @@
+{
+	"transacao": {
+		"idTransacao": 1234,
+		"codigoAutorizacao": "826475",
+		"codigoPagamento": 1236,
+		"dataTransacao": "2011-01-01T00:00:00",
+		"cnpj": "00XXXXXX002254",
+		"cnpjCriptografado": "QlkEjtU7/1gIZsG3tA8fv1LAh8gmCuJ2FNsjzEuP+f4=",
+		"razaoSocialEstabelecimento": "Padaria Isis",
+		"produto": "VA",
+		"valorBruto": 2000.05,
+		"valorTaxa": 200.35,
+		"valorLiquido": 1799.40,
+		"indicadorServicoDePrazo": "mac+Rapido",
+		"dataVencimento": "2011-01-01",
+		"status": "Processada",
+		"dataCancelamentoOuContestacao": "2011-01-01",
+		"meioCaptura": "Meio Captura",
+		"adquirente": "Adquirente"
+	}
+}

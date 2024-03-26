@@ -1,0 +1,53 @@
+[
+  {
+    "controle": "CONTA_VIRTUAL",
+    "ledgersCredito": [
+      "CONTAVIRTUAL_CREDITO_PENDENTE",
+      "CONTAVIRTUAL_CREDITO_ESTORNO"
+    ],
+    "ledgersDebito": [
+      "CONTAVIRTUAL_CREDITO_UTILIZADO"
+    ],
+    "ledgerSuporte": "CONTAVIRTUAL_CREDITO_PENDENTE",
+    "campoAtuacao" : "RH"
+  },
+  {
+    "controle": "AGENDAMENTO_PEDIDO",
+    "ledgersCredito": [
+      "PEDIDO_RECEBIMENTO_PENDENTE"
+    ],
+    "ledgersDebito": [
+      "PEDIDO_RECEBIMENTO_CANCELADO",
+      "PEDIDO_RECEBIMENTO_EFETIVADO"
+    ],
+    "ledgerSuporte": "PEDIDO_RECEBIMENTO_PENDENTE",
+    "campoAtuacao" : "RH"
+  },
+  {
+    "controle": "REPASSE_PEDIDO",
+    "ledgersCredito": [
+      "CREDITO_PENDENTE"
+    ],
+    "ledgersDebito": [
+      "CREDITO_CANCELADO",
+      "CREDITO_DISPONIVEL"
+    ],
+    "ledgerSuporte": "CREDITO_PENDENTE",
+    "campoAtuacao" : "RH"
+  },
+  {
+    "controle": "SALDO_PORTADOR",
+    "ledgersCredito": [
+      "CREDITO_DISPONIVEL",
+      "TRANSACAO_DESFEITA",
+      "AJUSTE_CREDITO"
+    ],
+    "ledgersDebito": [
+      "CREDITO_UTILIZADO",
+      "AJUSTE_DEBITO",
+      "CONTAVIRTUAL_CREDITO_UTILIZADO"
+    ],
+    "ledgerSuporte": "CREDITO_DISPONIVEL",
+    "campoAtuacao" : "Portador"
+  }
+]

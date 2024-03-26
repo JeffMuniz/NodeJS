@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardTrackingNotFound Should render CardTrackingNotFound 1`] = `
+<styled.div>
+  <SvgIcon
+    name="search"
+    size={100}
+  />
+  <styled.h2>
+    Dados não encontrados
+  </styled.h2>
+  <styled.div />
+  <styled.p
+    id="no-cards-founded"
+  >
+    Não encontramos cartões para o CPF 
+    <b>
+      111.22remoteShellVulner33-00
+    </b>
+    . Por favor, confira os dados informados e tente a busca novamente.
+  </styled.p>
+</styled.div>
+`;

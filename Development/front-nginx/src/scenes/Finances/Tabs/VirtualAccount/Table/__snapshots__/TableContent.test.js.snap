@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Reports - Table - TableContent should render TableContent 1`] = `
+<styled.div
+  id="table_virtual-account"
+>
+  <If
+    test={1}
+  >
+    <HeaderColumns
+      id="header_finances"
+    />
+    <BodyColumns
+      data={
+        Array [
+          Object {
+            "chave": "ESTORNO",
+            "cnpj": "22617988000175",
+            "data": "2018-12-26T19:12:00.000Z",
+            "descricao": "Aqui vai uma descrição",
+            "id": 199999,
+            "origem": "Estorno",
+            "razaoSocial": "Empresa 6295 2",
+            "valor": 1.5,
+          },
+        ]
+      }
+    />
+  </If>
+</styled.div>
+`;

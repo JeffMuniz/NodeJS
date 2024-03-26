@@ -1,0 +1,34 @@
+{
+	"motivos": [
+		   {
+		      "id": 1,
+		      "tipo":"EC",
+		      "operacao":"Crédito",
+		      "motivoDescricao":"EC / CRÉDITO - Reembolso MDR"
+		   },
+		   {
+		      "id": 2,
+		      "tipo":"EC",
+		      "operacao":"Crédito",
+		      "motivoDescricao":"EC / CRÉDITO - Pagamento não efetuado"
+		   },
+		   {
+		      "id": 3,
+		      "tipo":"EC",
+		      "operacao":"Crédito",
+		      "motivoDescricao":"EC / CRÉDITO - Reembolso tarifa"
+		   },
+		   {
+		      "id": 4,
+		      "tipo":"EC",
+		      "operacao":"Débito",
+		      "motivoDescricao":"EC / DÉBITO - Ajuste manual"
+		   },
+		   {
+		      "id": 5,
+		      "tipo":"Portador",
+		      "operacao":"Débito",
+		      "motivoDescricao":"PORTADOR / DÉBITO - Correção carga indevida"
+		   }
+	]
+}

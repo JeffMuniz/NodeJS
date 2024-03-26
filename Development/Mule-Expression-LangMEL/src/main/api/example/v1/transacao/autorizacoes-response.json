@@ -1,0 +1,28 @@
+{
+    "autorizacoes": [
+        {
+            "statusTransacao": "Processada",
+            "cpfCriptografado": "zsXM1SlFdB2uziwl2zIUfg==",
+            "valorBruto": 110.5,
+            "nome": "JAMYLA LEOPOLDINO",
+            "cnpj": "00XXXXXX032715",
+            "statusContestacao": null,
+            "dataTransacao": "02/04/2019 - 23:57:00",
+            "numeroCartao": "xxxxxxxxxxxx3753",
+            "codigoAutorizacao": "869213",
+            "meioCaptura": "POS",
+            "produto": "VR",
+            "idTransacao": 37822,
+            "cpf": "XXXXXX58613",
+            "adquirente": "GetNet",
+            "cnpjCriptografado": "ek23+1v/hFC/XD1mp681PyqJsnHoBhbaMBBI2f+Mmyc=",
+            "razaoSocialEstabelecimento": "Estabelecimento 32715 - L"
+        }
+    ],
+    "meta": {
+        "total": 1,
+        "pages": 1,
+        "offset": 0,
+        "limit": 20
+    }
+}

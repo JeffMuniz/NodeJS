@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Groups Should render it 1`] = `
+<div
+  id="access-group-list"
+>
+  <TableHeader
+    between="xs"
+    id="access-permissions-header"
+  >
+    <TableHeaderCol
+      md={3}
+    >
+      Nome Completo
+    </TableHeaderCol>
+    <styled.TableHeaderCol
+      md={2}
+    >
+      CPF
+    </styled.TableHeaderCol>
+    <styled.TableHeaderCol
+      md={3}
+    >
+      E-mail
+    </styled.TableHeaderCol>
+    <styled.TableHeaderCol
+      md={2}
+    >
+      Status
+    </styled.TableHeaderCol>
+    <styled.TableHeaderCol
+      md={1}
+    />
+  </TableHeader>
+  <TableRow
+    id="access-permissions-list-item-id1"
+  >
+    <TableCol
+      md={3}
+    >
+      <If
+        test={true}
+      >
+        <styled.button
+          id="btn_detail_employee_id1_name"
+          onClick={undefined}
+        />
+      </If>
+      <If
+        test={false}
+      />
+    </TableCol>
+    <styled.TableCol
+      md={2}
+    >
+      
+    </styled.TableCol>
+    <styled.TableCol
+      md={3}
+    />
+    <styled.TableCol
+      capitalize="true"
+      md={2}
+    />
+    <styled.TableCol
+      md={1}
+    >
+      <If
+        test={true}
+      >
+        <styled.button
+          id="btn_detail_employee_id1"
+          onClick={undefined}
+        >
+          Detalhe
+        </styled.button>
+      </If>
+    </styled.TableCol>
+  </TableRow>
+</div>
+`;

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LimitChartContainer container should render it 1`] = `
+<LimitChart
+  availableValue={932077.12}
+  hasBorderTop={false}
+  percentage={6.7}
+  totalLimit={1000000}
+  usedLimit={67922.88}
+/>
+`;

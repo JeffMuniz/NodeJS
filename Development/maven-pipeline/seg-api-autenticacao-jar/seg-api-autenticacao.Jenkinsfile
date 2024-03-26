@@ -1,0 +1,353 @@
+/*@NonCPS
+def slackNotifier(String buildResult) {
+  if ( buildResult == "SUCCESS" ) {
+    slackSend ( color: "good",
+    teamDomain: 'macmaceficios',
+    tokenCredentialId: 'mac-slack',
+    channel: '#backoffice-build',
+    message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Sucesso \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+  else if( buildResult == "FAILURE" ) {
+    slackSend( color: "danger",
+    teamDomain: 'macmaceficios',
+    tokenCredentialId: 'mac-slack',
+    channel: '#backoffice-build',
+    message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Falha \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+  else if( buildResult == "UNSTABLE" ) {
+    slackSend( color: "warning",
+      teamDomain: 'macmaceficios',
+      tokenCredentialId: 'mac-slack',
+      channel: '#backoffice-build',
+      message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Unstable \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+  else if( buildResult == "ABORTED" ) {
+    slackSend( teamDomain: 'macmaceficios',
+      tokenCredentialId: 'mac-slack',
+      channel: '#backoffice-build',
+      message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Abortado \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+  else if( buildResult == "null" ) {
+    slackSend( color: "warning",
+      teamDomain: 'macmaceficios',
+      tokenCredentialId: 'mac-slack',
+      channel: '#backoffice-build',
+      message: "Job: ${env.JOB_NAME} \nBuild: ${env.BUILD_NUMBER} \nStatus: Desconhecido \nTempo: ${currentBuild.durationString.minus(' and counting')}")
+  }
+}
+*/
+
+@NonCPS
+def configFromBranch(branch) {
+    def env_dev = [
+        rancherContext: 'c-lh4tc:p-qzrhd',
+        deploymentFile: 'deployment.yml',
+        namespace: 'backoffice-dev'
+    ]
+    def env_qa = [
+        rancherContext: 'c-lh4tc:p-qzrhd',
+        deploymentFile: 'deployment.yml',
+        namespace: 'backoffice-qa'
+    ]
+    def env_staging = [
+        rancherContext: 'c-lh4tc:p-qzrhd',
+        deploymentFile: 'deployment.yml',
+        namespace: 'backoffice-staging'
+    ]
+    def env_prd = [
+        rancherContext: '',
+        deploymentFile: '',
+        namespace: ''
+    ]
+    if (branch ==~ /(development)/) { 
+        return [
+            shouldTest: true,
+            shouldAnalyze: true,
+            shouldBuildImage: true,
+            shouldPushImage: true,
+            shouldDeploy: true,
+            shouldStoreArtifact: false,
+            dockerfile: 'Dockerfile',
+            tag: 'dev',
+            deployments: [env_dev]
+        ]
+    }
+    else if (branch ==~ /(qa)/) {
+        return [
+            shouldTest: true,
+            shouldAnalyze: false,
+            shouldBuildImage: true,
+            shouldPushImage: true,
+            shouldDeploy: true,
+            shouldStoreArtifact: false,
+            dockerfile: 'Dockerfile',
+            tag: 'qa',
+            deployments: [env_qa]
+        ]
+    }
+    else if (branch ==~ /(staging)/) {
+        return [
+            shouldTest: false,
+            shouldAnalyze: false,
+            shouldBuildImage: true,
+            shouldPushImage: true,
+            shouldDeploy: true,
+            shouldStoreArtifact: false,
+            dockerfile: 'Dockerfile',
+            tag: 'stg',
+            deployments: [env_staging]
+        ]
+    }
+    else if (branch ==~ /(master)/) {
+        return [
+            shouldTest: false,
+            shouldAnalyze: false,
+            shouldBuildImage: true,
+            shouldPushImage: true,
+            shouldDeploy: false,
+            shouldStoreArtifact: true,
+            dockerfile: 'Dockerfile-prd',
+            tag: 'prd',
+            deployments: [env_prd]
+        ]
+    }
+    else {
+        return [
+            shouldTest: false,
+            shouldAnalyze: false,
+            shouldBuildImage: false,
+            shouldPushImage: false,
+            shouldDeploy: false,
+            shouldStoreArtifact: false,
+            tag: '-',
+            deployments: []
+        ]
+    }
+}
+
+pipeline {
+    agent none
+    
+    environment {
+        CONFIG = configFromBranch(BRANCH_NAME)
+        SHOULD_TEST = "${CONFIG.shouldTest}"
+        SHOULD_BUILD_IMAGE = "${CONFIG.shouldBuildImage}"
+        SHOULD_PUSH_IMAGE = "${CONFIG.shouldPushImage}"
+        SHOULD_DEPLOY = "${CONFIG.shouldDeploy}"
+        SHOULD_ANALYZE = "${CONFIG.shouldAnalyze}"
+        SHOUD_STORE_ARTIFACT = "${CONFIG.shouldStoreArtifact}"
+        DOCKERFILE = "${CONFIG.dockerfile}"
+
+        NEXUS_VERSION = "nexus3"
+        NEXUS_PROTOCOL = "http"
+        NEXUS_URL = "ec2-18-229-139-6.sa-east-1.compute.amazonaws.com:8081"
+        NEXUS_REPOSITORY = "nexusrepo"
+        NEXUS_CREDENTIAL_ID = "NexusRepo"
+
+        GIT_URL="git@bitbucket.org:maquiinaedu/seg-api-autenticacao.git"
+        PROJECT_NAME="backoffice-autenticacao-api"
+        PROJECT_SONNAR="seg-api-autenticacao"
+
+        IMAGE_TAG = "${CONFIG.tag}-${env.BUILD_ID}"
+        IMAGE_NAME = "${PROJECT_NAME}:${IMAGE_TAG}"
+        IMAGE_URL = "123721783999.dkr.ecr.sa-east-1.amazonaws.com/${IMAGE_NAME}"
+    }
+
+    stages {
+        stage ('CI') {
+            agent {
+                label 'TestContainer'
+            }
+            stages {
+                stage('SCM - Checkout') {
+                    steps{
+                        cleanWs()
+                        git branch: BRANCH_NAME,
+                        credentialsId: "bitb-mac",
+                        url: GIT_URL
+                        echo 'SCM Checkout'
+                    }
+                }
+                stage ('Tests'){
+                    when {
+                        expression { SHOULD_TEST == 'true' }
+                    }
+                    stages {
+                        stage('Integration Tests - Maven'){
+                            steps {
+                                withMaven( maven: 'maven-3', jdk: 'jdk11-open'){
+                                    timeout ( time: 60, unit: 'MINUTES'){
+                                        sh "./mvnw checkstyle:check -q"
+                                        sh "./mvnw dependency:go-offline -q"
+                                        sh "./mvnw test verify jacoco:report"
+                                    }
+                                }
+                            }
+                        }
+                        stage('Code coverage - Jacoco'){
+                            steps{
+                                jacoco(
+                                    execPattern: 'target/*.exec',
+                                    classPattern: 'target/classes',
+                                    sourcePattern: 'src/main/java',
+                                    exclusionPattern: 'src/test*'
+                                )
+                            }
+                        }
+                    }
+                }
+                stage ('SonarQube & Quality Gate'){
+                    when {
+                        expression { SHOULD_ANALYZE == 'true' }
+                    }
+                    stages{
+                        stage('Analysis - SonarQube'){
+                            steps {
+                                withSonarQubeEnv('SONAR'){
+                                    sh "./mvnw sonar:sonar \
+                                        -Dsonar.projectName=\"${PROJECT_SONNAR}\" \
+                                        -Dsonar.projectKey=\"${PROJECT_SONNAR}\" \
+                                        -Dsonar.coverage.jacoco.xmlReportPaths=target/jacoco/test/jacoco.xml,target/jacoco/integrationTest/jacoco.xml"
+                                }
+                            }
+                        }
+                        stage('Quality gate'){
+                            steps {
+                                timeout ( time: 1, unit: 'HOURS'){
+                                    script{
+                                        def qg = waitForQualityGate()
+                                        if (qg.status != 'OK'){
+                                            error "Pipeline aborted due to a quality gate failure: ${qg.status}"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                stage("Publish Artifact - Nexus") {
+                    when {
+                      expression { SHOUD_STORE_ARTIFACT == 'true' }
+                    }
+                    steps {
+                        script {
+                            pom = readMavenPom file: "pom.xml";
+                            filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+                            echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                            artifactPath = filesByGlob[0].path;
+                            artifactExists = fileExists artifactPath;
+                            if(artifactExists) {
+                                echo "*** Arquivo: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                                nexusArtifactUploader(
+                                    nexusVersion: NEXUS_VERSION,
+                                    protocol: NEXUS_PROTOCOL,
+                                    nexusUrl: NEXUS_URL,
+                                    groupId: pom.groupId,
+                                    version: pom.version,
+                                    repository: NEXUS_REPOSITORY,
+                                    credentialsId: NEXUS_CREDENTIAL_ID,
+                                   artifacts: [
+                                        [artifactId: pom.artifactId, classifier: '', file: artifactPath,type: 'jar']
+                                    ]
+                                );
+                            } else {
+                                error "*** Arquivo: ${artifactPath}, não encontrado";
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        stage ('CD') {
+            stages {
+                stage ('Deploy') {
+                    agent {
+                        label 'Build'
+                    }
+                    stages{
+                        stage('Build - Maven'){
+                            steps{
+                                withMaven( maven: 'maven-3', jdk: 'jdk11-open'){
+                                    sh "./mvnw clean install -DskipTests"
+                                }
+                            }
+                        }
+                        stage ('Build - Docker') {
+                            when {
+                              expression { SHOULD_BUILD_IMAGE == 'true' }
+                            }
+                            steps {
+                                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable:
+                                 'AWS_ACCESS_KEY_ID', credentialsId: 'mac-ecr', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                                    sh "export AWS_DEFAULT_REGION=sa-east-1"
+                                    sh "\$(/usr/local/bin/aws ecr get-login --no-include-email --region sa-east-1)"
+                                    sh "docker build --file ${DOCKERFILE} --pull -t ${IMAGE_URL} --no-cache ."
+                                }
+                            }
+                        }
+                        stage('Push Image - Docker'){
+                            when {
+                              expression { SHOULD_PUSH_IMAGE == 'true' }
+                            }
+                            steps{
+                                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'mac-ecr', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                                    sh "docker push ${IMAGE_URL}"
+                                    echo "Image push complete"
+                                }
+                            }
+                        }
+                        stage('Sysdig Analysis - Scan'){
+                            when {
+                              expression { SHOULD_PUSH_IMAGE == 'true' }
+                            }
+                            steps{
+                                sh "echo ${IMAGE_URL} > sysdig_secure_images"
+                                sysdig engineCredentialsId: 'sysdig-token', name: 'sysdig_secure_images', inlineScanning: true, bailOnFail: false, bailOnPluginFail: false
+                            }
+                        }
+                        stage('Kubernetes Deploy'){
+                            when {
+                              expression { SHOULD_DEPLOY == 'true' }
+                            }
+                            steps {
+                                script {
+                                    for (deployment in configFromBranch(BRANCH_NAME).deployments) {
+                                        sh """
+                                            sed '
+                                              s,{{IMAGE_URL}},${IMAGE_URL},g;
+                                              s,{{NAMESPACE}},${deployment.namespace},g;
+                                              s,{{PROJECT_NAME}},${PROJECT_NAME},g;
+                                            ' ${deployment.deploymentFile} | /usr/local/sbin/kubectl apply -f -
+                                            """
+                                     }
+                                }
+                             }
+                         }
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            script{
+                slackNotifier('SUCCESS')
+            }
+        }
+        failure{
+            script{
+                slackNotifier('FAILURE')
+            }
+        }
+        unstable{
+            script{
+                slackNotifier('UNSTABLE')
+            }
+        }
+        aborted{
+            script{
+                slackNotifier('ABORTED')
+            }
+        }
+    }
+}

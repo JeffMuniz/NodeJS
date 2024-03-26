@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OrderBy Should render it 1`] = `
+<styled.div>
+  <styled.span>
+    
+    : 
+  </styled.span>
+  <styled.div
+    id=""
+    onClick={[MockFunction]}
+    selected={true}
+  >
+    <span>
+      
+    </span>
+  </styled.div>
+</styled.div>
+`;

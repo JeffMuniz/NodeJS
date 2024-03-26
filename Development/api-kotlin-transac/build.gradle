@@ -1,0 +1,118 @@
+plugins {
+	id "com.bmuschko.nexus" version "${nexusVersion}"
+	id 'org.springframework.boot' version "${springBootVersion}"
+	id 'io.spring.dependency-management' version "${dependencyManagementVersion}"
+	id "org.sonarqube" version "${sonarQubeVersion}"
+	id 'jacoco'
+	id 'java'
+	id 'maven-publish'
+}
+
+def jarSuffix = System.getenv('JAR_SUFFIX') ?: ""
+description   = description
+group         = group
+version       = version + jarSuffix
+
+// Separando dependencias para outro arquivo.
+apply from: 'dependencies.gradle'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	maven {
+		allowInsecureProtocol = true
+		url = machinaRepo + '/maven-central'
+	}
+
+	maven {
+		allowInsecureProtocol = true
+		url = machinaRepo + '/nexusrepo'
+	}
+
+	maven {
+		allowInsecureProtocol = true
+		url = machinaRepo + '/maven-releases'
+	}
+
+	maven {
+		allowInsecureProtocol = true
+		url = machinaRepo + '/maven-snapshots'
+	}
+
+	maven {
+		url = 'https://packages.confluent.io/maven'
+	}
+
+	mavenLocal()
+}
+
+sonarqube {
+	properties {
+		property 'sonar.tests', 'src/test/'
+
+	}
+}
+
+jacoco {
+	toolVersion = "0.8.5"
+}
+
+jacocoTestReport {
+	reports {
+		xml.enabled true
+	}
+}
+
+nexus {
+	sign                  = false
+	repositoryUrl         = machinaRepo + '/maven-releases'
+	snapshotRepositoryUrl = machinaRepo + '/maven-snapshots'
+}
+
+/* TOOLCHAIN correção para o erro jenkins:
+What went wrong:
+Execution failed for task ':compileJava'.
+> Could not target platform: 'Java SE 11' using tool chain: 'JDK 8 (1.8)'.
+*/
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(11)
+        vendor = JvmVendorSpec.ADOPTOPENJDK
+        implementation = JvmImplementation.J9
+    }
+}
+
+compileJava {
+	options.release = 11
+	sourceCompatibility("${jvm}")
+}
+
+assemble {
+	finalizedBy(':publishToMavenLocal')
+}
+
+test {
+	useJUnitPlatform()
+	ignoreFailures = false
+}
+
+sourceSets {
+	test {
+		java {
+			srcDirs = ['src/test']
+		}
+	}
+}
+
+publishing {
+	publications {
+		maven(MavenPublication){
+			from components.java
+		}
+	}
+}

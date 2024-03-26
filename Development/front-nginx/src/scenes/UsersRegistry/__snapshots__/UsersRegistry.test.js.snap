@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Users Registry Should render UsersRegistry with default data 1`] = `
+<ContainerWrapper
+  headerClickHandler={[MockFunction]}
+  showBackIcon={true}
+  title="Adicionar usuário"
+>
+  <Stepper
+    progress={0}
+    steps={
+      Array [
+        Object {
+          "id": "step1",
+          "label": "Dados do usuário",
+        },
+        Object {
+          "id": "step2",
+          "label": "Unidades de acesso",
+        },
+      ]
+    }
+  />
+  <styled.h3>
+    Atribua as unidades em que o novo usuário terá acesso.
+  </styled.h3>
+  <CreateAccessForm
+    goToAcessPermissions={[MockFunction]}
+    handleGoBack={[MockFunction]}
+  />
+</ContainerWrapper>
+`;

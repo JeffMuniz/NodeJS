@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Branches Orders - Unit Tests Should render component with default props 1`] = `
+<styled.table>
+  <styled.thead
+    id="bo_header"
+  >
+    <styled.tr>
+      <styled.th
+        centered={true}
+        id="bo_header_cnpj"
+      >
+        CNPJ
+      </styled.th>
+      <styled.th
+        centered={true}
+        id="bo_header_employees_total"
+      >
+        Nº funcionários
+      </styled.th>
+      <styled.th
+        centered={true}
+        id="bo_header_cc"
+      >
+        Centro de Custo
+      </styled.th>
+      <styled.th
+        centered={true}
+        id="bo_header_amount"
+      >
+        Valor Total
+      </styled.th>
+      <styled.th
+        centered={true}
+        id="bo_header_credit_status"
+      >
+        Status Crédito
+      </styled.th>
+      <styled.th
+        centered={true}
+        id="bo_header_credit_date"
+      >
+        Disponível em
+      </styled.th>
+      <styled.th
+        width="165px"
+      />
+      <styled.th
+        width="24px"
+      />
+    </styled.tr>
+  </styled.thead>
+  <styled.tbody>
+    <OrderDetailsLine
+      handleClickOnChargeCancel={[MockFunction]}
+      handleOrderDetailsByCompanyPress={[MockFunction]}
+      hasAction={false}
+      index={0}
+      order={
+        Object {
+          "amount": "45.567,00",
+          "cnpj": "123.456.789/0000-01",
+          "color": "#fff",
+          "id": "1",
+          "status": "CARGA_EFETUADOA",
+          "totalEmployees": "45",
+        }
+      }
+      showCostCenter={[Function]}
+    />
+  </styled.tbody>
+</styled.table>
+`;

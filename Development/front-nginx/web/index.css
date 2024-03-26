@@ -1,0 +1,22 @@
+html, body, #root {
+  height: 100%;
+  letter-spacing: 0.5px;
+  margin: 0;
+  padding: 0;
+}
+
+html * {
+  font-family: 'Open Sans', sans-serif;
+}
+
+#root {
+  display: flex;
+}
+
+body.ReactModal__Body--open {
+  overflow: hidden;
+ }
+
+ body input::-ms-clear {
+  display: none;
+}

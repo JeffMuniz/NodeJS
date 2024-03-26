@@ -1,0 +1,259 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FirstAccess - Form Should render form 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Row
+    center="xs"
+  >
+    <Styled(Col)>
+      <strong>
+        lembre-se que sua senha precisa ter ao menos:
+      </strong>
+    </Styled(Col)>
+    <styled.ul>
+      <RulePassword
+        error={undefined}
+        id="min-caracter"
+        rule={/\\.\\{8,15\\}/}
+        text="Mínimo 8 e máximo 15 caracteres"
+        value={undefined}
+      />
+      <RulePassword
+        error={undefined}
+        id="um-maiscula"
+        rule={/\\^\\(\\?=\\.\\*\\?\\[A-Z\\]\\)/}
+        text="uma letra maiúscula"
+        value={undefined}
+      />
+    </styled.ul>
+    <styled.ul>
+      <RulePassword
+        error={undefined}
+        id="um-minuscula"
+        rule={/\\(\\?=\\.\\*\\?\\[a-z\\]\\)/}
+        text="Uma letra minúscula"
+        value={undefined}
+      />
+      <RulePassword
+        error={undefined}
+        id="carcter-especial"
+        rule={/\\(\\?=\\.\\*\\?\\[#\\?!@\\$%\\^&\\*-\\]\\)/}
+        text="Um caractere especial (Exemplo: @ # * & % $)"
+        value={undefined}
+      />
+      <RulePassword
+        error={undefined}
+        id="um-number"
+        rule={/\\(\\?=\\.\\*\\?\\[0-9\\]\\)/}
+        text="Um número"
+        value={undefined}
+      />
+    </styled.ul>
+  </Row>
+  <styled.FormGroup
+    error={undefined}
+    fieldId="cp_password"
+    label="Criar uma Senha"
+    showSuccess={undefined}
+  >
+    <TextInput
+      eye={true}
+      id="password"
+      maskType={undefined}
+      maxLength={15}
+      name="password"
+      onBlur={[MockFunction]}
+      onChange={[Function]}
+      passwordView={[Function]}
+      placeholder="Insira aqui sua senha"
+      value={undefined}
+    />
+  </styled.FormGroup>
+  <styled.FormGroup
+    error={undefined}
+    fieldId="cp_confirm_password"
+    label="Confirmar senha"
+    showSuccess={undefined}
+  >
+    <TextInput
+      error={undefined}
+      eye={true}
+      id="confirmPassword"
+      maskType={undefined}
+      maxLength={15}
+      name="confirmPassword"
+      onBlur={[MockFunction]}
+      onChange={[Function]}
+      passwordView={[Function]}
+      placeholder="Repita a sua senha"
+      value={undefined}
+    />
+  </styled.FormGroup>
+  <Styled(Row)>
+    <Col
+      xs={12}
+    />
+  </Styled(Row)>
+  <Styled(Row)
+    center="md"
+  >
+    <Col
+      md={12}
+      xs={12}
+    >
+      <Styled(Row)>
+        <UNDEFINED
+          hl="pt-BR"
+          onChange={undefined}
+          onErrored={undefined}
+          onExpired={undefined}
+          sitekey=""
+        />
+        <div />
+      </Styled(Row)>
+      <Button
+        action="Enviou form 'Criar a Senha'"
+        disabled={true}
+        id="cp_btn_submit"
+        loading={false}
+        onPress={[MockFunction]}
+        type="button"
+        value="Continuar"
+      />
+    </Col>
+  </Styled(Row)>
+</form>
+`;
+
+exports[`FirstAccess - Form Should render it when error is given 1`] = `
+<form
+  onSubmit={[MockFunction]}
+>
+  <Row
+    center="xs"
+  >
+    <Styled(Col)>
+      <strong>
+        lembre-se que sua senha precisa ter ao menos:
+      </strong>
+    </Styled(Col)>
+    <styled.ul>
+      <RulePassword
+        error="Inválida"
+        id="min-caracter"
+        rule={/\\.\\{8,15\\}/}
+        text="Mínimo 8 e máximo 15 caracteres"
+        value={undefined}
+      />
+      <RulePassword
+        error="Inválida"
+        id="um-maiscula"
+        rule={/\\^\\(\\?=\\.\\*\\?\\[A-Z\\]\\)/}
+        text="uma letra maiúscula"
+        value={undefined}
+      />
+    </styled.ul>
+    <styled.ul>
+      <RulePassword
+        error="Inválida"
+        id="um-minuscula"
+        rule={/\\(\\?=\\.\\*\\?\\[a-z\\]\\)/}
+        text="Uma letra minúscula"
+        value={undefined}
+      />
+      <RulePassword
+        error="Inválida"
+        id="carcter-especial"
+        rule={/\\(\\?=\\.\\*\\?\\[#\\?!@\\$%\\^&\\*-\\]\\)/}
+        text="Um caractere especial (Exemplo: @ # * & % $)"
+        value={undefined}
+      />
+      <RulePassword
+        error="Inválida"
+        id="um-number"
+        rule={/\\(\\?=\\.\\*\\?\\[0-9\\]\\)/}
+        text="Um número"
+        value={undefined}
+      />
+    </styled.ul>
+  </Row>
+  <styled.FormGroup
+    error="Inválida"
+    fieldId="cp_password"
+    label="Criar uma Senha"
+    showSuccess={false}
+  >
+    <TextInput
+      eye={true}
+      id="password"
+      maskType={undefined}
+      maxLength={15}
+      name="password"
+      onBlur={[MockFunction]}
+      onChange={[Function]}
+      passwordView={[Function]}
+      placeholder="Insira aqui sua senha"
+      value={undefined}
+    />
+  </styled.FormGroup>
+  <styled.FormGroup
+    error="Inválida"
+    fieldId="cp_confirm_password"
+    label="Confirmar senha"
+    showSuccess={false}
+  >
+    <TextInput
+      error="Inválida"
+      eye={true}
+      id="confirmPassword"
+      maskType={undefined}
+      maxLength={15}
+      name="confirmPassword"
+      onBlur={[MockFunction]}
+      onChange={[Function]}
+      passwordView={[Function]}
+      placeholder="Repita a sua senha"
+      value={undefined}
+    />
+  </styled.FormGroup>
+  <Styled(Row)>
+    <Col
+      xs={12}
+    >
+      <ErrorText>
+        Error
+      </ErrorText>
+    </Col>
+  </Styled(Row)>
+  <Styled(Row)
+    center="md"
+  >
+    <Col
+      md={12}
+      xs={12}
+    >
+      <Styled(Row)>
+        <UNDEFINED
+          hl="pt-BR"
+          onChange={undefined}
+          onErrored={undefined}
+          onExpired={undefined}
+          sitekey=""
+        />
+        <div />
+      </Styled(Row)>
+      <Button
+        action="Enviou form 'Criar a Senha'"
+        disabled={true}
+        id="cp_btn_submit"
+        loading={false}
+        onPress={[MockFunction]}
+        type="button"
+        value="Continuar"
+      />
+    </Col>
+  </Styled(Row)>
+</form>
+`;

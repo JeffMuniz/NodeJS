@@ -1,0 +1,1 @@
+update motivo set nome = 'Cobrança tarifa', descricao = 'EC / DÉBITO - Cobrança tarifa' where id = 6

@@ -1,0 +1,39 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": ".",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/.tsbuildinfo",
+    "target": "es2015",
+    "declaration": true,
+    "composite": true,
+    "lib": ["es2019", "dom"],
+    "module": "esnext",
+    "types": ["react", "jest", "node"],
+    "jsx": "react",
+    "incremental": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "node",
+    "emitDeclarationOnly": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "preserveConstEnums": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": true,
+
+    "paths": {
+      "@": ["./src/index.ts"],
+      "@/*": ["./src/*"],
+    },
+
+  },
+  "include": ["src/**/*", "package.json", "tests/**/*"],
+  "exclude": ["node_modules"]
+}

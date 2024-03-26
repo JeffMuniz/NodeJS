@@ -1,0 +1,33 @@
+{
+	"ajuste": {
+		"id": 0,
+		"tipo": {
+			"id": 0,
+			"nome": "string"
+		},
+		"cliente": {
+			"id": 0,
+			"nome": "string",
+			"cpf": "string",
+			"cnpj": "string",
+			"idConta": 0
+		},
+		"status": {
+			"id": 0,
+			"nome": "string"
+		},
+		"loginUsuario": "string",
+		"nomeUsuario": "string",
+		"idSolicitacao": 0,
+		"operacao": {
+			"id": 0,
+			"descricao": "string"
+		},
+		"codigoExterno": 0,
+		"observacao": "string",
+		"valor": 0,
+		"dataVencimento": "string",
+		"dataCriacao": "string",
+		"dataFinalizacao": "string"
+	}
+}

@@ -1,0 +1,57 @@
+spring:
+  application:
+    name: /ctb-api-transacao
+  main:
+    banner-mode: 'OFF'
+  jackson:
+    default-property-inclusion: non_null
+
+logging:
+  level:
+    ROOT: INFO
+    br:
+      com:
+        mac: DEBUG
+
+cassandra:
+  contactpoints: localhost
+  port: 9042
+  keySpace: test
+  basePackages: br.com.mac.ctb.entity
+  dataCenter: datacenter1
+  informational:
+    keyspace: test
+
+server:
+  port: 8085
+  servlet:
+    encoding:
+      enabled: true
+      charset: UTF-8
+
+mac:
+  ledger:
+    controle:
+      config:
+        file: src/test/resources/ponto-controles.json
+    conciliacao:
+      config:
+        file: src/test/resources/conciliacao-fields.json
+  timezone: America/Sao_Paulo
+
+ledger:
+  name: credito_disponivel
+
+control-point:
+  name: REPASSE_PEDIDO
+
+info:
+  app:
+    name: '@name@'
+    description: '@project.description@'
+  build:
+    groupId: '@project.groupId@'
+    artifact: '@project.artifactId@'
+    name: '@project.name@'
+    version: '@project.version@'
+

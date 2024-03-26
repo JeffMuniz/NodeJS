@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Finances Should render Finances 1`] = `
+<styled.div
+  itens={undefined}
+>
+  <styled.div>
+    <styled.div>
+      <styled.div>
+        Vencimento: 
+      </styled.div>
+      <UNDEFINED
+        canEditPeriod={true}
+        editDateText="Escolher data"
+        id="my_payments_period_date_select"
+        maxRange={
+          Object {
+            "period": "months",
+            "value": 1,
+          }
+        }
+        onSelectValue={undefined}
+        padding="0px 21px"
+        position={false}
+        valueList={
+          Array [
+            Object {},
+          ]
+        }
+      />
+    </styled.div>
+    <UNDEFINED
+      fieldsToFilterBy={undefined}
+      filterBy={undefined}
+      id="searchable_input_id"
+      onChange={undefined}
+      onFilterChange={undefined}
+    />
+  </styled.div>
+  <If
+    test={false}
+  >
+    <styled.div>
+      <UNDEFINED
+        loading={true}
+      />
+    </styled.div>
+  </If>
+  <If
+    test={true}
+  >
+    <UNDEFINED
+      callback={[MockFunction]}
+      currentPage={1}
+      data={
+        Object {
+          "totalItems": undefined,
+        }
+      }
+      emptyStateComponent={undefined}
+      itemsPerPage={1}
+      render={[Function]}
+      showLoading={true}
+    />
+  </If>
+</styled.div>
+`;

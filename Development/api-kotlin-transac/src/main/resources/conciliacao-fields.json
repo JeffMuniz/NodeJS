@@ -1,0 +1,170 @@
+[
+  {
+    "controle": "CONTA_VIRTUAL",
+    "datas": [],
+    "estoqueInicial": {
+      "descricaoCampo": "Estoque Movimentação Conta Virtual",
+      "descricaoTipoMovimento": "(=)Est.inicial"
+    },
+    "entradas": {
+      "CONTAVIRTUAL_CREDITO_PENDENTE": {
+        "descricaoCampo": "Movimentação Conta Virtual (valor pendente)",
+        "descricaoTipoMovimento": "(+)Entrada"
+      },
+      "CONTAVIRTUAL_CREDITO_ESTORNO": {
+        "descricaoCampo": "Movimentação Conta Virtual (valor estorno)",
+        "descricaoTipoMovimento": "(+)Entrada"
+      }
+    },
+    "saidas": {
+      "CONTAVIRTUAL_CREDITO_UTILIZADO": {
+        "descricaoCampo": "Pedidos Confirmados (valor crédito)",
+        "descricaoTipoMovimento": "(-)Saida"
+      }
+    },
+    "estoqueFinal": {
+      "descricaoCampo": "(Saldo Oper.) Est.Final",
+      "descricaoTipoMovimento": "(=)Est. final"
+    },
+    "suporte": {
+      "descricaoCampo": "(Saldo Sup.) Est.de ped. em aberto",
+      "descricaoTipoMovimento": "(=)Suporte"
+    },
+    "diferencaMovimento": {
+      "descricaoCampo": "Diferença movimento",
+      "descricaoTipoMovimento": "Est.final x suporte"
+    },
+    "diferencaPendente": {
+      "descricaoCampo": "Diferença pendente"
+    }
+  },
+  {
+    "controle": "AGENDAMENTO_PEDIDO",
+    "datas": [],
+    "estoqueInicial": {
+      "descricaoCampo": "(Saldo operac.) Est.pedidos",
+      "descricaoTipoMovimento": "(=)Est.inicial"
+    },
+    "entradas": {
+      "PEDIDO_RECEBIMENTO_PENDENTE": {
+        "descricaoCampo": "(01) Pedidos Confirmados",
+        "descricaoTipoMovimento": "(+)Entrada"
+      }
+    },
+    "saidas": {
+      "PEDIDO_RECEBIMENTO_CANCELADO": {
+        "descricaoCampo": "(69) Cancelamento de pedidos",
+        "descricaoTipoMovimento": "(-)Saida"
+      },
+      "PEDIDO_RECEBIMENTO_EFETIVADO": {
+        "descricaoCampo": "(69) Pedidos baixados como pagos",
+        "descricaoTipoMovimento": "(-)Saida"
+      }
+    },
+    "estoqueFinal": {
+      "descricaoCampo": "(Saldo Oper.) Est.Final",
+      "descricaoTipoMovimento": "(=)Est. final"
+    },
+    "suporte": {
+      "descricaoCampo": "(Saldo Sup.) Est.de ped. em aberto",
+      "descricaoTipoMovimento": "(=)Suporte"
+    },
+    "diferencaMovimento": {
+      "descricaoCampo": "Diferença movimento",
+      "descricaoTipoMovimento": "Est.final x suporte"
+    },
+    "diferencaPendente": {
+      "descricaoCampo": "Diferença pendente"
+    }
+  },
+  {
+    "controle": "REPASSE_PEDIDO",
+    "datas": [],
+    "estoqueInicial": {
+      "descricaoCampo": "(Saldo operac.) Saldo de cargas não repassadas",
+      "descricaoTipoMovimento": "(=)Est.inicial"
+    },
+    "entradas": {
+      "CREDITO_PENDENTE": {
+        "descricaoCampo": "(01) Pedidos confirmados",
+        "descricaoTipoMovimento": "(+)Entrada"
+      }
+    },
+    "saidas": {
+      "CREDITO_DISPONIVEL": {
+        "descricaoCampo": "(19) Repasse de carga - Portador",
+        "descricaoTipoMovimento": "(-)Saida"
+      },
+      "CREDITO_CANCELADO": {
+        "descricaoCampo": "(69) Cancelamento de pedidos",
+        "descricaoTipoMovimento": "(-)Saida"
+      }
+    },
+    "estoqueFinal": {
+      "descricaoCampo": "(Saldo Oper.) Saldo de cargas não repassadas",
+      "descricaoTipoMovimento": "(=)Est. final"
+    },
+    "suporte": {
+      "descricaoCampo": "(Saldo Sup.) Est. de cargas não repassadas",
+      "descricaoTipoMovimento": "(=)Suporte"
+    },
+    "diferencaMovimento": {
+      "descricaoCampo": "Diferença movimento",
+      "descricaoTipoMovimento": "Est.final x suporte"
+    },
+    "diferencaPendente": {
+      "descricaoCampo": "Diferença pendente"
+    }
+  },
+  {
+    "controle": "SALDO_PORTADOR",
+    "datas": [],
+    "estoqueInicial": {
+      "descricaoCampo": "Saldo carga ao portador",
+      "descricaoTipoMovimento": "(=)Est.inicial"
+    },
+    "entradas": {
+      "CREDITO_DISPONIVEL": {
+        "descricaoCampo": "Repasse de carga ao portador",
+        "descricaoTipoMovimento": "(+)Entrada"
+      },
+      "AJUSTE_CREDITO": {
+        "descricaoCampo": "Ajustes financeiros a crédito (portador)",
+        "descricaoTipoMovimento": "(+)Entrada"
+      },
+      "TRANSACAO_DESFEITA": {
+        "descricaoCampo": "Transações desfeitas",
+        "descricaoTipoMovimento": "(+)Entrada"
+      }
+    },
+    "saidas": {
+      "CREDITO_UTILIZADO": {
+        "descricaoCampo": "Transações aprovadas (base 1)",
+        "descricaoTipoMovimento": "(-)Saida"
+      },
+      "AJUSTE_DEBITO": {
+        "descricaoCampo": "Ajustes financeiros a débito (portador)",
+        "descricaoTipoMovimento": "(-)Saida"
+      },
+      "CONTAVIRTUAL_CREDITO_UTILIZADO": {
+        "descricaoCampo": "Movimentação Conta Virtual (valor estorno)",
+        "descricaoTipoMovimento": "(-)Saida"
+      }
+    },
+    "estoqueFinal": {
+      "descricaoCampo": "Estoque Saldo - Portador",
+      "descricaoTipoMovimento": "(=)Est. final"
+    },
+    "suporte": {
+      "descricaoCampo": "",
+      "descricaoTipoMovimento": "(=)Suporte"
+    },
+    "diferencaMovimento": {
+      "descricaoCampo": "Diferença movimento",
+      "descricaoTipoMovimento": "Est.final x suporte"
+    },
+    "diferencaPendente": {
+      "descricaoCampo": "Diferença pendente"
+    }
+  }
+]

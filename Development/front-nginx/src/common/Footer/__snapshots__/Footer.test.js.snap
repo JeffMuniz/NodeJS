@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer should render it with default props 1`] = `
+<Styled(Row)>
+  <Styled(Styled(Col))
+    xs={10}
+    xsOffset={2}
+  >
+    <Row>
+      <Col
+        xs={12}
+      >
+        <Styled(styled.p)>
+          Atendimento
+        </Styled(styled.p)>
+      </Col>
+    </Row>
+    <Row>
+      <Styled(Styled(Col))
+        md={6}
+        xs={12}
+      >
+        <Styled(Icon)
+          name="attendance"
+        />
+         Atendimento on-line
+      </Styled(Styled(Col))>
+      <Styled(Styled(Col))
+        md={6}
+        xs={12}
+      >
+        Uma empresa 
+        <Styled(Icon)
+          name="macnabank"
+        />
+      </Styled(Styled(Col))>
+    </Row>
+    <Row>
+      <Col
+        xs={12}
+      >
+        <Styled(styled.div)>
+          <Styled(Icon)
+            name="telphone"
+          />
+          <Styled(styled.p)>
+            Atendimento: (11) 3456 0909
+          </Styled(styled.p)>
+          <Styled(styled.p)>
+            Disponível de segunda a sexta-feira das 8:00 as 20:00 horas, exceto em feriados nacionais.
+          </Styled(styled.p)>
+        </Styled(styled.div)>
+        <Styled(styled.div)>
+          <Styled(styled.p)>
+            SAC: 0800 762 7777
+          </Styled(styled.p)>
+          <Styled(styled.p)>
+            Disponível 24 horas por dia, 7 dias por semana.
+          </Styled(styled.p)>
+        </Styled(styled.div)>
+        <Styled(styled.div)>
+          <Styled(styled.p)>
+            OUVIDORIA: 0800 726 0322
+          </Styled(styled.p)>
+          <Styled(styled.p)>
+            Disponível de segunda a sexta-feira, das 9h às 18h, exceto feriados.
+          </Styled(styled.p)>
+        </Styled(styled.div)>
+      </Col>
+    </Row>
+  </Styled(Styled(Col))>
+  <Col
+    xs={12}
+  >
+    <styled.div />
+    <styled.div>
+      <Styled(styled.p)>
+        Copyright Grupo macnabank© 2018
+      </Styled(styled.p)>
+      <Styled(styled.p)>
+        For permission to reprint articles from this site, please contact: mac@comvc.com.br
+      </Styled(styled.p)>
+    </styled.div>
+  </Col>
+</Styled(Row)>
+`;

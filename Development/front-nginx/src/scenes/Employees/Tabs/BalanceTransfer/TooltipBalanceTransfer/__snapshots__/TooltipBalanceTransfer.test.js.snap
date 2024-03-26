@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip Balance Transfer - Unit Tests Should render Tooltip Balance Transfer 1`] = `
+<UNDEFINED>
+  <styled.div
+    className=""
+  >
+    <styled.div />
+    <styled.div>
+      <Button
+        action={null}
+        buttonType="primary"
+        disabled={false}
+        id="button_submit"
+        imgColor={null}
+        imgSrc={undefined}
+        imgWidth={16}
+        loading={false}
+        onPress={[Function]}
+        popupText={null}
+        value="Fechar"
+      />
+    </styled.div>
+  </styled.div>
+  <styled.div
+    onClick={[Function]}
+  />
+</UNDEFINED>
+`;

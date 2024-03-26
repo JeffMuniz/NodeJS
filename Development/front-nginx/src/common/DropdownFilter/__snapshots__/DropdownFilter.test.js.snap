@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropdownFilter Container Component should render it 1`] = `
+<styled.div>
+  <styled.div
+    id="TestDropdownFilter_select"
+    innerRef={
+      Object {
+        "current": null,
+      }
+    }
+  >
+    <styled.span>
+      Mostrar: 
+    </styled.span>
+    <styled.div
+      id="generic_dropdown_filter_btn"
+      onClick={[Function]}
+    >
+      <styled.span>
+        Teste 1
+      </styled.span>
+      <Styled(Component)
+        fill="#009CFF"
+        name="arrowDown"
+      />
+    </styled.div>
+  </styled.div>
+  <DropdownFilter
+    handleClickOutside={[Function]}
+    id="outside_listener_generic_dropdown"
+    isListening={false}
+    triggerRef={
+      Object {
+        "current": null,
+      }
+    }
+  />
+</styled.div>
+`;

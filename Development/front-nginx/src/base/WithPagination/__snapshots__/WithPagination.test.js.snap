@@ -1,0 +1,172 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WithPagination - Component should render WithPagination 1`] = `
+<styled.div
+  isDashed={false}
+>
+  <If
+    test={true}
+  >
+    <styled.div>
+      <p>
+        header
+      </p>
+      <If
+        test={false}
+      >
+        <Connect(CustomInput)
+          fieldsToFilterByDate={null}
+          fieldsToFilterByReason={null}
+          fieldsToFilterByStatus={null}
+          filterByDate={Object {}}
+          filterByReason={Object {}}
+          filterByStatus={Object {}}
+          id="with_pagination_chageback_filter"
+          onChangeReason={[Function]}
+          onChangeStatus={[Function]}
+          onClickNewChargeback={[MockFunction]}
+          onFilterChangeDate={[Function]}
+          onFilterChangeReason={[Function]}
+          onFilterChangeStatus={[Function]}
+        />
+      </If>
+      <If
+        test={false}
+      >
+        <UNDEFINED
+          callback={[Function]}
+          id="generic_dropdown_filter"
+          options={Array []}
+        />
+      </If>
+      <If
+        test={false}
+      >
+        <SearchableInput
+          fieldsToFilterBy={Array []}
+          filterBy={undefined}
+          id="searchable_input_id"
+          onChange={[Function]}
+          onFilterChange={[Function]}
+        />
+      </If>
+      <If
+        test={false}
+      >
+        <Styled(TextInput)
+          id="with_pagination_simple_input"
+          onChange={[Function]}
+          placeholder=""
+          value=""
+        />
+        <styled.div>
+          <Styled(Component)
+            name="search"
+          />
+        </styled.div>
+      </If>
+    </styled.div>
+  </If>
+  <styled.div
+    status={false}
+  >
+    <If
+      test={false}
+    >
+      <DefaultEmptyState />
+    </If>
+    <styled.div
+      id="animation"
+      innerRef={[Function]}
+      status={false}
+    />
+  </styled.div>
+  <If
+    test={true}
+  >
+    <If
+      test={true}
+    >
+      <p>
+        body
+      </p>
+    </If>
+    <GridPaginationLabel
+      callback={[MockFunction]}
+      canGoBack={false}
+      canGoForward={false}
+      currentPage={1}
+      data={
+        Object {
+          "totalItems": 1,
+        }
+      }
+      emptyStateComponent={undefined}
+      fieldsToFilterBy={Array []}
+      fieldsToFilterByDate={null}
+      fieldsToFilterByReason={null}
+      fieldsToFilterByStatus={null}
+      fieldsToFilterDropdownGeneric={null}
+      filterBy={Object {}}
+      firstItemNumber={1}
+      goBackward={[Function]}
+      goForward={[Function]}
+      isDashed={false}
+      itemsPerPage={10}
+      lastItemNumber={1}
+      onClickNewChargeback={[MockFunction]}
+      orderComponent={
+        [MockFunction] {
+          "calls": Array [
+            Array [],
+            Array [
+              Object {
+                "onChange": [Function],
+                "selectedOption": "ASC",
+              },
+            ],
+            Array [],
+            Array [
+              Object {
+                "onChange": [Function],
+                "selectedOption": "ASC",
+              },
+            ],
+          ],
+        }
+      }
+      render={
+        [MockFunction] {
+          "calls": Array [
+            Array [
+              Object {
+                "currentPage": 1,
+                "itemsPerPage": 10,
+              },
+            ],
+            Array [
+              Object {
+                "currentPage": 1,
+                "itemsPerPage": 10,
+              },
+            ],
+          ],
+        }
+      }
+      selectedCompany={
+        Object {
+          "id": 1,
+        }
+      }
+      showChargeBackComponent={false}
+      showFilterDropdownGeneric={false}
+      showLoading={false}
+      showSearchInput={false}
+      showSimpleInput={false}
+      showTopLabel={false}
+      status="success"
+      totalItems={1}
+    />
+  </If>
+</styled.div>
+`;

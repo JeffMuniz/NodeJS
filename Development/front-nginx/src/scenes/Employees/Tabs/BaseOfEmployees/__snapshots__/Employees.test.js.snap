@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Employees - Scene Should render it 1`] = `
+<div>
+  <styled.div>
+    <styled.div>
+      <Styled(ValueLabelText)
+        id="e_total_employees"
+        subtitle="funcionários"
+        title="100"
+      />
+      <Styled(ValueLabelText)
+        id="e_active_employees"
+        subtitle="ativos"
+        title="100"
+      />
+      <Styled(ValueLabelText)
+        id="e_active_employees"
+        subtitle="inativos"
+        title="0"
+      />
+    </styled.div>
+  </styled.div>
+  <WithPagination
+    callback={[MockFunction]}
+    currentPage={1}
+    data={Object {}}
+    fieldsToFilterBy={
+      Array [
+        Object {
+          "description": "nº do CPF",
+          "key": "cpf",
+          "mask": "cpf",
+          "optionDescription": "CPF",
+        },
+        Object {
+          "description": "Nome",
+          "key": "name",
+        },
+      ]
+    }
+    fieldsToFilterDropdownGeneric={
+      Array [
+        Object {
+          "description": "Ativos",
+          "key": 1,
+          "label": "status",
+        },
+        Object {
+          "description": "Inativos",
+          "key": 2,
+          "label": "status",
+        },
+        Object {
+          "description": "Todos",
+          "key": 0,
+          "label": "status",
+        },
+      ]
+    }
+    itemsPerPage={10}
+    render={[Function]}
+    selectedCompany={Object {}}
+    showFilterDropdownGeneric={true}
+    showLoading={true}
+    showSearchInput={true}
+    status="none"
+  />
+</div>
+`;

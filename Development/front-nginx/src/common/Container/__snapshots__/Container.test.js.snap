@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Container Should render Container 1`] = `
+<Styled(Grid)>
+  <div
+    id="test"
+  />
+</Styled(Grid)>
+`;

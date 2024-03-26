@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Template container should render it when logged 1`] = `
+<template
+  history={Object {}}
+  isAuthenticated={true}
+  shouldRenderWithoutGroupId={false}
+  showModal={false}
+  theme={
+    Object {
+      "flexboxgrid": Object {
+        "gutterWidth": 1.5,
+        "outerMargin": 1.5,
+      },
+      "main": "logged",
+    }
+  }
+>
+  <div
+    id="test"
+  >
+    Test
+  </div>
+</template>
+`;
+
+exports[`Template container should render it when not logged 1`] = `
+<template
+  history={Object {}}
+  isAuthenticated={false}
+  shouldRenderWithoutGroupId={false}
+  showModal={false}
+  theme={
+    Object {
+      "flexboxgrid": Object {
+        "gutterWidth": 1.5,
+        "outerMargin": 1.5,
+      },
+      "main": "notLogged",
+    }
+  }
+>
+  <div
+    id="test"
+  >
+    Test
+  </div>
+</template>
+`;

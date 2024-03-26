@@ -1,0 +1,21 @@
+version: "3.7"
+services:
+  postgres_relatorio:
+    container_name: postgres_relatorio
+    image: postgres:13.1
+    environment:
+      POSTGRES_USER: cadastro
+      POSTGRES_PASSWORD: cadastro
+    ports:
+      - "5432:5432"
+  rabbitmq_relatorio:
+    container_name: rabbitmq_relatorio
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+  artemis_relatorio:
+    container_name: artemis_relatorio
+    image: vromero/activemq-artemis:2.11.0
+    environment:
+      ARTEMIS_USERNAME: admin
+      ARTEMIS_PASSWORD: admin

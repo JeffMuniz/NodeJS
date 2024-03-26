@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabs Component should render it 1`] = `
+<Tabs
+  activeTab=""
+  blockOtherTabs={false}
+  height=""
+  onClick={[Function]}
+  renderDynamically={false}
+  setSelectedTab={[Function]}
+  width=""
+>
+  <div
+    label="Grupo"
+  >
+    <span>
+      Grupo Content
+    </span>
+  </div>
+  <div
+    label="Matriz"
+  >
+    <span>
+      Matriz Content
+    </span>
+  </div>
+</Tabs>
+`;

@@ -1,0 +1,59 @@
+{
+  "result": [
+    {
+      "aprovacao": {
+        "meta": {
+          "total": 1,
+          "limit": 1,
+          "offset": 0
+        },
+        "solicitacoes": [
+          {
+            "id": 325,
+            "tipo": {
+              "id": 9,
+              "nome": "CONTESTAÇÃO TRANSAÇÃO"
+            },
+            "loginUsuario": "dev@mac.com.br",
+            "nomeUsuario": "dev@mac.com.br",
+            "perfis": [],
+            "cliente": {
+              "id": 126,
+              "nome": "Padaria Isis",
+              "cpf": "",
+              "cnpj": "36XXXXXX929005"
+            },
+            "status": {
+              "id": 1,
+              "nome": "Pendente"
+            },
+            "valor": 200,
+            "observacao": "",
+            "chaveDocumento": "d0dc258265bb3e26485b7981edd75b99",
+            "dataCriacao": "2020-06-02"
+          }
+        ]
+      },
+      "aprovacaoCode": 201
+    },
+    {
+      "cancelamento": {
+        "idCompraContestada": 17,
+        "idEventoCompra": 12367,
+        "idConta": 785,
+        "idOperacao": 340,
+        "dataContestacao": "2020-06-02 10:14:35",
+        "parcelaPedida": 0,
+        "quantidadeParcelas": 0,
+        "status": 0,
+        "idStatusContestacao": 1,
+        "historico": "XYZ",
+        "dataAlteracao": "2020-06-02 10:14:35",
+        "responsavel": "dev@mac.com.br",
+        "idTipoResolucao": 2,
+        "idArquivo": 1
+      },
+      "cancelamentoCode": 200
+    }
+  ]
+}

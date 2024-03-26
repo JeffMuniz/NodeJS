@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`If - Util Should render child 1`] = `
+<div
+  id="test"
+>
+  Test
+</div>
+`;
+
+exports[`If - Util should not render child 1`] = `null`;

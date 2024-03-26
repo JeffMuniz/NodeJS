@@ -1,0 +1,8 @@
+{
+	"ajuste": {
+		"cnpj": "12345678901234",
+		"idTipoAjusteLojista": 2,
+		"dataVencimento": "2020-03-25",
+		"valor": 245
+	}
+}

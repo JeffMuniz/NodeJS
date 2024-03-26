@@ -1,0 +1,105 @@
+#%RAML 1.0 Library
+usage: API RAML resource types
+
+types:
+  
+  ErrorMessageDefinition:
+    type: object
+    properties:
+      message: string
+      processor?: string
+      errors?: StackErrorDefinition[]
+
+  StackErrorDefinition:
+      type: object
+      properties:
+        code: string
+        message: string
+
+resourceTypes:
+
+  base:
+    description: Base resource type.
+    usage: as a main resouce type definition.
+    options:
+      description: Route for CORS preflight
+      responses:
+        200:
+          headers:
+            Access-Control-Allow-Origin:
+              required: false
+              example: '*'
+            Access-Control-Allow-Method:
+              required: false
+              example: 'GET, POST, DELETE, PUT'
+    get?: &default-http-method
+      responses:
+        200:
+        401:
+        403:
+        408: &error-408
+          body:
+            application/json:
+              type: ErrorMessageDefinition
+              example: !include ../../examples/v1/errors/error-408.json
+        500: &error-500
+          body:
+            application/json:
+              type: ErrorMessageDefinition
+              example: !include ../../examples/v1/errors/error-500.json
+    delete?: *default-http-method
+    post?: *default-http-method
+    put?: *default-http-method
+
+  collection:
+    type: base
+    description: Collection of <<resourcePathName>>.
+    usage: to create a resource collection of items.
+    get?:
+      description: Get a list of <<resourcePathName>>.
+      responses:
+        200:
+          body:
+            application/json:
+              type: <<resourcePathName>>
+              example: <<exampleCollection>>
+
+    post?:
+      description: Create a new <<resourcePathName|!singularize>> record.
+      body: &body-request-item
+        application/json:
+          type: <<resourcePathName|!singularize>>
+          example: <<exampleItemRequest>>
+      responses:
+        201: &body-response-item
+          body:
+            application/json:
+              type: <<resourcePathName|!singularize>>
+              example: <<exampleItemResponse>>
+        400: &error-400
+          body:
+            application/json:
+              type: ErrorMessageDefinition
+              example: !include ../../examples/v1/errors/error-400.json
+
+  member:
+    type: base
+    description: A single <<resourcePathName|!singularize>> record.
+    usage: to create a resource item.
+    get?:
+      description: Get the details from the <<resourcePathName|!singularize>> record.
+      responses:
+        200: *body-response-item
+        404:
+    delete?:
+      description: Inactivate the <<resourcePathName|!singularize>> record.
+      responses:
+        200: *body-response-item
+        404:
+    put?:
+      description: Updates the <<resourcePathName|!singularize>> record.
+      body: *body-request-item
+      responses:
+        200: *body-response-item
+        400: *error-400
+        404:

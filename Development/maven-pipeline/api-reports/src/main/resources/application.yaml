@@ -1,0 +1,81 @@
+'%test':
+  aws:
+    s3:
+      bucket: qamac
+  br:
+    com:
+      mac:
+        reports:
+          client:
+            DocumentosS3Client/mp-rest/url: http://localhost:9090
+  quarkus:
+    mac:
+      rabbit:
+        exchange: rch.api.relatorio.exchange
+        host: 10.70.49.192
+        password: 97QrszSJgXsT3NsWHy97
+        port: 5671
+        queue: rch.api.relatorio.queue
+        user: portador
+        virtual:
+          host: test-corporativo-api
+    datasource:
+      jdbc:
+        url: jdbc:postgresql://macnuda-qa.cttmacdernal.us-east-1.rds.amazonaws.com:5432/reports_dev
+      password: QMg2fu7VF84qcWQPjT6RzXnZw2atEpRbJMfC5hwr
+      username: reports_dev
+    flyway:
+      baseline-on-migrate: true
+      connect-retries: 10
+      locations: db/migration/test
+      migrate-at-start: true
+      table: flyway_history
+    hibernate-orm:
+      log:
+        sql: true
+aws:
+  s3:
+    bucket: ${QUARKUS_S3_BUCKET}
+br:
+  com:
+    mac:
+      reports:
+        client:
+          DocumentosS3Client/mp-rest/url: ${QUARKUS_DOCUMENTOS_API_HOST}
+          DocumentosS3Client/mp-rest/scope: javax.inject.Singleton
+
+
+quarkus:
+  mac:
+    rabbit:
+      exchange: ${QUARKUS_RABBITMQ_EXCHANGE}
+      host: ${QUARKUS_RABBITMQ_HOST}
+      password: ${QUARKUS_RABBITMQ_PASSWORD}
+      port: ${QUARKUS_RABBITMQ_PORT}
+      queue: ${QUARKUS_RABBITMQ_QUEUE}
+      user: ${QUARKUS_RABBITMQ_USERNAME}
+      virtual:
+        host: ${QUARKUS_RABBITMQ_VIRTUAL_HOST}
+  datasource:
+    db-kind: postgresql
+    jdbc:
+      driver: org.postgresql.Driver
+      max-size: 16
+      url: ${QUARKUS_DATASOURCE_URL}
+    password: ${QUARKUS_DATASOURCE_PASSWORD}
+    username: ${QUARKUS_DATASOURCE_USER}
+  hibernate-orm:
+    dialect: org.hibernate.dialect.PostgreSQL10Dialect
+  log:
+    console:
+      enable: true
+      format: '%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%c{3.}] (%t) %s%e%n'
+      level: INFO
+    file:
+      enable: true
+      format: '%d{yyyy-MM-dd HH:mm:ss,SSS} %h %N[%i] %-5p [%c{3.}] (%t) %s%e%n'
+      level: TRACE
+      rotation:
+        file-suffix: .yyyy-MM-dd
+        rotate-on-boot: true
+    min-level: TRACE

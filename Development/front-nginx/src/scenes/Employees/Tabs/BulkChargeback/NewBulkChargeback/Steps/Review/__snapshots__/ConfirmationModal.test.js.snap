@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewBulkChargeback - ConfirmationModal Should be ConfirmationModal 1`] = `
+<Modal
+  cancelButtonProps={
+    Object {
+      "id": "btn-modal-confirmation-cancel",
+      "onClick": [MockFunction],
+      "value": "Cancelar",
+    }
+  }
+  contentHasScroll={false}
+  height="unset"
+  id="modal-confirmation"
+  isView={false}
+  maxHeight={null}
+  okButtonProps={
+    Object {
+      "disabled": false,
+      "id": "btn-modal-confirmation-ok",
+      "onClick": [Function],
+      "value": "Confirmar",
+    }
+  }
+  onContentBottomReach={null}
+  padding={null}
+  subtitle="Verifique os dados abaixo para realizar o estorno."
+  title="Confirmação de estorno"
+  viewButtonProps={Object {}}
+  width="706px"
+>
+  <styled.div
+    id="content-modal-confirmation"
+  >
+    <styled.p
+      margin="5px"
+    >
+      Valor total solicitado:
+    </styled.p>
+    <styled.p
+      id="field-total-value"
+    >
+      R$ 2,00
+    </styled.p>
+    <styled.p>
+      Motivo do estorno: 
+      <styled.span
+        id="field-reason"
+      >
+        demissao
+      </styled.span>
+    </styled.p>
+    <styled.p>
+      Quantidade de funcionários:
+       
+      <styled.span
+        id="field-total-employees"
+      >
+        4
+      </styled.span>
+    </styled.p>
+    <styled.p>
+      Produtos: 
+      <styled.span
+        id="field-product-type"
+      >
+        mac Refeição e mac Alimentação
+      </styled.span>
+    </styled.p>
+  </styled.div>
+</Modal>
+`;

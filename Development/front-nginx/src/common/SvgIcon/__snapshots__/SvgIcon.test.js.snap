@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Icon - Component Should render icon when prop icon is passed 1`] = `
+<Icon
+  fill="#000"
+  size={72}
+/>
+`;
+
+exports[`Icon - Component Should render icon when prop name is passed 1`] = `
+<Icon
+  fill="#FECA43"
+  size={36}
+/>
+`;

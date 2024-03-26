@@ -1,0 +1,213 @@
+#%RAML 1.0
+title: Transacao API
+baseUri: ${base.uri}
+
+protocols: [ HTTP ]
+mediaType: application/json
+
+
+documentation:
+  - title: Transacao API
+    content: this API is responsible for listing all transactions in Transacao-api
+
+uses: 
+  types: libraries/v1/types.raml
+  traits: libraries/v1/traits.raml
+
+types:
+  TransacaoWrapper:
+    type: types.TransacaoWrapper
+  AutorizacaoWrapper:
+    type: types.AutorizacaoWrapper
+  CriaContestacao:
+    type: types.CriaContestacao-Cancelamento
+  ContestacaoBody:
+    type: types.Contestacao-CancelamentoBody
+  CriaCancelamento:
+    type: types.CriaContestacao-Cancelamento
+  CancelamentoBody:
+    type: types.Contestacao-CancelamentoBody
+   
+/{idTransacao}: 
+  description: Rota recuperar Transacao
+  uriParameters: 
+    idTransacao:
+      type: string
+      required: true
+  get:
+    headers:
+      Authorization:
+        type: string
+        required: true
+    responses:
+      200:
+        body:
+          application/json:
+            type: TransacaoWrapper
+            example: !include example/v1/transacao/transacoes-response.json
+      400:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-400.json
+      401:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-401.json
+      500:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-500.json
+            
+/autorizacoes:
+  description: Rota recuperar autorizações
+  get:
+    headers:
+      Authorization:
+        type: string
+        required: true
+    is: [traits.orderable, traits.pageable]
+    queryParameters:
+      idTransacao:
+        required: false
+        type: integer
+      dataInicio:
+        required: false
+        type: date-only
+      dataFim:
+        required: false
+        type: date-only
+      cpf:
+        required: false
+        type: string
+      cnpj:
+        required: false
+        type: string
+      produto:
+        required: false
+        type: string
+        enum: [VA, VR]
+      valorTransacaoIgual:
+        required: false
+        type: number
+      valorTransacaoMaior:
+        required: false
+        type: number
+      valorTransacaoMenor:
+        required: false
+        type: number
+      numeroCartao:
+        required: false
+        type: string
+      statusTransacao:
+        required: false
+        type: string
+        enum: [Processada,  Baixada por prazo, Desfeita, Cancelada, Pendente, Cancelada Fraude Negada]
+
+    responses:
+      200:
+        body:
+          application/json:
+            type: AutorizacaoWrapper
+            example: !include example/v1/transacao/autorizacoes-response.json
+      400:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-400.json
+      401:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-401.json
+      500:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-500.json
+            
+/contestacoes:
+  post:
+    displayName: criaContestacao
+    description: Recurso para realizar a criação de uma contestacão
+    body:
+      application/json:
+        displayName: body
+        type: CriaContestacao
+        example: !include example/v1/transacao/contestacoes-cancelamento-post-request.json
+    headers:
+      Authorization:
+        type: string
+        required: true
+      Content-Type:
+        required: false
+        default: application/json
+        example:
+          value: application/json
+        displayName: Content-Type
+        type: string
+    responses:
+      201:
+        description: Criado com sucesso.
+        body:
+          application/json:
+            displayName: response
+            description: Criado com sucesso.
+            type: ContestacaoBody
+            example: !include example/v1/transacao/contestacoes-post-response.json
+      400:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-400.json
+      401:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-401.json
+      500:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-500.json     
+  
+  options:
+  
+/cancelamentos:
+  post:
+    displayName: criaCancelamento
+    description: Recurso para realizar a criação de um cancelamento
+    body:
+      application/json:
+        displayName: body
+        type: CriaCancelamento
+        example: !include example/v1/transacao/contestacoes-cancelamento-post-request.json
+    headers:
+      Authorization:
+        type: string
+        required: true
+      Content-Type:
+        required: false
+        default: application/json
+        example:
+          value: application/json
+        displayName: Content-Type
+        type: string
+    responses:
+      201:
+        description: Criado com sucesso.
+        body:
+          application/json:
+            displayName: response
+            description: Criado com sucesso.
+            type: CancelamentoBody
+            example: !include example/v1/transacao/cancelamentos-post-response.json
+      400:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-400.json
+      401:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-401.json
+      500:
+        body: 
+          application/json:
+            example: !include examples/v1/errors/error-500.json     
+  
+  options:
+  
+  

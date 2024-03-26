@@ -1,0 +1,20 @@
+{
+  "idTransacao": 123,
+  "usuario": {
+	"loginUsuario": "dev@mac.com.br",
+	"nomeUsuario": "dev@mac.com.br"
+  },
+  "cliente": {
+	"nome": "Padaria Isis",
+	"cnpjCriptografado": "7qPzMbnqaN9sAd+DhyYT5Q=="
+  },
+  "valor": 200,
+  "comentario": "XYZ",
+  "documento": "data:text/plain;base64,YQo=",
+  "detalhe": [
+	{
+	  "campo": "ID Transação",
+	  "valor": "123"
+	}
+  ]
+}

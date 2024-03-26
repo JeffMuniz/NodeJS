@@ -1,0 +1,51 @@
+spring:
+  application:
+    name: /ctb-api-transacao
+  main:
+    banner-mode: 'OFF'
+  jackson:
+    default-property-inclusion: non_null
+
+logging:
+  level:
+    ROOT: ${LOGGING_LEVEL_ROOT}
+    br:
+      com:
+        mac: ${LOGGING_BR_COM_mac}
+
+cassandra:
+  contactpoints: ${CASSANDRA_CONTACTPOINTS}
+  port: ${CASSANDRA_PORT}
+  keyspace: ${CASSANDRA_KEYSPACE}
+  basePackages: br.com.mac.ctb.entity
+  dataCenter: ${CASANDRA_DATACENTER}
+  informational:
+    keyspace: ${INFORMATIONAL_KEYSPACE}
+
+server:
+  port: ${SERVER_PORT}
+  servlet:
+    encoding:
+      enabled: true
+      charset: UTF-8
+
+mac:
+  ledger:
+    controle:
+      config:
+        file: ${mac_LEDGER_CONTROLE_CONFIG_FILE:src/main/resources/ponto-controles.json}
+    conciliacao:
+      config:
+        file: ${mac_LEDGER_CONCILIACAO_CONFIG_FILE:src/main/resources/conciliacao-fields.json}
+  timezone: America/Sao_Paulo
+
+info:
+  app:
+    name: ctb-api-transacao
+    description: Contabil Transacao REST API
+  build:
+    groupId: br.com.mac.api.ctb.transacao
+    artifact: ctb-api-transacao-1.0.0.jar
+    name: ctb-api-transacao
+    version: 1.0.0
+

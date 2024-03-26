@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadioButton should render it when labelBefore is false 1`] = `
+<styled.div>
+  <styled.label
+    htmlFor="radioId_Y"
+  >
+    <styled.input
+      checked={false}
+      disabled={false}
+      id="radioId_Y"
+      name="radio"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="radio"
+      value=""
+    />
+    <styled.span />
+    <styled.span
+      labelBefore={false}
+    >
+      Sim
+    </styled.span>
+  </styled.label>
+  <styled.label
+    htmlFor="radioId_N"
+  >
+    <styled.input
+      checked={false}
+      disabled={false}
+      id="radioId_N"
+      name="radio"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="radio"
+      value=""
+    />
+    <styled.span />
+    <styled.span
+      labelBefore={false}
+    >
+      Não
+    </styled.span>
+  </styled.label>
+</styled.div>
+`;
+
+exports[`RadioButton should render it with default props 1`] = `
+<styled.div>
+  <styled.label
+    htmlFor="radioId_Y"
+  >
+    <styled.span
+      labelBefore={true}
+    >
+      Sim
+    </styled.span>
+    <styled.input
+      checked={false}
+      disabled={false}
+      id="radioId_Y"
+      name="radio"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="radio"
+      value=""
+    />
+    <styled.span />
+  </styled.label>
+  <styled.label
+    htmlFor="radioId_N"
+  >
+    <styled.span
+      labelBefore={true}
+    >
+      Não
+    </styled.span>
+    <styled.input
+      checked={false}
+      disabled={false}
+      id="radioId_N"
+      name="radio"
+      onBlur={[Function]}
+      onChange={[Function]}
+      type="radio"
+      value=""
+    />
+    <styled.span />
+  </styled.label>
+</styled.div>
+`;

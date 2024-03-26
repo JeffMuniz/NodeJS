@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Template should render it with default props 1`] = `
+<styled.div>
+  <styled.div>
+    <Container>
+      <Navbar />
+    </Container>
+  </styled.div>
+  <Styled(Container)>
+    <div
+      id="test"
+    >
+      Test
+    </div>
+  </Styled(Container)>
+  <styled.div>
+    <styled.div />
+    <Container>
+      <Footer />
+    </Container>
+  </styled.div>
+</styled.div>
+`;

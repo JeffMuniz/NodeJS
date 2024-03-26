@@ -1,0 +1,30 @@
+{
+  "presets": ["react-native"],
+  "plugins": [
+    "react-hot-loader/babel",
+    [
+      "module-resolver",
+      {
+        "root": ["."],
+        "extensions": [".js", ".ios.js", ".android.js"],
+        "alias": {
+          "src": "./src",
+          "@assets": "./src/assets",
+          "@base": "./src/base",
+          "@common": "./src/common",
+          "@scenes": "./src/scenes",
+          "@utils": "./src/utils",
+          "@colors": "./src/styles/colors",
+          "@enums": "./src/enums",
+          "@api": "./src/api",
+          "@dtos": "./src/api/dtos"
+        }
+      }
+    ]
+  ],
+  "env": {
+    "web": {
+      "presets": ["env", "react-native"]
+    }
+  }
+}

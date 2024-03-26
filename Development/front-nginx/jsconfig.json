@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "src": ["./src/*"],
+      "@assets": ["./src/assets"],
+      "@base": ["./src/base"],
+      "@common": ["./src/common"],
+      "@scenes": ["./src/scenes"],
+      "@utils": ["./src/utils"],
+      "@colors": ["./src/styles/colors"],
+      "@enums": ["./src/enums"],
+      "@api": ["./src/api"],
+      "@dtos": ["./src/api/dtos"]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}

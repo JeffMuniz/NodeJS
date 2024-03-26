@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MultiSelect Should render MultiSelect 1`] = `
+<Styled(Select)
+  clearable={false}
+  getMoreData={[MockFunction]}
+  hasError={false}
+  id="select"
+  isCapitalized={false}
+  items={
+    Array [
+      Object {
+        "id": 1,
+        "name": "test",
+      },
+      Object {
+        "id": 2,
+        "name": "test2",
+      },
+    ]
+  }
+  labelKey="name"
+  maxMenuHeight=""
+  multi={false}
+  multiSelect={false}
+  onBlur={[MockFunction]}
+  onChange={[MockFunction]}
+  onMenuScrollToBottom={[MockFunction]}
+  options={
+    Array [
+      Object {
+        "id": 1,
+        "name": "test",
+      },
+      Object {
+        "id": 2,
+        "name": "test2",
+      },
+    ]
+  }
+  placeholder="Selecione..."
+  selectedItem={
+    Object {
+      "id": 1,
+      "name": "test",
+    }
+  }
+  value={
+    Object {
+      "id": 1,
+      "name": "test",
+    }
+  }
+  valueKey="id"
+/>
+`;
+
+exports[`MultiSelect Should render MultiSelect without selectedItem 1`] = `
+<Styled(Select)
+  clearable={false}
+  getMoreData={[MockFunction]}
+  hasError={false}
+  id="select"
+  isCapitalized={false}
+  items={
+    Array [
+      Object {
+        "id": 1,
+        "name": "test",
+      },
+      Object {
+        "id": 2,
+        "name": "test2",
+      },
+    ]
+  }
+  labelKey="name"
+  maxMenuHeight=""
+  multi={false}
+  multiSelect={false}
+  onBlur={[MockFunction]}
+  onChange={[MockFunction]}
+  onMenuScrollToBottom={[MockFunction]}
+  options={
+    Array [
+      Object {
+        "id": 1,
+        "name": "test",
+      },
+      Object {
+        "id": 2,
+        "name": "test2",
+      },
+    ]
+  }
+  placeholder="Selecione..."
+  selectedItem={
+    Object {
+      "name": "",
+    }
+  }
+  value=""
+  valueKey="id"
+/>
+`;

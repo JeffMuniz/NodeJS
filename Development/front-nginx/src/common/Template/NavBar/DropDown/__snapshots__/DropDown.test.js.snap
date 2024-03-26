@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropDown - Component should render it dropdown 1`] = `
+<ClickOutsideListener
+  handleClickOutside={[MockFunction]}
+  id="ud_dropdown"
+  isListening={false}
+  triggerRef={
+    Object {
+      "current": [MockFunction],
+    }
+  }
+>
+  <styled.div
+    isOpen={false}
+  >
+    <Styled(NavLink)
+      activeStyle={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+      exact={true}
+      id="ud_link_RhFront.AccessPermission"
+      onClick={[MockFunction]}
+      to="/permissao-accesso"
+    >
+      Permissão de Acesso
+    </Styled(NavLink)>
+    <Styled(NavLink)
+      activeStyle={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+      exact={true}
+      id="ud_link_RhFront.FileConverter"
+      onClick={[MockFunction]}
+      to="/conversor"
+    >
+      Converter Arquivos
+    </Styled(NavLink)>
+    <Styled(NavLink)
+      activeStyle={
+        Object {
+          "fontWeight": "bold",
+        }
+      }
+      exact={true}
+      id="ud_link_RhFront.DeliveryPlaces"
+      onClick={[MockFunction]}
+      to="/locais-entrega"
+    >
+      Locais de Entrega
+    </Styled(NavLink)>
+    <If
+      test={false}
+    >
+      <Styled(styled.li)
+        id="btn_change_group"
+        onClick={[Function]}
+      >
+        Trocar Grupo (
+        0
+        )
+      </Styled(styled.li)>
+    </If>
+    <styled.li
+      id="logout_dropdown_button"
+      onClick={[MockFunction]}
+    >
+      Sair
+    </styled.li>
+  </styled.div>
+</ClickOutsideListener>
+`;

@@ -1,0 +1,41 @@
+[
+  {
+    "controle": "REPASSE_PEDIDO",
+    "datas": [],
+    "estoqueInicial": {
+      "descricaoCampo": "(Saldo operac.) Est.pedidos",
+      "descricaoTipoMovimento": "(=)Est.inicial"
+    },
+    "entradas": {
+      "CREDITO_PENDENTE": {
+        "descricaoCampo": "(01)Pedidos Confirmados",
+        "descricaoTipoMovimento": "(+)Entrada"
+      }
+    },
+    "saidas": {
+      "CREDITO_CANCELADO": {
+        "descricaoCampo": "(69)Cancelamento de pedidos",
+        "descricaoTipoMovimento": "(-)Saida"
+      },
+      "CREDITO_DISPONIVEL": {
+        "descricaoCampo": "(69)Pedidos baixados como pagos",
+        "descricaoTipoMovimento": "(-)Saida"
+      }
+    },
+    "estoqueFinal": {
+      "descricaoCampo": "(Saldo Oper.)Est.Final",
+      "descricaoTipoMovimento": "(=)Est. final"
+    },
+    "suporte": {
+      "descricaoCampo": "(Saldo Sup.)Est.de ped. em aberto",
+      "descricaoTipoMovimento": "(=)Suporte"
+    },
+    "diferencaMovimento": {
+      "descricaoCampo": "Diferença movimento",
+      "descricaoTipoMovimento": "Est.final x suporte"
+    },
+    "diferencaPendente": {
+      "descricaoCampo": "Diferença pendente"
+    }
+  }
+]

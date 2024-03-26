@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchableDropdown should dropdown with default props 1`] = `
+<styled.div>
+  <styled.div>
+    <Styled(SvgIcon)
+      name="search"
+    />
+  </styled.div>
+  <styled.TextInput
+    hasIcon={true}
+    id="searchable_dropdown"
+    maskType="text"
+    onChange={[Function]}
+    placeholder=""
+    value=""
+  />
+  <styled.ul
+    onScroll={[Function]}
+  >
+    <styled.li
+      id="searchable_dropdown_op_0"
+      onClick={[MockFunction]}
+    >
+      test_1
+    </styled.li>
+    <styled.li
+      id="searchable_dropdown_op_1"
+      onClick={[MockFunction]}
+    >
+      test_2
+    </styled.li>
+  </styled.ul>
+</styled.div>
+`;

@@ -1,0 +1,248 @@
+@NonCPS
+def slackNotifier(String buildResult) {
+  if ( buildResult == "SUCCESS" ) {
+    slackSend ( color: "good", 
+    teamDomain: 'maciensa', 
+    tokenCredentialId: 'maciensa-slack',
+    message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was successful")
+  }
+  else if( buildResult == "FAILURE" ) { 
+    slackSend( color: "danger", 
+    teamDomain: 'maciensa', 
+    tokenCredentialId: 'maciensa-slack',
+    message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was failed")
+  }
+  else if( buildResult == "UNSTABLE" ) { 
+    slackSend( color: "warning", 
+      teamDomain: 'maciensa', 
+      tokenCredentialId: 'maciensa-slack',
+      message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} was unstable")
+  }
+  else if( buildResult == "null" ) { 
+    slackSend( color: "warning", 
+      teamDomain: 'maciensa', 
+      tokenCredentialId: 'maciensa-slack',
+      message: "Job: ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} finished with unknown status")
+  }
+}
+
+def startMsg() {
+  commit_desc = sh(script: "git log -1 --format='format:%s'", returnStdout: true).trim()
+  slackSend(teamDomain: 'maciensa', 
+    tokenCredentialId: 'maciensa-slack',
+    message: "Job ${env.JOB_NAME} <${env.BUILD_URL}|build ${env.BUILD_DISPLAY_NAME}> started by ${env.BUILD_USER}\n====\n${commit_desc}")
+
+}
+
+@NonCPS
+def configFromBranch(branch) {
+    def env_dev = [
+        rancherContext: 'c-lh4tc:p-qzrhd',
+        deploymentFile: 'deployment.yml',
+        namespace: 'backoffice-dev',
+        host: '',
+        replicas: 1
+    ]
+    def env_qa = [
+        rancherContext: 'c-lh4tc:p-qzrhd',
+        deploymentFile: 'deployment.yml',
+        namespace: 'backoffice-qa',
+        host: '',
+        replicas: 1
+    ]
+    def env_staging = [
+        rancherContext: 'c-lh4tc:p-qzrhd',
+        deploymentFile: 'deployment.yml',
+        namespace: 'backoffice-staging',
+        host: '',
+        replicas: 3
+    ]
+    def env_prd = [
+        rancherContext: '',
+        deploymentFile: 'deployment.yml',
+        namespace: '',
+        host: '',
+        replicas: 3
+    ]
+    if (branch ==~ /(development)/) { 
+        return [
+            shouldTest: true,
+            shouldBuildImage: true,
+            shouldPushImage: true,
+            shouldDeploy: true,
+            tag: 'dev',
+            deployments: [env_dev]
+        ]
+    }
+    else if (branch ==~ /(qa)/) {
+        return [
+            shouldTest: true,
+            shouldBuildImage: true,
+            shouldPushImage: true,
+            shouldDeploy: true,
+            tag: 'qa',
+            deployments: [env_qa]
+        ]
+    }
+    else if (branch ==~ /(staging)/) {
+        return [
+            shouldTest: false,
+            shouldBuildImage: true,
+            shouldPushImage: true,
+            shouldDeploy: true,
+            tag: 'stg',
+            deployments: [env_staging]
+        ]
+    }
+    else if (branch ==~ /(master)/) {
+        return [
+            shouldTest: false,
+            shouldBuildImage: true,
+            shouldPushImage: true,
+            shouldDeploy: false,
+            tag: 'prd',
+            deployments: [env_prd]
+        ]
+    }
+    else {
+        return [
+            shouldTest: true,
+            shouldBuildImage: false,
+            shouldPushImage: false,
+            shouldDeploy: false,
+            tag: env.GIT_COMMIT.substring(0, 7),
+            deployments: []
+        ]
+    }
+}
+
+pipeline {
+    agent none
+    
+    environment {
+        CONFIG = configFromBranch(BRANCH_NAME)
+        SHOULD_TEST = "${CONFIG.shouldTest}"
+        SHOULD_BUILD_IMAGE = "${CONFIG.shouldBuildImage}"
+        SHOULD_PUSH_IMAGE = "${CONFIG.shouldPushImage}"
+        SHOULD_DEPLOY = "${CONFIG.shouldDeploy}"
+
+        GIT_URL="https://macvisacard@bitbucket.org/macvisacard/ajt-mul-financeiro.git"
+        PROJECT_NAME_ECR="ajt-mul-financeiro"
+        PROJECT_NAME="backoffice-mule-ajuste-fin-api"
+
+        IMAGE_TAG = "${CONFIG.tag}-${env.BUILD_ID}"
+        IMAGE_NAME = "${PROJECT_NAME_ECR}:${IMAGE_TAG}"
+        IMAGE_URL = "123721783999.dkr.ecr.sa-east-1.amazonaws.com/${IMAGE_NAME}"
+    }
+
+    stages {
+        stage ('CI') {
+            agent {
+                label 'master'
+            }
+            stages {
+                stage('SCM - Checkout') {
+                    steps{
+                        startMsg()
+                        cleanWs()
+                        git branch: BRANCH_NAME, 
+                        credentialsId: "bitb-mac", 
+                        url: GIT_URL
+                        echo 'SCM Checkout'
+                    }
+                }
+                stage ('Test & Publish QA Reports'){
+                    when {
+                      expression { SHOULD_TEST == 'true' }
+                    }
+                    steps{
+                        withMaven( maven: 'maven-3', jdk: 'jdk8-open'){
+                            echo 'Tests mvn'
+                            echo 'Sonnar'
+                        }
+                    }
+                }
+                stage('Maven - Build'){
+                    when {
+                      expression { SHOULD_BUILD_IMAGE == 'true' }
+                    }     
+                    steps{
+                        withMaven( maven: 'maven-3', jdk: 'jdk8-open'){
+                            sh "mvn clean package -Dmule.env=dev"
+                        }
+                    }
+                } 
+            }
+        }
+        stage ('CD') {
+            stages {
+                stage ('Deploy') {
+                    agent {
+                        label 'master'
+                    }
+                    stages{
+                        stage ('Docker - Build') {
+                            when {
+                              expression { SHOULD_BUILD_IMAGE == 'true' }
+                            }                  
+                            steps {
+                                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'mac-ecr', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                                    sh "export AWS_DEFAULT_REGION=sa-east-1"
+                                    sh "\$(/usr/local/bin/aws ecr get-login --no-include-email --region sa-east-1)"
+                                    sh "docker build -t ${IMAGE_URL} --no-cache ."
+                                }
+                            }
+                        }
+                        stage('Docker - Push'){
+                            when {
+                              expression { SHOULD_PUSH_IMAGE == 'true' }
+                            }
+                            steps{
+                                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'mac-ecr', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+                                    sh "docker push ${IMAGE_URL}"
+                                    echo "Image push complete"
+                                }
+                            }
+                        }
+                        stage('Kubernetes Deploy'){
+                            when {
+                              expression { SHOULD_DEPLOY == 'true' }
+                            }
+                            steps {
+                                script {
+                                    for (deployment in configFromBranch(BRANCH_NAME).deployments) {
+                                        sh "echo yes | /usr/local/sbin/rancher login --token token-lxxmp:cznmfmm5k9fh9whdzkbmqhqbbswnpmcwznzvnwc2ljmsp5hfxq5qw9  --context ${deployment.rancherContext} --name rancher2 https://ec2-18-228-89-100.sa-east-1.compute.amazonaws.com/v3"
+                                        sh """
+                                            sed '
+                                              s,{{IMAGE_URL}},${IMAGE_URL},g;
+                                              s,{{NAMESPACE}},${deployment.namespace},g;
+                                              s,{{PROJECT_NAME}},${PROJECT_NAME},g;
+                                            ' ${deployment.deploymentFile} | /usr/local/sbin/rancher kubectl apply -f -
+                                            """
+                                     }
+                                }
+                             }
+                         }
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            script{
+                slackNotifier('SUCCESS')
+            }
+        }
+        failure{
+            script{
+                slackNotifier('FAILURE')
+            }
+        }
+        unstable{
+            script{
+                slackNotifier('UNSTABLE')
+            }
+        }
+    }
+}

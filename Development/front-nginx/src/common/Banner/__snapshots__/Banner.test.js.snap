@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Banner Should render Banner 1`] = `
+<styled.div
+  action={null}
+  backgroundColor="#fff"
+  description=""
+  logoAlt="Logo"
+  logoSource=""
+  title=""
+>
+  <styled.div
+    alt="Logo"
+    backgroundColor="#fff"
+    image=""
+  />
+  <styled.div>
+    <styled.span>
+      
+    </styled.span>
+    <styled.span>
+      
+    </styled.span>
+  </styled.div>
+  <styled.div />
+</styled.div>
+`;

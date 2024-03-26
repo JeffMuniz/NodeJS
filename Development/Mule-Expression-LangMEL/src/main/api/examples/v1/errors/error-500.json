@@ -1,0 +1,5 @@
+{
+    "message" : "Internal Server Error",
+    "description" : "Ocorreu um erro desconhecido, tente mais tarde",
+    "processor": "API"
+}

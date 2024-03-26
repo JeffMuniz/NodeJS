@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Delivery Places Should render empty dashboard 1`] = `
+<ContainerWrapper
+  headerClickHandler={[Function]}
+  showBackIcon={true}
+  showHeaderBorder={true}
+  title="Validação planilha"
+>
+  <Styled(Row)>
+    <Col
+      xs={12}
+    >
+      <Connect(FormContainer)
+        location={Object {}}
+        navigator={undefined}
+      />
+    </Col>
+  </Styled(Row)>
+</ContainerWrapper>
+`;

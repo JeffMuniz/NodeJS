@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip render Should Snapshot  1`] = `
+<div
+  className="sc-bdVaJa fpMPAk"
+  id="wrapper-tooltip"
+>
+   
+  <span
+    className="sc-bwzfXH gpTzkN"
+    id="message-tooltip"
+  >
+    Os seus créditos serão usados automaticamente nos próximos pedidos.
+  </span>
+</div>
+`;

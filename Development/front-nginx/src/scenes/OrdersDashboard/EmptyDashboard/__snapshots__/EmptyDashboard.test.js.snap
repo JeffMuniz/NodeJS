@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Order Should render empty dashboard 1`] = `
+<div>
+  <styled.div>
+    <SvgIcon
+      name="emptyGrid"
+    />
+  </styled.div>
+  <styled.p
+    id="emptyOrderText"
+  >
+    Não encontramos pedidos para os filtros que você selecionou.
+  </styled.p>
+  <styled.div />
+  <Styled(Row)>
+    <If
+      test={false}
+    >
+      <Col
+        xs={6}
+      >
+        <Button
+          id="or_button_new_order"
+          onClick={[Function]}
+          value="fazer primeiro pedido"
+        />
+      </Col>
+    </If>
+    <If
+      test={false}
+    >
+      <Col
+        xs={6}
+      >
+        <Button
+          id="or_button_new_dp"
+          onClick={[MockFunction]}
+          value="cadastrar locais de entrega"
+        />
+      </Col>
+    </If>
+  </Styled(Row)>
+</div>
+`;

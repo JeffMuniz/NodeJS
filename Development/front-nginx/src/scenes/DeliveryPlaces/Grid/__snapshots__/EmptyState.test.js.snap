@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Delivery Places - Empty State - Unit Tests Should render Empty State 1`] = `
+<styled.div>
+  <SvgIcon
+    name="emptyGrid"
+  />
+  <styled.p>
+    Você ainda não tem endereços de entregas cadastrados.
+  </styled.p>
+  <styled.div />
+  <If
+    test={true}
+  >
+    <styled.Button
+      id="ept_st_send_sheet"
+      onClick={[MockFunction]}
+      value="enviar planilha"
+    />
+  </If>
+</styled.div>
+`;

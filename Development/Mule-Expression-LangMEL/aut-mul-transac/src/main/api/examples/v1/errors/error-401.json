@@ -1,0 +1,5 @@
+{
+	"code": "ERR-001",
+	"message" : "Unauthorized",
+	"description" : "Electronic assign invalid"
+}

@@ -1,0 +1,61 @@
+spring:
+  profiles:
+    active: test
+  datasource:
+    continue-on-error: false
+    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+    jdbc-url: jdbc:tc:postgresql://localhost:5432/databasename
+    username: SA
+    password: A_Str0ng_Required_Password
+  jpa:
+    show-sql: true
+    hibernate:
+      dialect: org.hibernate.dialect.PostgreSQL10Dialect
+      naming-strategy: org.hibernate.cfg.EJB3NamingStrategy
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+        proc:
+          param_null_passing: true
+  liquibase:
+    change-log: classpath:/config/liquibase/master.xml
+    url: jdbc:tc:postgresql://localhost:5432/databasename
+  jackson:
+    time-zone: America/Sao_Paulo
+  elasticsearch:
+    jest:
+      uris: ${INTEGRATION_ELASTICSEARCH_ENDPOINT:http://52.67.62.173:9200}
+
+server:
+  port: 8080
+  servlet:
+    session:
+      timeout: 40
+    context-path: /
+
+app:
+  resttemplate:
+    timeout: 30000
+  thread:
+    poolsize: 5
+  aprovacao:
+    host: http://aprovacao-api
+  ajuste:
+    core:
+      host: http://ajuste-api
+  estorno:
+    host: ${API_ESTORNO_HOST:http://10.70.30.41:7272}
+
+integration:
+  operation:
+    active: true
+    endpoint:
+      ajuste-financeiro: 'https://host/financeiros/{id}'
+      ajuste-pedido: 'https://host/pedidos/{id}'
+  elasticsearch:
+    active: ${INTEGRATION_ELASTICSEARCH_ACTIVE:false}
+    endpoint: ${INTEGRATION_ELASTICSEARCH_ENDPOINT:}
+    index: ${INTEGRATION_ELASTICSEARCH_INDEX:}
