@@ -1,0 +1,58 @@
+server:
+  port: 8181
+spring:
+  application:
+    name: est-autoec-api
+  http:
+    encoding:
+      enabled: true
+      charset: UTF-8
+  jackson:
+    serialization.INDENT_OUTPUT: true
+    time-zone: America/Sao_Paulo
+  data:
+    mongodb:
+      uri: mongodb+srv://motorpoliticas-tst:P2TUb0WEw76OrzsK@machina-tst-qa-t6nct.azure.mongodb.net/motor-politica-tst?retryWrites=true
+
+springfox:
+  documentation:
+    swagger:
+      use-model-v3: false
+springdoc:
+  serverUrl: http://localhost:8181
+  swagger-ui:
+    configUrl: /v3/api-docs/swagger-config
+    disable-swagger-default-url: true
+    urls[0]:
+      url: /v3/api-docs/est-autoec-api
+      name: est-autoec-api
+    use-root-path: true
+  use-management-port: true
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: false
+
+app:
+  motor:
+    url: https://lb-motorpoliticasapi-staging.stack-geral:7575/politicas
+  blue:
+    url: https://apis-machina-qa.devcdt.com.br/blue-qa
+  pier:
+    url: https://apis-machina-qa.devcdt.com.br/pier-qa/v2/api
+    accessToken: 31blue
+
+info:
+  app:
+    name: '@name@'
+    description: '@project.description@'
+  build:
+    groupId: '@project.groupId@'
+    artifact: '@project.artifactId@'
+    name: '@project.name@'
+    version: '@project.version@'
+  env:
+    java:
+      vendor: ${java.specification.vendor}
+      vm-name: ${java.vm.name}
+      runtime-version: ${java.runtime.version}

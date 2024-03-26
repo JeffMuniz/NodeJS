@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: /ctb-wkr-atutransac
+  main:
+    banner-mode: 'OFF'
+
+logging:
+  level:
+    ROOT: ${LOGGING_LEVEL_ROOT}
+    br:
+      com:
+        mac: ${LOGGING_BR_COM_mac}
+server:
+  port: ${SERVER_PORT}
+
+mac:
+  ledgers: ${LEDGERS}
+  records-size: ${RECORDS_SIZE}
+  initial-date: ${INITIAL_DATE:#{null}}
+
+cassandra:
+  contactpoints: ${CASSANDRA_CONTACTPOINTS}
+  port: ${CASSANDRA_PORT}
+  keyspace: ${CASSANDRA_KEYSPACE}
+  dataCenter: ${CASANDRA_DATACENTER}
+  basePackages: br.com.mac.wkr.ctb.atutransacao.domain.entity
+  read-timeout-millis: ${CASSANDRA_READ_TIMEOUT_MILLIS:120000}

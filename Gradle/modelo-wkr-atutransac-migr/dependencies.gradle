@@ -1,0 +1,58 @@
+def jacksonVersion = '2.12.6'
+def elassandraAdapterVersion  = '1.4.3'
+def macInfrastructureVersion = '1.1.2'
+def cloudEventsVersion = '0.3.1'
+def ninjaSquadVersion = '2.0.0'
+def mockkVersion = '1.9.1'
+def testContainerVersion = '1.15.1'
+
+configurations {
+    localDeps
+}
+
+ext['tomcat.version'] = '9.0.58'
+ext['spring-framework.version'] = '5.2.15.RELEASE'
+ext['log4j2.version'] = '2.17.1'
+ext['jackson.version'] = '2.12.6'
+
+dependencies {
+    //Spring boot
+    implementation "org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+    implementation "org.springframework.boot:spring-boot-starter-data-cassandra:${springBootVersion}"
+
+    testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}") {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        exclude group: "org.mockito", module: "mockito-core"
+    }
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:${kotlinVersion}"
+
+    //Jackson
+    implementation "com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}"
+
+    //Cassandra
+    implementation "br.com.mac.adapter:elassandra-adapter:${elassandraAdapterVersion}"
+
+    //mac infrastructure
+    implementation "br.com.mac:mac-infrastructure:${macInfrastructureVersion}"
+
+    //Cloudevents
+    implementation "io.cloudevents:cloudevents-api:${cloudEventsVersion}"
+
+    //Mockk
+    implementation "com.ninja-squad:springmockk:${ninjaSquadVersion}"
+    testImplementation "io.mockk:mockk:${mockkVersion}"
+
+    testImplementation 'org.awaitility:awaitility-kotlin:4.0.3'
+
+    //Testcontainer
+    testImplementation "org.testcontainers:testcontainers:${testContainerVersion}"
+    testImplementation "org.testcontainers:junit-jupiter:${testContainerVersion}"
+
+    //Force dependence guava
+    implementation 'com.google.guava:guava:24.1.1-jre'
+}

@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: /ctb-wkr-atutransac
+
+logging:
+  level:
+    ROOT: INFO
+    br:
+      com:
+        mac: DEBUG
+server:
+  port: 8084
+
+mac:
+  ledgers: CREDITO_PENDENTE
+  records-size: 100
+  initial-date: 2020-01-01
+
+cassandra:
+  contactpoints: localhost
+  port: 9042
+  keyspace: test
+  basePackages: br.com.mac.wkr.ctb.atutransacao.domain.entity

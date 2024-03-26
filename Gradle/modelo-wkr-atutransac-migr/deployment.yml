@@ -1,0 +1,104 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{PROJECT_NAME}}-service
+  namespace: {{NAMESPACE}}
+  labels:
+    app: {{PROJECT_NAME}}
+    service: {{PROJECT_NAME}}-service
+spec:
+  ports:
+  - port: 8080
+    name: http
+  selector:
+    app: {{PROJECT_NAME}}
+---
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule
+metadata:
+  name: {{PROJECT_NAME}}-dn
+  namespace: {{NAMESPACE}}
+spec:
+  host: {{PROJECT_NAME}}-service.{{NAMESPACE}}.svc.cluster.local
+  subsets:
+    - name: v1
+      labels:
+        version: v1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{PROJECT_NAME}}
+  namespace: {{NAMESPACE}}
+  labels:
+    app: {{PROJECT_NAME}}
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: {{PROJECT_NAME}}
+      app: {{PROJECT_NAME}}
+      version: v1
+  template:
+    metadata:
+      labels:
+        name: {{PROJECT_NAME}}
+        app: {{PROJECT_NAME}}
+        version: v1
+    spec:
+      containers:
+      - env:
+        - name: mac_APP
+          value: {{PROJECT_NAME}}
+        - name: LEDGERS
+          valueFrom:
+            configMapKeyRef:
+              key: LEDGERS
+              name: {{PROJECT_NAME}}
+        - name: RECORDS_SIZE
+          valueFrom:
+            configMapKeyRef:
+              key: RECORDS_SIZE
+              name: {{PROJECT_NAME}}
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: SERVER_PORT
+              name: {{PROJECT_NAME}}
+        - name: LOGGING_LEVEL_ROOT
+          valueFrom:
+            configMapKeyRef:
+              key: LOGGING_LEVEL_ROOT
+              name: {{PROJECT_NAME}}
+        - name: LOGGING_BR_COM_mac
+          valueFrom:
+            configMapKeyRef:
+              key: LOGGING_BR_COM_mac
+              name: {{PROJECT_NAME}}
+        - name: CASSANDRA_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: CASSANDRA_PORT
+              name: cassandra
+        - name: CASSANDRA_KEYSPACE
+          valueFrom:
+            configMapKeyRef:
+              key: CASSANDRA_KEYSPACE
+              name: {{PROJECT_NAME}}
+        - name: CASSANDRA_CONTACTPOINTS
+          valueFrom:
+            configMapKeyRef:
+              key: CASSANDRA_CONTACTPOINTS
+              name: cassandra
+        - name: CASANDRA_DATACENTER
+          valueFrom:
+            configMapKeyRef:
+              key: CASANDRA_DATACENTER
+              name: {{PROJECT_NAME}}
+        name: {{PROJECT_NAME}}
+        image: {{IMAGE_URL}}
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
