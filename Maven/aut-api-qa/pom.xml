@@ -69,7 +69,7 @@
 
         <profile.swagger/>
 
-        <spring-boot.version>2.5.12</spring-boot.version>
+        <spring-boot.version>2.7.18</spring-boot.version>
         <spring.version>5.3.5</spring.version>
         <javassist.version>3.23.2-GA</javassist.version>
         <hibernate-core.version>5.4.24.Final</hibernate-core.version>
