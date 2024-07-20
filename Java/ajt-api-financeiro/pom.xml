@@ -57,7 +57,7 @@
         <profile.no-liquibase/>
         <profile.swagger/>
 
-        <spring-boot.version>2.5.12</spring-boot.version>
+        <spring-boot.version>2.7.18</spring-boot.version>
         <spring.version>5.1.12.RELEASE</spring.version>
         <javassist.version>3.23.2-GA</javassist.version>
         <liquibase.version>4.8.0</liquibase.version>
