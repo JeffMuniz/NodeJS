@@ -1,6 +1,0 @@
-export default {
-  GROUP: "GRUPO",
-  SUBGROUP: "SUBGRUPO",
-  COMPANY: "EMPRESA",
-  HYBRID: "SUBGRUPO_EMPRESA",
-};

@@ -1,1 +1,0 @@
-# ajt-mul-financeiro
